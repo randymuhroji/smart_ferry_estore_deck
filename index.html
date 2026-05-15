@@ -4,2413 +4,1868 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Ferry E-Store — Premium Business Proposal</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
-    --black: #050505;
-    --charcoal: #0d0d0f;
-    --navy: #080c18;
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --gold-dim: #9a7a35;
-    --white: #f5f0e8;
-    --white-dim: rgba(245,240,232,0.65);
-    --white-faint: rgba(245,240,232,0.25);
-    --glow: rgba(201,168,76,0.15);
-    --glow-strong: rgba(201,168,76,0.35);
+    --navy: #0A1628;
+    --navy-mid: #1A2D4A;
+    --navy-light: #2C4567;
+    --gold: #C5963A;
+    --gold-light: #E8B94F;
+    --gold-pale: #FBF2E0;
+    --gold-bg: #FEF9EF;
+    --cream: #FAFAF7;
+    --cream-mid: #F2F0E8;
+    --white: #FFFFFF;
+    --text-primary: #0D1B2E;
+    --text-secondary: #4A5568;
+    --text-muted: #8896A5;
+    --border: #E2DDD0;
+    --border-light: #EDE9DC;
+    --teal: #0D7B6B;
+    --teal-light: #E8F5F3;
+    --blue-accent: #1B5FA8;
+    --blue-light: #EBF3FC;
+    --red-accent: #C0392B;
+    --green-accent: #1B7A42;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --shadow-soft: 0 2px 20px rgba(10, 22, 40, 0.06);
+    --shadow-card: 0 4px 32px rgba(10, 22, 40, 0.09);
+    --shadow-hover: 0 8px 48px rgba(10, 22, 40, 0.14);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --radius-xl: 32px;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  html { scroll-behavior: smooth; }
   body {
-    background: var(--black);
-    font-family: 'Outfit', sans-serif;
-    color: var(--white);
-    overflow-x: hidden;
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* NAVIGATION */
+  /* ── NAV ── */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 48px;
-    background: linear-gradient(to bottom, rgba(5,5,5,0.95), transparent);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border-light);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
   }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--navy);
+    letter-spacing: -0.3px;
   }
-  .nav-slides {
-    display: flex;
-    gap: 6px;
+  .nav-anchor { width: 32px; height: 32px; background: var(--navy); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .nav-anchor svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--navy); color: white; border: none; cursor: pointer;
+    padding: 9px 22px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    font-family: var(--font-body); letter-spacing: 0.3px; transition: all 0.2s;
   }
-  .nav-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--gold-dim);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  .nav-dot.active { background: var(--gold); transform: scale(1.4); }
+  .nav-cta:hover { background: var(--navy-mid); transform: translateY(-1px); }
 
-  /* SLIDES */
-  .slide {
-    min-height: 100vh;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 120px 48px 80px;
+    background: var(--white);
+    position: relative; overflow: hidden;
   }
-
-  /* ─── SLIDE 1: COVER ─── */
-  .s1 {
-    background: radial-gradient(ellipse at 60% 40%, #1a1200 0%, #070810 50%, #000 100%);
-    align-items: center;
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 900px 500px at 50% 60%, rgba(197,150,58,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold-bg); border: 1px solid rgba(197,150,58,0.3);
+    padding: 6px 18px; border-radius: 100px;
+    font-size: 12px; font-weight: 600; color: #8B6520;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .hero-badge span { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.08;
+    letter-spacing: -2px;
+    color: var(--navy);
     text-align: center;
+    max-width: 900px;
+    margin-bottom: 12px;
   }
-  .s1::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-      radial-gradient(ellipse 80% 60% at 50% 60%, rgba(201,168,76,0.08) 0%, transparent 70%),
-      repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(201,168,76,0.02) 80px, rgba(201,168,76,0.02) 81px),
-      repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(201,168,76,0.02) 80px, rgba(201,168,76,0.02) 81px);
-  }
-  .cover-badge {
-    font-size: 11px;
-    letter-spacing: 5px;
+  .hero-title em {
+    font-style: italic;
     color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    opacity: 0.8;
   }
-  .cover-badge::before, .cover-badge::after {
-    content: '— ';
+  .hero-subtitle {
+    font-size: 18px; color: var(--text-secondary); text-align: center;
+    max-width: 560px; line-height: 1.6; margin-bottom: 48px;
   }
-  .cover-badge::after { content: ' —'; }
-  .cover-kiosk {
-    width: 320px;
-    height: 500px;
-    margin: 0 auto 48px;
-    position: relative;
-    animation: floatKiosk 4s ease-in-out infinite;
+  .hero-actions { display: flex; gap: 16px; margin-bottom: 80px; }
+  .btn-primary {
+    background: var(--navy); color: white;
+    padding: 14px 32px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
   }
-  @keyframes floatKiosk {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+  .btn-primary:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(10,22,40,0.2); }
+  .btn-outline {
+    background: transparent; color: var(--navy);
+    border: 1.5px solid var(--border);
+    padding: 14px 32px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--navy); background: var(--cream); }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md); overflow: hidden; width: 100%; max-width: 720px;
+  }
+  .hero-stat {
+    background: var(--white); padding: 24px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 32px; color: var(--navy); letter-spacing: -1px;
+  }
+  .hero-stat-label { font-size: 12px; color: var(--text-muted); line-height: 1.3; }
+
+  /* ── SECTION WRAPPERS ── */
+  section { padding: 100px 0; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 48px; }
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; width: 20px; height: 1.5px; background: var(--gold); flex-shrink: 0;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.12; letter-spacing: -1.5px;
+    color: var(--navy); margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-desc { font-size: 17px; color: var(--text-secondary); max-width: 520px; line-height: 1.7; margin-bottom: 60px; }
+  .divider { width: 100%; height: 1px; background: var(--border-light); }
+
+  /* ── ALTERNATING SECTION BGs ── */
+  .bg-white { background: var(--white); }
+  .bg-cream { background: var(--cream); }
+  .bg-navy {
+    background: var(--navy);
+    color: white;
+  }
+  .bg-navy .section-title { color: white; }
+  .bg-navy .section-desc { color: rgba(255,255,255,0.6); }
+  .bg-navy .section-label { color: var(--gold-light); }
+  .bg-navy .section-label::before { background: var(--gold-light); }
+
+  /* ── OPPORTUNITY / EXECUTIVE SUMMARY ── */
+  .opportunity-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: start;
+  }
+  .opp-visual {
+    background: var(--cream); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 40px; position: relative; overflow: hidden;
+  }
+  .opp-visual::after {
+    content: ''; position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%; background: rgba(197,150,58,0.07);
+  }
+  .stat-row { display: flex; flex-direction: column; gap: 20px; }
+  .stat-item { display: flex; align-items: center; gap: 20px; }
+  .stat-bar-wrap { flex: 1; }
+  .stat-bar-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; font-weight: 500; }
+  .stat-bar-track { height: 8px; background: var(--border-light); border-radius: 4px; overflow: hidden; }
+  .stat-bar-fill { height: 100%; border-radius: 4px; background: var(--gold); }
+  .stat-bar-num { font-family: var(--font-display); font-size: 28px; color: var(--navy); min-width: 70px; text-align: right; }
+  .corridor-map {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; margin-top: 40px;
+  }
+  .port-dot {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .port-circle {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--navy); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  }
+  .port-name { font-size: 12px; font-weight: 600; color: var(--navy); }
+  .port-pax { font-size: 11px; color: var(--text-muted); }
+  .port-line {
+    flex: 1; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 14px);
+    margin: 0 4px;
+  }
+  .opp-features { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .opp-feature {
+    display: flex; gap: 20px; padding: 24px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .opp-feature:last-child { border-bottom: none; }
+  .opp-num {
+    font-family: var(--font-display); font-size: 24px;
+    color: rgba(197,150,58,0.3); min-width: 36px; line-height: 1;
+  }
+  .opp-feature-text h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  .opp-feature-text p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ── CHALLENGES ── */
+  .challenges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .challenge-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 28px;
+    transition: all 0.25s;
+  }
+  .challenge-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); border-color: transparent; }
+  .ch-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--cream); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 18px; font-size: 20px;
+  }
+  .challenge-card h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+  .challenge-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ── SOLUTION ── */
+  .solution-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .solution-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-md); padding: 32px;
+    transition: all 0.25s;
+  }
+  .solution-card:hover { background: rgba(255,255,255,0.1); }
+  .sol-icon { font-size: 28px; margin-bottom: 18px; }
+  .solution-card h4 { font-size: 16px; font-weight: 600; color: white; margin-bottom: 10px; }
+  .solution-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* ── DEVICE VISUAL ── */
+  .device-section { padding: 120px 0; background: var(--cream); }
+  .device-showcase {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 80px; align-items: center;
+  }
+  .device-info h3 {
+    font-family: var(--font-display);
+    font-size: 40px; letter-spacing: -1px; color: var(--navy);
+    margin-bottom: 16px; line-height: 1.15;
+  }
+  .device-info h3 em { color: var(--gold); font-style: italic; }
+  .device-info p { font-size: 16px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px; }
+  .device-specs { display: flex; flex-direction: column; gap: 16px; }
+  .spec-item { display: flex; gap: 14px; align-items: flex-start; }
+  .spec-icon { width: 36px; height: 36px; background: var(--gold-bg); border: 1px solid rgba(197,150,58,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .spec-text h5 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .spec-text p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Kiosk illustration */
+  .kiosk-frame {
+    position: relative; display: flex; justify-content: center;
+  }
+  .kiosk-3d {
+    width: 340px; position: relative;
   }
   .kiosk-body {
-    position: absolute;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 420px;
-    background: linear-gradient(160deg, #1a1a2e 0%, #0d0d14 60%, #1c1200 100%);
-    border-radius: 20px 20px 8px 8px;
-    border: 1px solid rgba(201,168,76,0.3);
-    box-shadow: 
-      0 0 60px rgba(201,168,76,0.12),
-      0 0 120px rgba(201,168,76,0.05),
-      inset 0 1px 0 rgba(201,168,76,0.4);
-  }
-  .kiosk-screen {
-    position: absolute;
-    top: 24px; left: 12px; right: 12px;
-    height: 280px;
-    background: linear-gradient(160deg, #0a0e2a 0%, #051525 50%, #070a1e 100%);
-    border-radius: 12px;
-    border: 1px solid rgba(201,168,76,0.4);
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(10,40,80,0.8) inset;
-  }
-  .screen-content {
-    padding: 16px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-  .screen-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-  .screen-route {
-    font-size: 18px;
-    font-weight: 300;
-    color: white;
-    text-align: center;
-    line-height: 1.3;
-  }
-  .screen-btn {
-    margin-top: 8px;
-    padding: 6px 20px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: #000;
-    text-transform: uppercase;
-  }
-  .screen-dots {
-    display: flex;
-    gap: 4px;
-    margin-top: 12px;
-  }
-  .screen-dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: rgba(201,168,76,0.5);
-  }
-  .screen-dot:first-child { background: var(--gold); }
-  .kiosk-card-slot {
-    position: absolute;
-    bottom: 80px; left: 50%; transform: translateX(-50%);
-    width: 80px; height: 6px;
-    background: #111;
-    border-radius: 3px;
-    border: 1px solid rgba(201,168,76,0.2);
-  }
-  .kiosk-base {
-    position: absolute;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 240px; height: 20px;
-    background: linear-gradient(to bottom, #1a1000, #0d0900);
-    border-radius: 0 0 12px 12px;
-    border: 1px solid rgba(201,168,76,0.2);
-    border-top: none;
-  }
-  .kiosk-glow {
-    position: absolute;
-    bottom: -10px; left: 50%;
-    transform: translateX(-50%);
-    width: 280px; height: 60px;
-    background: radial-gradient(ellipse, rgba(201,168,76,0.2) 0%, transparent 70%);
-    filter: blur(10px);
-  }
-  .kiosk-accent-left, .kiosk-accent-right {
-    position: absolute;
-    top: 30px;
-    width: 4px; height: 60px;
-    border-radius: 2px;
-    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-    animation: accentPulse 2s ease-in-out infinite;
-  }
-  .kiosk-accent-left { left: 8px; }
-  .kiosk-accent-right { right: 8px; animation-delay: 1s; }
-  @keyframes accentPulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-
-  .cover-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 5vw, 72px);
-    font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    margin-bottom: 8px;
-  }
-  .cover-title em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
-  .cover-subtitle {
-    font-size: 14px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 48px;
-  }
-  .cover-divider {
-    width: 120px;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    margin: 24px auto;
-  }
-  .cover-tagline {
-    font-size: 13px;
-    color: var(--white-dim);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-  .cover-route-pills {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 32px;
-    flex-wrap: wrap;
-  }
-  .route-pill {
-    padding: 8px 20px;
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 40px;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  /* ─── SLIDE 2: EXECUTIVE SUMMARY ─── */
-  .s2 {
-    background: linear-gradient(135deg, #08080f 0%, #0c0e1a 50%, #100c00 100%);
-    padding: 120px 10%;
-  }
-  .slide-label {
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .slide-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 4vw, 56px);
-    font-weight: 300;
-    line-height: 1.15;
-    margin-bottom: 48px;
-  }
-  .slide-title span { color: var(--gold-light); font-style: italic; }
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-  }
-  .exec-lead {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 300;
-    line-height: 1.6;
-    color: var(--white);
-    border-left: 2px solid var(--gold);
-    padding-left: 24px;
-    margin-bottom: 32px;
-  }
-  .exec-body {
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--white-dim);
-  }
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-  }
-  .stat-card {
-    background: rgba(201,168,76,0.04);
-    border: 1px solid rgba(201,168,76,0.12);
-    padding: 28px 24px;
-    position: relative;
-    overflow: hidden;
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-  }
-  .stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 40px;
-    font-weight: 300;
-    color: var(--gold-light);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .stat-label {
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--white-dim);
-    text-transform: uppercase;
-  }
-
-  /* ─── SLIDE 3: MARKET OPPORTUNITY ─── */
-  .s3 {
-    background: radial-gradient(ellipse at 30% 50%, #0a1020 0%, #050508 70%);
-    padding: 120px 10%;
-  }
-  .map-visual {
-    position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45%;
-    aspect-ratio: 1.2;
-    opacity: 0.08;
-  }
-  .market-points {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    max-width: 55%;
-  }
-  .market-point {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-    padding: 28px 0;
-    border-bottom: 1px solid rgba(201,168,76,0.1);
-  }
-  .market-point:last-child { border-bottom: none; }
-  .market-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    font-weight: 300;
-    color: var(--gold);
-    opacity: 0.4;
-    line-height: 1;
-    min-width: 60px;
-  }
-  .market-text h4 {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--gold-light);
-    margin-bottom: 6px;
-  }
-  .market-text p {
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--white-dim);
-  }
-  .route-diagram {
-    position: absolute;
-    right: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
-  .route-node {
-    width: 120px;
-    text-align: center;
-  }
-  .route-city {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    color: var(--gold-light);
-    margin-bottom: 4px;
-  }
-  .route-country {
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: var(--white-dim);
-    text-transform: uppercase;
-  }
-  .route-line {
-    width: 1px;
-    height: 50px;
-    background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.2));
-    position: relative;
-  }
-  .route-line::after {
-    content: '⬦';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--gold);
-    font-size: 10px;
-  }
-  .route-pax {
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: var(--gold-dim);
-    margin-top: 2px;
-  }
-
-  /* ─── SLIDE 4: CHALLENGES ─── */
-  .s4 {
-    background: linear-gradient(160deg, #0d0500 0%, #060608 60%, #08080e 100%);
-    padding: 120px 10%;
-  }
-  .challenge-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 48px;
-  }
-  .challenge-card {
-    padding: 40px 32px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-  }
-  .challenge-card:hover {
-    background: rgba(201,168,76,0.04);
-    border-color: rgba(201,168,76,0.2);
-  }
-  .challenge-icon {
-    font-size: 32px;
-    margin-bottom: 20px;
-    display: block;
-  }
-  .challenge-card h4 {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 12px;
-    letter-spacing: 0.5px;
-  }
-  .challenge-card p {
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--white-dim);
-  }
-  .challenge-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
-  }
-
-  /* ─── SLIDE 5: SOLUTION ─── */
-  .s5 {
-    background: radial-gradient(ellipse at 50% 30%, #0e1020 0%, #060608 60%);
-    padding: 120px 10%;
-    position: relative;
-  }
-  .solution-hero {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 60px;
-  }
-  .solution-features {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-  }
-  .feat-card {
-    padding: 36px 28px;
-    background: rgba(201,168,76,0.03);
-    border: 1px solid rgba(201,168,76,0.1);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .feat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-  }
-  .feat-icon { font-size: 28px; margin-bottom: 16px; }
-  .feat-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: var(--gold-light);
-    margin-bottom: 10px;
-  }
-  .feat-desc {
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--white-dim);
-  }
-
-  /* ─── SLIDE 6: WHY BUY HERE ─── */
-  .s6 {
-    background: linear-gradient(135deg, #060410 0%, #080808 50%, #0c0800 100%);
-    padding: 120px 10%;
-  }
-  .why-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    margin-top: 48px;
-  }
-  .why-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .why-item {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    padding: 22px 0;
-    border-bottom: 1px solid rgba(201,168,76,0.08);
-  }
-  .why-item:last-child { border-bottom: none; }
-  .why-bullet {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: var(--gold);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .why-item h5 {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .why-item p {
-    font-size: 12px;
-    color: var(--white-dim);
-    line-height: 1.6;
-  }
-  .why-visual {
-    position: relative;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .comparison-ring {
-    width: 340px; height: 340px;
-    border-radius: 50%;
-    border: 1px solid rgba(201,168,76,0.15);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .ring-center {
-    text-align: center;
-    z-index: 2;
-  }
-  .ring-center-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-style: italic;
-    color: var(--gold-light);
-    display: block;
-    margin-bottom: 4px;
-  }
-  .ring-center-title {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-  }
-  .ring-tag {
-    position: absolute;
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 11px;
-    color: var(--gold);
-    white-space: nowrap;
-  }
-
-  /* ─── SLIDE 7: CUSTOMER JOURNEY ─── */
-  .s7 {
-    background: linear-gradient(180deg, #050508 0%, #0a0a12 50%, #050508 100%);
-    padding: 120px 10%;
-  }
-  .journey-flow {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
-    margin-top: 60px;
-    overflow-x: auto;
-    padding-bottom: 20px;
-  }
-  .journey-step {
-    flex: 1;
-    min-width: 140px;
-    text-align: center;
-    position: relative;
-  }
-  .journey-step::after {
-    content: '';
-    position: absolute;
-    top: 32px;
-    right: -50%;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(to right, var(--gold), rgba(201,168,76,0.1));
-  }
-  .journey-step:last-child::after { display: none; }
-  .step-circle {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    border: 1px solid rgba(201,168,76,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 16px;
-    font-size: 24px;
-    position: relative;
-    z-index: 1;
-    background: #08080f;
-    box-shadow: 0 0 20px rgba(201,168,76,0.1);
-  }
-  .step-title {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--gold-light);
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
-  }
-  .step-desc {
-    font-size: 11px;
-    color: var(--white-dim);
-    line-height: 1.5;
-    padding: 0 8px;
-  }
-  .step-num {
-    position: absolute;
-    top: -8px; right: -4px;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: var(--gold);
-    color: #000;
-    font-size: 9px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* ─── SLIDE 8: PHYSICAL PROTOTYPE ─── */
-  .s8 {
-    background: radial-gradient(ellipse at 40% 50%, #0d0800 0%, #060608 60%);
-    padding: 120px 10%;
-  }
-  .prototype-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    margin-top: 48px;
-  }
-  .kiosk-large {
-    position: relative;
-    height: 560px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  .kiosk-l-body {
-    width: 260px;
-    height: 520px;
-    background: linear-gradient(160deg, #1e1e30 0%, #0d0d14 60%, #1c1200 100%);
+    background: linear-gradient(160deg, #1e3a5f 0%, #0A1628 60%, #071120 100%);
     border-radius: 24px 24px 8px 8px;
-    border: 1px solid rgba(201,168,76,0.35);
+    padding: 18px 18px 0;
+    box-shadow: 0 40px 80px rgba(10,22,40,0.35), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.12);
     position: relative;
-    box-shadow: 
-      0 0 80px rgba(201,168,76,0.12),
-      0 30px 60px rgba(0,0,0,0.8),
-      inset 0 1px 0 rgba(201,168,76,0.5);
   }
-  .kiosk-l-screen {
-    position: absolute;
-    top: 28px; left: 14px; right: 14px;
-    height: 340px;
-    background: linear-gradient(160deg, #0a0e2a 0%, #041020 50%, #070a1e 100%);
-    border-radius: 14px;
-    border: 1px solid rgba(201,168,76,0.5);
+  .kiosk-body::before {
+    content: ''; position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 0;
+    border-radius: 18px 18px 0 0;
+    background: rgba(255,255,255,0.03);
+    pointer-events: none;
+  }
+  .kiosk-brand-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px; padding: 0 4px;
+  }
+  .kb-logo { font-family: var(--font-display); font-size: 13px; color: var(--gold-light); letter-spacing: 0.5px; }
+  .kb-status { display: flex; gap: 5px; align-items: center; }
+  .kb-dot { width: 6px; height: 6px; border-radius: 50%; background: #2ECC71; box-shadow: 0 0 6px #2ECC71; }
+  .kb-dot-text { font-size: 9px; color: rgba(255,255,255,0.5); }
+  .kiosk-screen {
+    background: #050E1C;
+    border-radius: 12px 12px 0 0;
     overflow: hidden;
-    box-shadow: 0 0 40px rgba(10,40,80,0.9) inset;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 20px;
-  }
-  .ls-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    text-align: center;
-  }
-  .ls-divider { width: 60px; height: 1px; background: rgba(201,168,76,0.4); }
-  .ls-route {
-    text-align: center;
-    font-size: 22px;
-    font-weight: 300;
-    color: white;
-    line-height: 1.3;
-  }
-  .ls-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    color: var(--gold-light);
-  }
-  .ls-btn {
-    padding: 10px 32px;
-    border-radius: 30px;
-    background: linear-gradient(135deg, var(--gold) 0%, #a0720a 100%);
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: #000;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  .kiosk-l-reader {
-    position: absolute;
-    bottom: 130px; left: 50%; transform: translateX(-50%);
-    width: 100px; height: 10px;
-    background: #111;
-    border-radius: 5px;
-    border: 1px solid rgba(201,168,76,0.25);
-  }
-  .kiosk-l-dispenser {
-    position: absolute;
-    bottom: 80px; left: 50%; transform: translateX(-50%);
-    width: 60px; height: 3px;
-    background: rgba(201,168,76,0.4);
-    border-radius: 2px;
-  }
-  .kiosk-l-base {
-    position: absolute;
-    bottom: -20px; left: 50%;
-    transform: translateX(-50%);
-    width: 300px; height: 24px;
-    background: linear-gradient(to bottom, #1a1000, #0d0900);
-    border-radius: 0 0 14px 14px;
-    border: 1px solid rgba(201,168,76,0.2);
-    border-top: none;
-  }
-  .kiosk-l-glow {
-    position: absolute;
-    bottom: -30px; left: 50%;
-    transform: translateX(-50%);
-    width: 360px; height: 80px;
-    background: radial-gradient(ellipse, rgba(201,168,76,0.18) 0%, transparent 70%);
-    filter: blur(15px);
-  }
-  .kiosk-l-accent-l, .kiosk-l-accent-r {
-    position: absolute;
-    top: 40px;
-    width: 5px; height: 80px;
-    border-radius: 3px;
-    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-    animation: accentPulse 2s ease-in-out infinite;
-  }
-  .kiosk-l-accent-l { left: 10px; }
-  .kiosk-l-accent-r { right: 10px; animation-delay: 1s; }
-  .kiosk-l-brand {
-    position: absolute;
-    top: 390px; left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    white-space: nowrap;
-  }
-  .kiosk-l-brand-text {
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    opacity: 0.7;
-  }
-  .proto-features {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .proto-feat {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(201,168,76,0.08);
-  }
-  .proto-feat:last-child { border-bottom: none; }
-  .proto-feat-icon {
-    font-size: 22px;
-    width: 44px;
-    text-align: center;
-    flex-shrink: 0;
-  }
-  .proto-feat h5 {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--gold-light);
-    margin-bottom: 4px;
-  }
-  .proto-feat p {
-    font-size: 12px;
-    color: var(--white-dim);
-    line-height: 1.5;
-  }
-
-  /* ─── SLIDE 9: UI PROTOTYPE ─── */
-  .s9 {
-    background: linear-gradient(135deg, #05050f 0%, #08080e 100%);
-    padding: 120px 8%;
-  }
-  .ui-screens {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 48px;
-  }
-  .ui-phone {
-    border-radius: 20px;
-    border: 1px solid rgba(201,168,76,0.25);
-    overflow: hidden;
-    background: #08080f;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(201,168,76,0.05);
-    aspect-ratio: 0.6;
-    display: flex;
-    flex-direction: column;
-  }
-  .ui-phone-bar {
-    padding: 14px 16px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 10px;
-    color: var(--white-dim);
-  }
-  .ui-phone-content {
-    flex: 1;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow: hidden;
-  }
-  .ui-label {
-    text-align: center;
-    margin-top: 12px;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-  }
-  /* Welcome screen */
-  .ui-welcome-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    text-align: center;
-    margin: 8px 0;
-  }
-  .ui-welcome-hero {
-    height: 100px;
-    background: linear-gradient(160deg, #0a1828, #041018);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-  }
-  .ui-welcome-cta {
-    padding: 12px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--gold) 0%, #8a6010 100%);
-    text-align: center;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #000;
-    text-transform: uppercase;
-  }
-  /* Destination screen */
-  .ui-dest-title { font-size: 11px; color: var(--white-dim); letter-spacing: 1px; text-align: center; }
-  .ui-dest-routes { display: flex; flex-direction: column; gap: 8px; }
-  .ui-route-card {
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(201,168,76,0.2);
-    background: rgba(201,168,76,0.04);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .ui-route-card.active { border-color: var(--gold); background: rgba(201,168,76,0.1); }
-  .ui-route-name { font-size: 11px; color: var(--white); font-weight: 500; }
-  .ui-route-time { font-size: 9px; color: var(--gold-dim); }
-  .ui-route-price { font-size: 11px; color: var(--gold-light); }
-  /* Gamification screen */
-  .ui-game-wheel {
-    height: 90px;
-    background: linear-gradient(135deg, #1a0e00 0%, #0d0900 100%);
-    border-radius: 50%;
-    border: 2px solid var(--gold-dim);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    margin: 0 auto;
-    width: 90px;
-    box-shadow: 0 0 20px rgba(201,168,76,0.2);
-    animation: spin 8s linear infinite;
-  }
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  .ui-game-promo {
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    background: rgba(201,168,76,0.06);
-    border: 1px solid rgba(201,168,76,0.2);
-  }
-  .ui-game-promo-title { font-size: 11px; color: var(--gold-light); font-weight: 600; }
-  .ui-game-promo-sub { font-size: 10px; color: var(--white-dim); }
-  /* Payment screen */
-  .ui-pay-total {
-    text-align: center;
-    padding: 16px;
-    border-radius: 12px;
-    background: rgba(201,168,76,0.04);
-    border: 1px solid rgba(201,168,76,0.15);
-  }
-  .ui-pay-amount {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    color: var(--gold-light);
-  }
-  .ui-pay-label { font-size: 9px; letter-spacing: 2px; color: var(--white-dim); text-transform: uppercase; }
-  .ui-pay-methods { display: flex; gap: 6px; justify-content: center; }
-  .ui-pay-method {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(201,168,76,0.2);
-    font-size: 9px;
-    color: var(--white-dim);
-    text-align: center;
-    flex: 1;
-  }
-  .ui-pay-method.active { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
-  /* Ticket screen */
-  .ui-ticket {
-    border-radius: 12px;
-    background: rgba(201,168,76,0.06);
-    border: 1px solid rgba(201,168,76,0.25);
-    padding: 12px;
-    text-align: center;
-  }
-  .ui-ticket-route { font-size: 12px; color: var(--white); font-weight: 500; }
-  .ui-ticket-qr {
-    width: 60px; height: 60px;
-    margin: 8px auto;
-    background: white;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-  }
-  .ui-ticket-id { font-size: 9px; color: var(--gold-dim); letter-spacing: 2px; }
-
-  /* ─── SLIDE 10: GAMIFICATION ─── */
-  .s10 {
-    background: radial-gradient(ellipse at 50% 40%, #0e0800 0%, #060608 70%);
-    padding: 120px 10%;
-  }
-  .game-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 48px;
-  }
-  .game-card {
-    padding: 40px 32px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(201,168,76,0.08);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
     position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
   }
-  .game-card:hover {
-    background: rgba(201,168,76,0.05);
-    border-color: rgba(201,168,76,0.25);
+  .kiosk-screen-inner {
+    background: linear-gradient(180deg, #0B2140 0%, #071830 100%);
+    min-height: 360px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
   }
-  .game-card-icon { font-size: 36px; margin-bottom: 20px; display: block; }
-  .game-card h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 400;
+  .ks-header {
+    background: rgba(10,22,40,0.8);
+    backdrop-filter: blur(10px);
+    padding: 12px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .ks-logo { font-family: var(--font-display); font-size: 14px; color: var(--gold-light); }
+  .ks-time { font-size: 11px; color: rgba(255,255,255,0.4); }
+  .ks-hero-section {
+    padding: 20px 16px 12px;
+    text-align: center;
+  }
+  .ks-greeting { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .ks-headline { font-family: var(--font-display); font-size: 22px; color: white; line-height: 1.2; margin-bottom: 4px; }
+  .ks-sub { font-size: 10px; color: rgba(255,255,255,0.5); }
+  .ks-routes { padding: 8px 14px 0; display: flex; flex-direction: column; gap: 8px; }
+  .ks-route-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 10px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .ks-route-card.active { background: rgba(197,150,58,0.15); border-color: rgba(197,150,58,0.4); }
+  .ks-route-flag { font-size: 14px; margin-right: 6px; }
+  .ks-route-name { font-size: 11px; font-weight: 600; color: white; }
+  .ks-route-detail { font-size: 9px; color: rgba(255,255,255,0.4); }
+  .ks-route-price {
+    font-family: var(--font-display); font-size: 15px;
     color: var(--gold-light);
+  }
+  .ks-promo {
+    margin: 8px 14px 12px;
+    background: linear-gradient(135deg, rgba(197,150,58,0.25), rgba(197,150,58,0.1));
+    border: 1px solid rgba(197,150,58,0.3);
+    border-radius: 8px; padding: 8px 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ks-promo-icon { font-size: 14px; }
+  .ks-promo-text { font-size: 10px; color: var(--gold-light); font-weight: 600; }
+  .ks-pay-row {
+    padding: 8px 14px 16px;
+    display: flex; gap: 6px;
+  }
+  .ks-pay-btn {
+    flex: 1; background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 7px; padding: 8px 6px; text-align: center;
+    font-size: 9px; color: rgba(255,255,255,0.6);
+    display: flex; flex-direction: column; gap: 3px; align-items: center;
+  }
+  .ks-pay-icon { font-size: 14px; }
+  .kiosk-base {
+    background: linear-gradient(160deg, #253D5E 0%, #162840 100%);
+    border-radius: 0 0 16px 16px;
+    padding: 0 24px 20px;
+    box-shadow: 0 40px 60px rgba(10,22,40,0.4);
+  }
+  .kiosk-pedestal {
+    background: linear-gradient(160deg, #1a3050 0%, #0d1e33 100%);
+    height: 16px; border-radius: 0 0 8px 8px;
+    margin: 0 30px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .kiosk-payment-bar {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px; padding: 10px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    border: 1px solid rgba(255,255,255,0.06);
     margin-bottom: 10px;
   }
-  .game-card p {
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--white-dim);
+  .kpb-label { font-size: 9px; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; }
+  .kpb-icons { display: flex; gap: 8px; }
+  .kpb-icon { font-size: 14px; opacity: 0.6; }
+  .kiosk-slot {
+    height: 4px; background: rgba(0,0,0,0.4);
+    border-radius: 2px; margin: 0 10px 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
   }
-  .game-card-tag {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 4px 12px;
-    border-radius: 12px;
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.25);
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
+  .kiosk-led-row { display: flex; gap: 6px; justify-content: center; }
+  .kiosk-led { width: 6px; height: 6px; border-radius: 50%; }
+  .kiosk-led.gold { background: var(--gold); box-shadow: 0 0 8px rgba(197,150,58,0.8); }
+  .kiosk-led.dim { background: rgba(255,255,255,0.1); }
 
-  /* ─── SLIDE 11: BUSINESS BENEFITS ─── */
-  .s11 {
-    background: linear-gradient(135deg, #050810 0%, #080808 60%, #0c0800 100%);
-    padding: 120px 10%;
-  }
-  .benefits-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 80px;
-    margin-top: 48px;
-    align-items: start;
-  }
-  .benefit-list { display: flex; flex-direction: column; gap: 0; }
-  .benefit-item {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    padding: 24px 0;
-    border-bottom: 1px solid rgba(201,168,76,0.08);
-  }
-  .benefit-item:last-child { border-bottom: none; }
-  .benefit-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
-  .benefit-item h5 { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
-  .benefit-item p { font-size: 12px; color: var(--white-dim); line-height: 1.6; }
-  .benefit-highlight {
-    background: rgba(201,168,76,0.04);
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 2px;
-    padding: 40px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .benefit-highlight::before {
-    content: '';
+  /* floating labels */
+  .kiosk-callouts { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+  .callout {
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 12px; font-weight: 600; color: var(--navy);
+    box-shadow: var(--shadow-soft);
+    display: flex; align-items: center; gap: 7px;
+    white-space: nowrap;
   }
-  .bh-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.5;
-    color: var(--white);
-    margin-bottom: 24px;
-  }
-  .bh-quote span { color: var(--gold-light); }
-  .bh-metrics {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
-    margin-top: 32px;
-  }
-  .bh-metric {
-    padding: 24px;
-    background: rgba(0,0,0,0.3);
-    text-align: center;
-  }
-  .bh-metric-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 40px;
-    color: var(--gold-light);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .bh-metric-label { font-size: 10px; letter-spacing: 2px; color: var(--white-dim); text-transform: uppercase; }
+  .callout::before { content: ''; width: 8px; height: 1px; background: var(--border); }
+  .callout.right::before { order: 3; }
+  .callout-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
-  /* ─── SLIDE 12: PLACEMENT ─── */
-  .s12 {
-    background: radial-gradient(ellipse at 30% 60%, #080e18 0%, #050508 60%);
-    padding: 120px 10%;
+  /* ── LOCATION IMPLEMENTATION ── */
+  .locations-section { padding: 120px 0; background: var(--white); }
+  .locations-intro {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: end; margin-bottom: 70px;
   }
-  .placement-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 48px;
+  .locations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 60px; }
+  .location-card {
+    border-radius: var(--radius-lg); overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all 0.3s; cursor: pointer; position: relative;
   }
-  .place-card {
-    padding: 36px 28px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
+  .location-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: transparent; }
+  .location-visual {
+    height: 220px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
   }
-  .place-card:hover { background: rgba(201,168,76,0.04); border-color: rgba(201,168,76,0.2); }
-  .place-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
-  }
-  .place-card-icon { font-size: 28px; margin-bottom: 16px; }
-  .place-card h4 { font-size: 14px; font-weight: 500; color: var(--gold-light); margin-bottom: 8px; }
-  .place-card p { font-size: 12px; color: var(--white-dim); line-height: 1.6; }
-  .place-priority {
-    display: inline-block;
-    margin-top: 12px;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    border-top: 1px solid rgba(201,168,76,0.2);
-    padding-top: 8px;
-    width: 100%;
-  }
-
-  /* ─── SLIDE 13: BUSINESS MODEL ─── */
-  .s13 {
-    background: linear-gradient(160deg, #080808 0%, #0a0d00 50%, #050508 100%);
-    padding: 120px 10%;
-  }
-  .revenue-streams {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
-    margin-top: 48px;
-  }
-  .rev-card {
-    padding: 36px 32px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(201,168,76,0.08);
-    position: relative;
-    overflow: hidden;
-  }
-  .rev-card-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 60px;
-    font-weight: 300;
-    color: rgba(201,168,76,0.1);
-    position: absolute;
-    top: 16px;
-    right: 24px;
-    line-height: 1;
-  }
-  .rev-card h4 { font-size: 16px; font-weight: 500; color: var(--gold-light); margin-bottom: 10px; }
-  .rev-card p { font-size: 13px; color: var(--white-dim); line-height: 1.6; max-width: 80%; }
-  .rev-card-tag {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 4px 14px;
-    border-radius: 12px;
-    background: rgba(201,168,76,0.08);
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  /* ─── SLIDE 14: PILOT PLAN ─── */
-  .s14 {
-    background: linear-gradient(135deg, #05050f 0%, #080808 100%);
-    padding: 120px 10%;
-  }
-  .timeline {
-    margin-top: 60px;
-    position: relative;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--gold), rgba(201,168,76,0.2), transparent);
-  }
-  .timeline-item {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    margin-bottom: 40px;
-    position: relative;
-  }
-  .timeline-item:nth-child(even) { flex-direction: row-reverse; }
-  .timeline-content {
-    flex: 1;
-    padding: 28px 32px;
-    background: rgba(201,168,76,0.03);
-    border: 1px solid rgba(201,168,76,0.1);
-    position: relative;
-  }
-  .timeline-content::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(to right, var(--gold), transparent);
-  }
-  .timeline-item:nth-child(even) .timeline-content::after {
-    background: linear-gradient(to left, var(--gold), transparent);
-  }
-  .timeline-phase {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .timeline-content h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: var(--gold-light);
-    margin-bottom: 8px;
-  }
-  .timeline-content p {
-    font-size: 13px;
-    color: var(--white-dim);
-    line-height: 1.6;
-  }
-  .timeline-dot {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-    background: #08080f;
-    z-index: 2;
-    position: relative;
-    box-shadow: 0 0 20px rgba(201,168,76,0.15);
-  }
-  .timeline-spacer { flex: 1; }
-
-  /* ─── SLIDE 15: CLOSING ─── */
-  .s15 {
-    background: radial-gradient(ellipse at 50% 40%, #12090000 0%, #050505 100%);
-    align-items: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .s15::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-      radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
-      repeating-conic-gradient(rgba(201,168,76,0.01) 0deg, transparent 1deg, transparent 59deg, rgba(201,168,76,0.01) 60deg) center / 100px 100px;
-  }
-  .closing-ornament {
-    font-size: 32px;
-    margin-bottom: 32px;
-    opacity: 0.6;
-  }
-  .closing-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 6vw, 80px);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 8px;
-  }
-  .closing-title em { font-style: italic; color: var(--gold-light); }
-  .closing-sub {
-    font-size: 14px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 48px;
-  }
-  .closing-cta-group {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 60px;
-  }
-  .cta-primary {
-    padding: 16px 40px;
-    background: linear-gradient(135deg, var(--gold) 0%, #a07820 100%);
-    border: none;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    color: #000;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  .cta-secondary {
-    padding: 16px 40px;
-    background: transparent;
-    border: 1px solid rgba(201,168,76,0.4);
-    border-radius: 4px;
-    font-size: 12px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  .closing-contact {
-    font-size: 13px;
-    color: var(--white-dim);
-    letter-spacing: 1px;
-  }
-  .closing-divider {
-    width: 1px;
-    height: 100px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    margin: 0 auto 48px;
-  }
-  .closing-taglines {
-    display: flex;
-    gap: 48px;
-    justify-content: center;
-    margin-bottom: 48px;
-    flex-wrap: wrap;
-  }
-  .closing-tagline-item {
-    text-align: center;
-  }
-  .cti-val {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    color: var(--gold-light);
-    margin-bottom: 4px;
-  }
-  .cti-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: var(--white-dim);
-    text-transform: uppercase;
-  }
-
-  /* SHARED UTILITY */
-  .container { position: relative; z-index: 2; width: 100%; }
-  .gold-line {
-    width: 60px; height: 1px;
-    background: linear-gradient(to right, var(--gold), transparent);
-    margin-bottom: 24px;
-  }
-  .section-eyebrow {
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
+  .lv-terminal { background: linear-gradient(135deg, #0D2B4E 0%, #1B4A7A 50%, #0A1E38 100%); }
+  .lv-mall { background: linear-gradient(135deg, #2D1B69 0%, #5E3BA8 50%, #1A0F40 100%); }
+  .lv-hotel { background: linear-gradient(135deg, #1A3A2A 0%, #2D6B4A 50%, #0D2218 100%); }
+  .lv-airport { background: linear-gradient(135deg, #4A2500 0%, #8B5E00 50%, #2E1800 100%); }
+  .lv-tourist { background: linear-gradient(135deg, #4A0025 0%, #8B2D5A 50%, #2E001A 100%); }
+  .lv-biz { background: linear-gradient(135deg, #0A2840 0%, #1B4F6E 50%, #05182A 100%); }
+  .location-scene { width: 100%; height: 100%; position: relative; }
+  .location-info { padding: 22px 24px; background: var(--white); }
+  .loc-tier {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 6px;
     margin-bottom: 12px;
   }
-  .h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 4vw, 56px);
-    font-weight: 300;
-    line-height: 1.15;
-  }
-  .h1 em { font-style: italic; color: var(--gold-light); }
-  .lead {
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--white-dim);
-    max-width: 600px;
-    margin-top: 16px;
-  }
-  .gold-accent { color: var(--gold-light); }
-  .animate-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .animate-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .tier-1 { background: rgba(197,150,58,0.12); color: #8B6520; }
+  .tier-2 { background: rgba(27,95,168,0.1); color: var(--blue-accent); }
+  .tier-3 { background: rgba(13,123,107,0.1); color: var(--teal); }
+  .location-info h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .location-info p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; }
+  .loc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .loc-tag {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    background: var(--cream); border: 1px solid var(--border-light);
+    padding: 3px 10px; border-radius: 20px;
   }
 
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #050505; }
-  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+  /* Scene illustrations */
+  .scene-building {
+    position: absolute; bottom: 0; width: 100%; display: flex; justify-content: center; align-items: flex-end;
+  }
+  .kiosk-mini {
+    width: 38px; z-index: 5; position: absolute;
+    bottom: 20px; left: 50%; transform: translateX(-50%);
+  }
+  .km-screen { height: 45px; background: #0B2140; border-radius: 5px 5px 0 0; border: 1.5px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; }
+  .km-body { height: 28px; background: #0A1628; border-radius: 0 0 4px 4px; border: 1.5px solid rgba(255,255,255,0.08); border-top: none; }
+  .km-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 80px; background: radial-gradient(ellipse, rgba(197,150,58,0.5) 0%, transparent 70%); pointer-events: none; }
+  .scene-people { position: absolute; bottom: 16px; display: flex; gap: 10px; }
+  .person-svg { width: 18px; height: 35px; }
+
+  /* Terminal Scene */
+  .terminal-bg {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 30px 0;
+    position: relative;
+  }
+  .terminal-arch { display: flex; gap: 16px; align-items: flex-end; justify-content: center; width: 100%; }
+  .t-pillar { width: 18px; background: rgba(255,255,255,0.08); border-radius: 3px 3px 0 0; }
+  .t-window-row { display: flex; gap: 4px; margin-bottom: 4px; }
+  .t-window { width: 20px; height: 16px; background: rgba(255,220,80,0.15); border-radius: 2px; border: 1px solid rgba(255,255,255,0.1); }
+  .t-window.lit { background: rgba(255,220,80,0.4); }
+  .t-board { background: rgba(0,0,0,0.4); border-radius: 6px; padding: 6px 10px; margin: 0 auto 8px; border: 1px solid rgba(255,255,255,0.1); }
+  .t-board-row { display: flex; gap: 6px; margin-bottom: 3px; align-items: center; }
+  .t-board-dot { width: 4px; height: 4px; border-radius: 50%; }
+  .t-board-line { height: 3px; border-radius: 2px; background: rgba(255,255,255,0.15); }
+  .t-board-text { font-size: 6px; color: rgba(255,255,255,0.5); font-family: monospace; }
+
+  /* Mall Scene */
+  .mall-bg { width: 100%; height: 100%; position: relative; display: flex; justify-content: center; align-items: flex-end; }
+  .mall-floors { display: flex; flex-direction: column; gap: 8px; width: 100%; padding: 16px 20px 0; }
+  .mall-floor { height: 28px; background: rgba(255,255,255,0.06); border-radius: 4px; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; padding: 0 8px; gap: 6px; }
+  .mf-store { height: 14px; border-radius: 2px; background: rgba(255,255,255,0.1); }
+  .mf-store.wide { flex: 2; }
+  .mf-store.narrow { flex: 1; }
+  .mf-store.lit { background: rgba(180,130,255,0.3); }
+  .mall-atrium { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 100%); border-left: 1px solid rgba(255,255,255,0.06); border-right: 1px solid rgba(255,255,255,0.06); }
+
+  /* Airport Scene */
+  .airport-bg { width: 100%; height: 100%; position: relative; }
+  .airport-roof { position: absolute; top: 0; left: 0; right: 0; height: 60px; background: rgba(139,94,0,0.3); clip-path: polygon(0 60px, 50% 0, 100% 60px); }
+  .airport-gate-row { display: flex; gap: 10px; position: absolute; top: 50px; left: 10px; right: 10px; }
+  .ap-gate { flex: 1; background: rgba(255,255,255,0.05); border-radius: 4px; height: 60px; border: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+  .ap-gate-text { font-size: 8px; color: rgba(255,255,255,0.5); font-family: monospace; letter-spacing: 1px; }
+  .ap-gate-num { font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.6); font-family: monospace; }
+  .ap-belt { position: absolute; bottom: 30px; left: 0; right: 0; height: 16px; background: rgba(255,255,255,0.04); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .ap-plane { position: absolute; top: 16px; right: 20px; font-size: 22px; transform: rotate(-30deg); opacity: 0.5; }
+
+  /* Hotel Scene */
+  .hotel-bg { width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end; }
+  .hotel-facade { display: flex; justify-content: center; align-items: flex-end; gap: 0; width: 100%; }
+  .hotel-tower { display: flex; flex-direction: column; align-items: center; }
+  .hotel-floor-row { display: flex; gap: 4px; margin-bottom: 3px; }
+  .hotel-window { width: 12px; height: 10px; border-radius: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.06); }
+  .hotel-window.lit { background: rgba(255,240,150,0.35); }
+  .hotel-lobby { width: 100%; height: 30px; background: rgba(255,255,255,0.06); border-radius: 4px 4px 0 0; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .hotel-door { width: 16px; height: 20px; background: rgba(255,240,150,0.2); border-radius: 2px; border: 1px solid rgba(255,255,255,0.1); }
+  .hotel-lobby-sign { width: 40px; height: 4px; background: rgba(197,150,58,0.5); border-radius: 2px; position: absolute; top: 4px; }
+
+  /* Tourist Scene */
+  .tourist-bg { width: 100%; height: 100%; position: relative; overflow: hidden; }
+  .tourist-sky { position: absolute; inset: 0; }
+  .tourist-palm { position: absolute; bottom: 0; }
+  .tourist-palm svg { width: 60px; height: 100px; }
+  .tourist-arch { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 100px; height: 80px; border-radius: 50px 50px 0 0; border: 3px solid rgba(255,255,255,0.15); border-bottom: none; }
+  .tourist-stars { position: absolute; top: 10px; width: 100%; display: flex; justify-content: space-around; }
+  .tourist-star { width: 2px; height: 2px; background: rgba(255,255,255,0.6); border-radius: 50%; }
+
+  /* Biz Scene */
+  .biz-bg { width: 100%; height: 100%; position: relative; }
+  .biz-towers { display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%; padding: 12px 16px 0; }
+  .biz-tower { background: rgba(255,255,255,0.06); border-radius: 3px 3px 0 0; border: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; justify-content: flex-start; padding: 4px; gap: 3px; }
+  .biz-floor { display: flex; gap: 2px; }
+  .biz-win { width: 8px; height: 6px; border-radius: 1px; background: rgba(255,255,255,0.08); }
+  .biz-win.on { background: rgba(100,180,255,0.5); }
+  .biz-win.gold-on { background: rgba(197,150,58,0.6); }
+
+  /* ── JOURNEY FLOW ── */
+  .journey-section { padding: 100px 0; background: var(--cream); }
+  .journey-flow { display: flex; gap: 0; overflow-x: auto; padding-bottom: 20px; }
+  .journey-step {
+    flex: 1; min-width: 120px;
+    display: flex; flex-direction: column; align-items: center;
+    position: relative;
+  }
+  .journey-step:not(:last-child)::after {
+    content: ''; position: absolute;
+    top: 24px; left: calc(50% + 24px); right: calc(-50% + 24px);
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 6px, transparent 6px, transparent 12px);
+  }
+  .js-num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--white); border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 18px;
+    color: var(--navy); margin-bottom: 14px;
+    position: relative; z-index: 1;
+    transition: all 0.2s;
+  }
+  .journey-step:hover .js-num { border-color: var(--gold); background: var(--gold-bg); }
+  .js-icon { font-size: 16px; margin-bottom: 10px; }
+  .js-label { font-size: 12px; font-weight: 600; color: var(--navy); text-align: center; }
+  .js-desc { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 4px; line-height: 1.4; }
+  .journey-time {
+    text-align: center; margin-top: 48px;
+    padding: 18px 36px; background: var(--navy);
+    border-radius: 12px; display: inline-flex; gap: 12px; align-items: center;
+    font-family: var(--font-display); font-size: 20px; color: white;
+  }
+  .journey-time span { color: var(--gold-light); font-style: italic; }
+
+  /* ── GAMIFICATION ── */
+  .gamif-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .gamif-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 28px 24px;
+    position: relative; overflow: hidden; transition: all 0.25s;
+  }
+  .gamif-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); border-color: transparent; }
+  .gamif-card::before {
+    content: attr(data-num);
+    position: absolute; top: -10px; right: 16px;
+    font-family: var(--font-display); font-size: 64px;
+    color: rgba(197,150,58,0.06); line-height: 1; pointer-events: none;
+  }
+  .gamif-badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .badge-instant { background: rgba(27,122,66,0.1); color: var(--green-accent); }
+  .badge-urgency { background: rgba(192,57,43,0.1); color: var(--red-accent); }
+  .badge-loyalty { background: rgba(27,95,168,0.1); color: var(--blue-accent); }
+  .badge-repeat { background: rgba(197,150,58,0.12); color: #8B6520; }
+  .badge-premium { background: rgba(44,69,103,0.1); color: var(--navy-mid); }
+  .badge-ecosystem { background: rgba(13,123,107,0.1); color: var(--teal); }
+  .gamif-card h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .gamif-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ── METRICS ── */
+  .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .metric-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-md); padding: 28px 24px;
+    text-align: center;
+  }
+  .metric-num {
+    font-family: var(--font-display); font-size: 44px;
+    color: var(--gold-light); letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .metric-label { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.4; }
+
+  /* ── ROADMAP ── */
+  .roadmap-section { padding: 100px 0; background: var(--cream); }
+  .roadmap-timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+  .roadmap-timeline::before {
+    content: ''; position: absolute;
+    top: 28px; left: 10%; right: 10%;
+    height: 2px; background: var(--border);
+  }
+  .roadmap-phase { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .rp-circle {
+    width: 56px; height: 56px; border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 18px;
+    position: relative; z-index: 1;
+    transition: all 0.3s;
+  }
+  .roadmap-phase:hover .rp-circle { border-color: var(--gold); background: var(--gold-bg); }
+  .rp-months { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; margin-bottom: 8px; }
+  .rp-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .rp-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── QUOTE / CTA ── */
+  .quote-section { padding: 80px 0; background: var(--white); text-align: center; }
+  .pull-quote {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-style: italic;
+    color: var(--navy);
+    max-width: 760px; margin: 0 auto 40px;
+    line-height: 1.4;
+  }
+  .pull-quote em { color: var(--gold); font-style: normal; }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    padding: 120px 0; background: var(--navy);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(197,150,58,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section .section-title { color: white; margin-bottom: 16px; }
+  .cta-section .section-desc { color: rgba(255,255,255,0.55); margin: 0 auto 48px; text-align: center; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; margin-bottom: 64px; }
+  .btn-gold {
+    background: var(--gold); color: white;
+    padding: 16px 36px; border-radius: 10px;
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(197,150,58,0.4); }
+  .btn-ghost {
+    background: transparent; color: rgba(255,255,255,0.7);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    padding: 16px 36px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: white; }
+  .cta-pilot-nums { display: flex; gap: 60px; justify-content: center; }
+  .cpn { text-align: center; }
+  .cpn-num { font-family: var(--font-display); font-size: 40px; color: var(--gold-light); }
+  .cpn-label { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060E1C; padding: 36px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-brand { font-family: var(--font-display); font-size: 18px; color: rgba(255,255,255,0.5); }
+  .footer-label { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+  /* ── SCREEN CAROUSEL ── */
+  .screens-carousel { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .screen-card {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    transition: all 0.25s;
+  }
+  .screen-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+  .screen-top {
+    height: 180px;
+    background: #071830;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .sc-header { background: rgba(0,0,0,0.4); padding: 6px 8px; font-size: 7px; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; }
+  .sc-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 8px; gap: 5px; }
+  .sc-line { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.12); }
+  .sc-line.gold { background: rgba(197,150,58,0.5); }
+  .sc-line.blue { background: rgba(50,130,255,0.4); }
+  .sc-box { background: rgba(255,255,255,0.06); border-radius: 5px; padding: 6px; margin: 2px 0; }
+  .sc-price { font-family: var(--font-display); font-size: 14px; color: var(--gold-light); text-align: center; }
+  .screen-label { padding: 10px 12px; font-size: 11px; font-weight: 700; color: var(--navy); }
+  .screen-sublabel { padding: 0 12px 10px; font-size: 10px; color: var(--text-muted); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 12px rgba(197,150,58,0.6); } 50% { box-shadow: 0 0 24px rgba(197,150,58,0.9); } }
+
+  .kiosk-3d { animation: float 4s ease-in-out infinite; }
+  .kiosk-led.gold { animation: pulse-glow 2s ease-in-out infinite; }
+
+  .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.2s; }
+  .fade-up:nth-child(3) { animation-delay: 0.3s; }
+  .fade-up:nth-child(4) { animation-delay: 0.4s; }
+  .fade-up:nth-child(5) { animation-delay: 0.5s; }
+  .fade-up:nth-child(6) { animation-delay: 0.6s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .container { padding: 0 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-title { font-size: 40px; letter-spacing: -1.5px; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .opportunity-grid, .device-showcase, .locations-intro { grid-template-columns: 1fr; gap: 40px; }
+    .challenges-grid, .solution-grid, .gamif-grid, .screens-carousel { grid-template-columns: 1fr; }
+    .locations-grid { grid-template-columns: 1fr; }
+    .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    .roadmap-timeline { grid-template-columns: 1fr; gap: 32px; }
+    .roadmap-timeline::before { display: none; }
+    .journey-flow { gap: 12px; }
+    .journey-step::after { display: none; }
+    .cta-pilot-nums { flex-direction: column; gap: 24px; }
+  }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Smart Ferry E-Store</div>
-  <div class="nav-slides" id="navDots"></div>
+  <div class="nav-brand">
+    <div class="nav-anchor">
+      <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+    </div>
+    Smart Ferry E-Store
+  </div>
+  <div class="nav-links">
+    <a href="#opportunity">Opportunity</a>
+    <a href="#solution">Solution</a>
+    <a href="#device">Device</a>
+    <a href="#locations">Locations</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <button class="nav-cta">Request Pilot →</button>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 1: COVER -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s1" id="slide-1">
-  <div class="container" style="padding: 80px 40px 60px; display:flex; flex-direction:column; align-items:center;">
-    <div class="cover-badge animate-in">Confidential Business Proposal · 2026</div>
-
-    <!-- Kiosk Illustration -->
-    <div class="cover-kiosk animate-in" style="animation-delay:0.2s">
-      <div class="kiosk-body">
-        <div class="kiosk-accent-left"></div>
-        <div class="kiosk-accent-right"></div>
-        <div class="kiosk-screen">
-          <div class="screen-content">
-            <div class="screen-logo">⚓ Smart Ferry</div>
-            <div style="font-size:11px; color:rgba(245,240,232,0.5); letter-spacing:1px;">CHOOSE YOUR ROUTE</div>
-            <div class="screen-route">Batam ↔ Singapore<br>Singapore ↔ Johor</div>
-            <div class="screen-btn">Book Now</div>
-            <div class="screen-dots">
-              <div class="screen-dot"></div>
-              <div class="screen-dot"></div>
-              <div class="screen-dot"></div>
-            </div>
-          </div>
-        </div>
-        <div class="kiosk-card-slot"></div>
-        <div style="position:absolute; bottom:48px; left:50%; transform:translateX(-50%); font-size:8px; letter-spacing:2px; color:rgba(201,168,76,0.5); text-transform:uppercase; white-space:nowrap;">⚓ FERRY E-STORE</div>
-        <div class="kiosk-base"></div>
-        <div class="kiosk-glow"></div>
-      </div>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-badge"><span></span>Confidential Business Proposal · 2026</div>
+  <h1 class="hero-title">Smart Ferry<br><em>E-Store</em></h1>
+  <p class="hero-subtitle">Transforming foot traffic into passengers — a premium self-service kiosk experience redefining how ferry tickets are discovered, purchased, and enjoyed.</p>
+  <div class="hero-actions">
+    <a href="#device" class="btn-primary">See the Device ↓</a>
+    <a href="#solution" class="btn-outline">View Proposal</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat fade-up">
+      <span class="hero-stat-num">12M+</span>
+      <span class="hero-stat-label">Annual cross-border passengers, Batam–SG corridor</span>
     </div>
-
-    <div class="cover-badge animate-in" style="animation-delay:0.1s">Batam · Singapore · Malaysia</div>
-    <h1 class="cover-title animate-in" style="animation-delay:0.3s">
-      Smart Ferry <em>E-Store</em><br>&amp; Gamified Ticketing
-    </h1>
-    <div class="cover-divider"></div>
-    <div class="cover-subtitle animate-in" style="animation-delay:0.4s">Transforming Foot Traffic into Passengers</div>
-    <p style="font-size:13px; color:var(--white-dim); max-width:520px; line-height:1.8; margin-bottom:36px;" class="animate-in" style="animation-delay:0.5s">
-      A premium self-service kiosk experience that redefines how ferry tickets are discovered, purchased, and enjoyed — turning passing strangers into loyal passengers.
-    </p>
-    <div class="cover-route-pills animate-in" style="animation-delay:0.6s">
-      <div class="route-pill">⚓ Batam → Singapore</div>
-      <div class="route-pill">🚢 Singapore → Johor</div>
-      <div class="route-pill">🌊 Cross-Border Routes</div>
+    <div class="hero-stat fade-up">
+      <span class="hero-stat-num">40%</span>
+      <span class="hero-stat-label">Travelers deciding destination spontaneously</span>
+    </div>
+    <div class="hero-stat fade-up">
+      <span class="hero-stat-num">3×</span>
+      <span class="hero-stat-label">Higher conversion vs app-only touchpoints</span>
+    </div>
+    <div class="hero-stat fade-up">
+      <span class="hero-stat-num">SGD 80</span>
+      <span class="hero-stat-label">Average basket value per kiosk transaction</span>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 2: EXECUTIVE SUMMARY -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s2" id="slide-2">
+<!-- OPPORTUNITY -->
+<section class="bg-white" id="opportunity">
   <div class="container">
-    <div class="section-eyebrow animate-in">01 — Executive Summary</div>
-    <div class="gold-line"></div>
-    <h2 class="h1 animate-in">The Opportunity<br>Hiding in <em>Plain Sight</em></h2>
-    <div style="height:48px"></div>
-    <div class="two-col animate-in">
+    <div class="section-label">01 — Executive Summary</div>
+    <div class="opportunity-grid">
       <div>
-        <div class="exec-lead">
-          Millions of passengers cross the Batam–Singapore–Malaysia corridor annually. Most tickets are sold at counters or via apps. The physical walk-in audience — untapped, impulsive, high-intent — remains uncaptured.
+        <h2 class="section-title">The Opportunity Hiding in <em>Plain Sight</em></h2>
+        <p class="section-desc">Millions of passengers cross the Batam–Singapore–Malaysia corridor annually. The physical walk-in audience — untapped, impulsive, high-intent — remains uncaptured.</p>
+        <div class="opp-features">
+          <div class="opp-feature">
+            <div class="opp-num">01</div>
+            <div class="opp-feature-text">
+              <h4>The Batam–Singapore Gateway</h4>
+              <p>One of Southeast Asia's busiest international ferry corridors, with over 12 million passenger crossings annually.</p>
+            </div>
+          </div>
+          <div class="opp-feature">
+            <div class="opp-num">02</div>
+            <div class="opp-feature-text">
+              <h4>Malaysia–Singapore Tourism Surge</h4>
+              <p>Post-pandemic recovery has driven a 35% YoY increase in Malaysia–Singapore visitor traffic.</p>
+            </div>
+          </div>
+          <div class="opp-feature">
+            <div class="opp-num">03</div>
+            <div class="opp-feature-text">
+              <h4>The Physical Touchpoint Gap</h4>
+              <p>No premium physical self-service experience exists. Walk-in audiences at malls, hotels, and attractions remain unaddressed.</p>
+            </div>
+          </div>
+          <div class="opp-feature">
+            <div class="opp-num">04</div>
+            <div class="opp-feature-text">
+              <h4>Tourism Behavior Shift</h4>
+              <p>40% of short-trip decisions are made within 48 hours. A compelling kiosk converts curiosity into bookings immediately.</p>
+            </div>
+          </div>
         </div>
-        <p class="exec-body">
-          The Smart Ferry E-Store is a premium interactive kiosk concept designed to convert foot traffic into booked passengers. Placed in high-traffic environments — terminals, malls, hotels, and tourist zones — it creates a new offline-to-digital sales channel that is visually arresting, commercially potent, and brand-elevating.
-          <br><br>
-          This proposal outlines the concept, opportunity, solution design, prototype vision, business model, and pilot strategy for ferry operators ready to lead the next era of passenger acquisition.
-        </p>
       </div>
-      <div class="stat-grid">
-        <div class="stat-card">
-          <div class="stat-number">12M+</div>
-          <div class="stat-label">Annual cross-border<br>passengers, Batam–SG corridor</div>
+      <div class="opp-visual">
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-bar-wrap">
+              <div class="stat-bar-label">Batam Centre</div>
+              <div class="stat-bar-track"><div class="stat-bar-fill" style="width:80%"></div></div>
+            </div>
+            <div class="stat-bar-num">8M+</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-bar-wrap">
+              <div class="stat-bar-label">HarbourFront, SG</div>
+              <div class="stat-bar-track"><div class="stat-bar-fill" style="width:60%"></div></div>
+            </div>
+            <div class="stat-bar-num">6M+</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-bar-wrap">
+              <div class="stat-bar-label">Stulang Laut, JB</div>
+              <div class="stat-bar-track"><div class="stat-bar-fill" style="width:30%"></div></div>
+            </div>
+            <div class="stat-bar-num">3M+</div>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">40%</div>
-          <div class="stat-label">Travelers deciding<br>destination spontaneously</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">3×</div>
-          <div class="stat-label">Higher conversion vs<br>app-only touchpoints</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">SGD 80</div>
-          <div class="stat-label">Avg. basket value<br>per kiosk transaction</div>
+        <div class="corridor-map">
+          <div class="port-dot">
+            <div class="port-circle">BT</div>
+            <div class="port-name">Batam</div>
+            <div class="port-pax">ID</div>
+          </div>
+          <div class="port-line"></div>
+          <div class="port-dot">
+            <div class="port-circle" style="background:var(--gold)">SG</div>
+            <div class="port-name">Singapore</div>
+            <div class="port-pax">SG</div>
+          </div>
+          <div class="port-line"></div>
+          <div class="port-dot">
+            <div class="port-circle">JB</div>
+            <div class="port-name">Johor</div>
+            <div class="port-pax">MY</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 3: MARKET OPPORTUNITY -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s3" id="slide-3" style="position:relative">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in">02 — Market Opportunity</div>
-    <div class="gold-line"></div>
-    <h2 class="h1 animate-in">A Corridor<br>of <em>Immense Scale</em></h2>
-    <div style="height:40px"></div>
-    <div class="market-points animate-in">
-      <div class="market-point">
-        <div class="market-num">01</div>
-        <div class="market-text">
-          <h4>The Batam–Singapore Gateway</h4>
-          <p>One of Southeast Asia's busiest international ferry corridors, with over 12 million passenger crossings annually. Ferry remains the primary and most convenient mode of cross-border travel between these two economic powerhouses.</p>
-        </div>
-      </div>
-      <div class="market-point">
-        <div class="market-num">02</div>
-        <div class="market-text">
-          <h4>Malaysia–Singapore Tourism Surge</h4>
-          <p>Post-pandemic travel recovery has driven a 35% YoY increase in Malaysia–Singapore visitor traffic, with leisure travelers increasingly choosing sea crossings for scenic and cost-efficient border transit.</p>
-        </div>
-      </div>
-      <div class="market-point">
-        <div class="market-num">03</div>
-        <div class="market-text">
-          <h4>The Physical Touchpoint Gap</h4>
-          <p>Despite massive passenger volumes, no premium physical self-service ticketing experience exists beyond traditional counters. Walk-in audiences at malls, hotels, and attractions remain unaddressed by current operators.</p>
-        </div>
-      </div>
-      <div class="market-point">
-        <div class="market-num">04</div>
-        <div class="market-text">
-          <h4>Tourism Behavior Shift</h4>
-          <p>Today's travelers are spontaneous planners. 40% of short-trip decisions are made within 48 hours. A compelling, visible physical kiosk placed at the right moment converts curiosity into bookings immediately.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Route diagram -->
-  <div class="route-diagram animate-in">
-    <div class="route-node">
-      <div class="route-city">Singapore</div>
-      <div class="route-country">SG · HarbourFront</div>
-      <div class="route-pax">6M+ pax/yr</div>
-    </div>
-    <div class="route-line"></div>
-    <div class="route-node">
-      <div class="route-city">Batam</div>
-      <div class="route-country">ID · Batam Centre</div>
-      <div class="route-pax">8M+ pax/yr</div>
-    </div>
-    <div class="route-line"></div>
-    <div class="route-node">
-      <div class="route-city">Johor</div>
-      <div class="route-country">MY · Stulang Laut</div>
-      <div class="route-pax">3M+ pax/yr</div>
-    </div>
-  </div>
-</div>
+<div class="divider"></div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 4: CHALLENGES -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s4" id="slide-4">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in">03 — Current Challenges</div>
-    <div class="gold-line"></div>
-    <h2 class="h1 animate-in">Where Today's<br>Sales Channels <em>Fall Short</em></h2>
-    <div class="challenge-grid animate-in">
+<!-- CHALLENGES -->
+<section class="bg-cream" id="challenges">
+  <div class="container">
+    <div class="section-label">03 — Current Challenges</div>
+    <h2 class="section-title">Where Today's Sales Channels <em>Fall Short</em></h2>
+    <p class="section-desc">Digital-first solutions only reach passengers who already intend to buy. The spontaneous, walk-in audience is entirely missed.</p>
+    <div class="challenges-grid">
       <div class="challenge-card">
-        <span class="challenge-icon">📱</span>
+        <div class="ch-icon">📱</div>
         <h4>App & Web Dependency</h4>
-        <p>Digital-first channels only serve travelers who already intend to buy. They miss the spontaneous, walk-in audience entirely — a massive untapped pool of potential passengers.</p>
+        <p>Digital channels only serve travelers who already intend to buy — missing the spontaneous, walk-in audience entirely.</p>
       </div>
       <div class="challenge-card">
-        <span class="challenge-icon">⏱️</span>
+        <div class="ch-icon">⏱️</div>
         <h4>Counter Congestion</h4>
-        <p>Traditional ticket counters create long queues, staffing costs, and a friction-heavy experience that drives frustration rather than loyalty. Peak-hour congestion is a persistent problem.</p>
+        <p>Traditional ticket counters create long queues, staffing costs, and friction-heavy experiences that drive frustration.</p>
       </div>
       <div class="challenge-card">
-        <span class="challenge-icon">💡</span>
+        <div class="ch-icon">💡</div>
         <h4>Zero Impulse Capture</h4>
-        <p>Passing foot traffic in malls, hotels, and tourist zones is never engaged. There is no physical presence to attract, inform, or convert the undecided traveler in the moment.</p>
+        <p>Passing foot traffic in malls, hotels, and tourist zones is never engaged. No physical presence to convert the undecided traveler.</p>
       </div>
       <div class="challenge-card">
-        <span class="challenge-icon">🎨</span>
+        <div class="ch-icon">🎨</div>
         <h4>Lack of Premium Experience</h4>
-        <p>Existing purchase channels offer no brand differentiation or memorability. The ferry booking experience is purely transactional — a missed opportunity to build emotional loyalty.</p>
+        <p>Existing channels offer no brand differentiation. The ferry booking experience is purely transactional — a missed loyalty opportunity.</p>
       </div>
       <div class="challenge-card">
-        <span class="challenge-icon">🌍</span>
+        <div class="ch-icon">🌍</div>
         <h4>Tourist Unfriendliness</h4>
-        <p>First-time international visitors struggle with language barriers, app downloads, and unfamiliar processes. A clear, guided, multilingual physical kiosk solves this immediately.</p>
+        <p>First-time international visitors struggle with language barriers, app downloads, and unfamiliar processes.</p>
       </div>
       <div class="challenge-card">
-        <span class="challenge-icon">📊</span>
+        <div class="ch-icon">📊</div>
         <h4>Limited Upsell Potential</h4>
-        <p>No channel currently bundles lounge access, transport add-ons, or tourism packages at the point of purchase. Revenue-per-passenger remains significantly below its potential.</p>
+        <p>No channel currently bundles lounge access, transport add-ons, or tourism packages. Revenue-per-passenger is below potential.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 5: SOLUTION -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s5" id="slide-5">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in" style="text-align:center">04 — The Proposed Solution</div>
-    <div class="solution-hero animate-in">
-      <div class="gold-line" style="margin: 12px auto 24px;"></div>
-      <h2 class="h1" style="text-align:center">Introducing the<br><em>Smart Ferry E-Store</em></h2>
-      <p class="lead" style="text-align:center; margin: 16px auto 0;">
-        A premium self-service interactive kiosk that places the full ferry booking experience — with discovery, gamification, and upsell — at the heart of wherever your passengers already are.
-      </p>
+<!-- SOLUTION -->
+<section class="bg-navy" id="solution">
+  <div class="container">
+    <div class="section-label">04 — The Proposed Solution</div>
+    <h2 class="section-title">Introducing the <em>Smart Ferry E-Store</em></h2>
+    <p class="section-desc">A premium self-service interactive kiosk placing the full ferry booking experience — with discovery, gamification, and upsell — at the heart of wherever your passengers already are.</p>
+    <div class="solution-grid">
+      <div class="solution-card">
+        <div class="sol-icon">🖥️</div>
+        <h4>Interactive Touchscreen</h4>
+        <p>Large, vivid display with intuitive route discovery, schedule browsing, and instant ticketing in under 60 seconds.</p>
+      </div>
+      <div class="solution-card">
+        <div class="sol-icon">🎮</div>
+        <h4>Gamified Engagement</h4>
+        <p>Spin-to-win promotions, loyalty point accumulation, and exclusive kiosk-only perks that create desire and urgency to buy.</p>
+      </div>
+      <div class="solution-card">
+        <div class="sol-icon">💳</div>
+        <h4>Seamless Payment</h4>
+        <p>Contactless cards, QR wallets, and cash acceptance — zero friction checkout with instant e-ticket QR delivery.</p>
+      </div>
+      <div class="solution-card">
+        <div class="sol-icon">✨</div>
+        <h4>Premium Brand Presence</h4>
+        <p>Elegant industrial design with ambient lighting, branded environment, and executive-class experience at every interaction.</p>
+      </div>
     </div>
-    <div class="solution-features animate-in">
-      <div class="feat-card">
-        <div class="feat-icon">🖥️</div>
-        <div class="feat-title">Interactive Touchscreen</div>
-        <div class="feat-desc">Large, vivid display with intuitive route discovery, schedule browsing, and instant ticketing in under 60 seconds.</div>
+    <div class="metrics-row" style="margin-top: 60px;">
+      <div class="metric-card">
+        <div class="metric-num">30%</div>
+        <div class="metric-label">Projected counter load reduction</div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon">🎮</div>
-        <div class="feat-title">Gamified Engagement</div>
-        <div class="feat-desc">Spin-to-win promotions, loyalty point accumulation, and exclusive kiosk-only perks that create desire and urgency to buy.</div>
+      <div class="metric-card">
+        <div class="metric-num">2.5×</div>
+        <div class="metric-label">Higher upsell rate vs digital checkout</div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon">💳</div>
-        <div class="feat-title">Seamless Payment</div>
-        <div class="feat-desc">Contactless cards, QR wallets, and cash acceptance — zero friction checkout with instant e-ticket QR delivery.</div>
+      <div class="metric-card">
+        <div class="metric-num">24/7</div>
+        <div class="metric-label">Availability without additional staffing</div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon">✨</div>
-        <div class="feat-title">Premium Brand Presence</div>
-        <div class="feat-desc">Elegant industrial design with ambient lighting, branded environment, and executive-class customer experience at every interaction.</div>
+      <div class="metric-card">
+        <div class="metric-num">18mo</div>
+        <div class="metric-label">Estimated pilot ROI payback period</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 6: WHY BUY HERE -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s6" id="slide-6">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in">05 — The Competitive Advantage</div>
-    <div class="gold-line"></div>
-    <h2 class="h1 animate-in">Why Customers Will<br>Choose the <em>Kiosk</em></h2>
-    <div class="why-layout animate-in">
-      <div class="why-list">
-        <div class="why-item">
-          <div class="why-bullet">🎁</div>
-          <div>
-            <h5>Exclusive Kiosk-Only Promotions</h5>
-            <p>Discounts, bonus miles, and bundle deals that can only be accessed at the physical E-Store — creating genuine incentive to buy here versus online.</p>
+<!-- DEVICE VISUAL -->
+<section class="device-section" id="device">
+  <div class="container">
+    <div class="section-label">07 — Physical Device Concept</div>
+    <div class="device-showcase">
+      <div class="device-info">
+        <h3>The <em>E-Store Kiosk</em><br>Hardware Concept</h3>
+        <p>A purpose-built physical unit designed to embody the brand's premium positioning while delivering a seamless, intuitive booking experience in any high-traffic environment.</p>
+        <div class="device-specs">
+          <div class="spec-item">
+            <div class="spec-icon">🖥️</div>
+            <div class="spec-text">
+              <h5>55" Ultra-HD Touchscreen Display</h5>
+              <p>High-brightness display visible in outdoor-adjacent environments with 10-point multi-touch precision.</p>
+            </div>
           </div>
-        </div>
-        <div class="why-item">
-          <div class="why-bullet">⚡</div>
-          <div>
-            <h5>Zero App Download Required</h5>
-            <p>Walk up, tap, pay, go. No registration, no password, no waiting. The fastest possible path from curiosity to confirmed ticket.</p>
+          <div class="spec-item">
+            <div class="spec-icon">💳</div>
+            <div class="spec-text">
+              <h5>Multi-Mode Payment Terminal</h5>
+              <p>NFC/contactless card, QR code wallets (PayNow, GrabPay, NETS), and cash acceptance with auto-change.</p>
+            </div>
           </div>
-        </div>
-        <div class="why-item">
-          <div class="why-bullet">🌍</div>
-          <div>
-            <h5>Tourist-First Design</h5>
-            <p>Multilingual interface, clear visual guidance, and a warm concierge-like experience built specifically for first-time international travelers.</p>
+          <div class="spec-item">
+            <div class="spec-icon">🖨️</div>
+            <div class="spec-text">
+              <h5>Thermal Ticket & Receipt Printer</h5>
+              <p>Instant QR-coded boarding pass printing, plus optional email/SMS delivery for paperless experience.</p>
+            </div>
           </div>
-        </div>
-        <div class="why-item">
-          <div class="why-bullet">🏛️</div>
-          <div>
-            <h5>Official Brand Trust</h5>
-            <p>A premium physical presence signals legitimacy. Travelers trust a beautifully branded physical unit over third-party aggregators or unfamiliar apps.</p>
+          <div class="spec-item">
+            <div class="spec-icon">💡</div>
+            <div class="spec-text">
+              <h5>Ambient LED Lighting Accents</h5>
+              <p>Programmable LED strips in brand gold, creating visual magnetism in any space.</p>
+            </div>
           </div>
-        </div>
-        <div class="why-item">
-          <div class="why-bullet">🎯</div>
-          <div>
-            <h5>Impulse-Driven Placement</h5>
-            <p>Located exactly where spontaneous travel decisions happen — malls, hotel lobbies, attraction entrances — capturing intent that no digital channel ever could.</p>
+          <div class="spec-item">
+            <div class="spec-icon">🔒</div>
+            <div class="spec-text">
+              <h5>Secure Industrial Enclosure</h5>
+              <p>Anti-vandal tempered glass, weatherproof chassis, tamper-resistant lock system for unattended deployment.</p>
+            </div>
           </div>
-        </div>
-        <div class="why-item">
-          <div class="why-bullet">🌟</div>
-          <div>
-            <h5>Memorable Experience</h5>
-            <p>A beautiful, engaging kiosk creates a story worth sharing. Customers become brand advocates simply by having a premium booking moment.</p>
+          <div class="spec-item">
+            <div class="spec-icon">📡</div>
+            <div class="spec-text">
+              <h5>Real-Time Connectivity</h5>
+              <p>4G/LTE + WiFi redundancy with remote management dashboard for live monitoring of all units.</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="why-visual">
-        <div class="comparison-ring" style="animation: rotateSlow 20s linear infinite;">
-          <div class="ring-center">
-            <span class="ring-center-label">Smart Ferry</span>
-            <span class="ring-center-title">E-Store</span>
-          </div>
-        </div>
-        <div class="ring-tag" style="top: 20%; left: 55%;">No App Needed</div>
-        <div class="ring-tag" style="top: 35%; left: 65%;">Kiosk Exclusives</div>
-        <div class="ring-tag" style="top: 55%; left: 60%;">Instant E-Ticket</div>
-        <div class="ring-tag" style="top: 70%; left: 45%;">Multilingual</div>
-        <div class="ring-tag" style="top: 55%; left: 10%;">Brand Trust</div>
-        <div class="ring-tag" style="top: 35%; left: 5%;">Impulse Buy</div>
-        <div class="ring-tag" style="top: 20%; left: 15%;">Gamification</div>
-        <style>@keyframes rotateSlow { from { border-color: rgba(201,168,76,0.15); } 50% { border-color: rgba(201,168,76,0.35); } to { border-color: rgba(201,168,76,0.15); } }</style>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 7: CUSTOMER JOURNEY -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s7" id="slide-7">
-  <div class="container" style="padding: 0 6%;">
-    <div class="section-eyebrow animate-in" style="text-align:center">06 — Customer Experience Flow</div>
-    <div class="gold-line" style="margin: 0 auto 24px;"></div>
-    <h2 class="h1 animate-in" style="text-align:center">The Journey from<br><em>Stranger to Passenger</em></h2>
-    <div class="journey-flow animate-in">
-      <div class="journey-step">
-        <div class="step-circle">👁️<div class="step-num">1</div></div>
-        <div class="step-title">See & Notice</div>
-        <div class="step-desc">Striking kiosk design catches attention in busy environment</div>
-      </div>
-      <div class="journey-step">
-        <div class="step-circle">✨<div class="step-num">2</div></div>
-        <div class="step-title">Attracted</div>
-        <div class="step-desc">Animated promo screen draws curious visitors closer</div>
-      </div>
-      <div class="journey-step">
-        <div class="step-circle">🗺️<div class="step-num">3</div></div>
-        <div class="step-title">Discover Routes</div>
-        <div class="step-desc">Browse destinations, schedules, and pricing effortlessly</div>
-      </div>
-      <div class="journey-step">
-        <div class="step-circle">🕐<div class="step-num">4</div></div>
-        <div class="step-title">Choose Schedule</div>
-        <div class="step-desc">Real-time seat availability shown with clear visuals</div>
-      </div>
-      <div class="journey-step">
-        <div class="step-circle">🎮<div class="step-num">5</div></div>
-        <div class="step-title">Play & Win</div>
-        <div class="step-desc">Gamified reward moment — spin for discount or bonus perk</div>
-      </div>
-      <div class="journey-step">
-        <div class="step-circle">💳<div class="step-num">6</div></div>
-        <div class="step-title">Pay</div>
-        <div class="step-desc">Contactless card, QR wallet, or cash — frictionless checkout</div>
-      </div>
-      <div class="journey-step">
-        <div class="step-circle">📱<div class="step-num">7</div></div>
-        <div class="step-title">Get E-Ticket</div>
-        <div class="step-desc">Instant QR code sent to phone and/or printed on receipt</div>
-      </div>
-      <div class="journey-step">
-        <div class="step-circle">⛴️<div class="step-num">8</div></div>
-        <div class="step-title">Board & Sail</div>
-        <div class="step-desc">Scan QR at gate — no counter, no queue, no friction</div>
-      </div>
-    </div>
-    <div style="margin-top:48px; text-align:center;">
-      <div style="display:inline-block; padding:16px 32px; border:1px solid rgba(201,168,76,0.2); border-radius:4px; background:rgba(201,168,76,0.04);">
-        <span style="font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:var(--gold-light);">Total Experience Time: Under 90 Seconds</span>
-      </div>
-    </div>
-  </div>
-</div>
+      <!-- KIOSK RENDER -->
+      <div class="kiosk-frame" style="position:relative;">
+        <div class="kiosk-3d">
+          <div class="kiosk-body">
+            <div class="kiosk-brand-bar">
+              <div class="kb-logo">⚓ Smart Ferry E-Store</div>
+              <div class="kb-status">
+                <div class="kb-dot"></div>
+                <div class="kb-dot-text">ONLINE</div>
+              </div>
+            </div>
+            <div class="kiosk-screen">
+              <div class="kiosk-screen-inner">
+                <div class="ks-header">
+                  <div class="ks-logo">⚓ Smart Ferry</div>
+                  <div class="ks-time">10:32 AM  •  FRI 15 MAY</div>
+                </div>
+                <div class="ks-hero-section">
+                  <div class="ks-greeting">YOUR GATEWAY TO</div>
+                  <div class="ks-headline">Batam · Singapore<br>Malaysia</div>
+                  <div class="ks-sub">Touch screen to begin · Sentuh untuk mulai</div>
+                </div>
+                <div class="ks-routes">
+                  <div class="ks-route-card active">
+                    <div>
+                      <div style="display:flex;align-items:center;">
+                        <span class="ks-route-flag">🇮🇩</span>
+                        <span style="font-size:9px;color:rgba(255,255,255,0.3);margin:0 4px;">→</span>
+                        <span class="ks-route-flag">🇸🇬</span>
+                      </div>
+                      <div class="ks-route-name">Batam → Singapore</div>
+                      <div class="ks-route-detail">~45 min · 8 departures/day</div>
+                    </div>
+                    <div class="ks-route-price">SGD 29+</div>
+                  </div>
+                  <div class="ks-route-card">
+                    <div>
+                      <div style="display:flex;align-items:center;">
+                        <span class="ks-route-flag">🇸🇬</span>
+                        <span style="font-size:9px;color:rgba(255,255,255,0.3);margin:0 4px;">→</span>
+                        <span class="ks-route-flag">🇲🇾</span>
+                      </div>
+                      <div class="ks-route-name">Singapore → Johor</div>
+                      <div class="ks-route-detail">~1hr · 4 departures/day</div>
+                    </div>
+                    <div class="ks-route-price">SGD 55+</div>
+                  </div>
+                </div>
+                <div class="ks-promo">
+                  <div class="ks-promo-icon">🎁</div>
+                  <div class="ks-promo-text">KIOSK EXCLUSIVE: 15% OFF TODAY · SPIN & WIN</div>
+                </div>
+                <div class="ks-pay-row">
+                  <div class="ks-pay-btn">
+                    <div class="ks-pay-icon">💳</div>
+                    <span>Card</span>
+                  </div>
+                  <div class="ks-pay-btn">
+                    <div class="ks-pay-icon">📱</div>
+                    <span>QR Pay</span>
+                  </div>
+                  <div class="ks-pay-btn">
+                    <div class="ks-pay-icon">💵</div>
+                    <span>Cash</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="kiosk-base">
+            <div class="kiosk-payment-bar">
+              <div class="kpb-label">PAYMENT · PEMBAYARAN</div>
+              <div class="kpb-icons">
+                <span class="kpb-icon">💳</span>
+                <span class="kpb-icon">📱</span>
+                <span class="kpb-icon">💵</span>
+              </div>
+            </div>
+            <div class="kiosk-slot"></div>
+            <div class="kiosk-led-row">
+              <div class="kiosk-led gold"></div>
+              <div class="kiosk-led dim"></div>
+              <div class="kiosk-led gold"></div>
+              <div class="kiosk-led dim"></div>
+              <div class="kiosk-led gold"></div>
+            </div>
+          </div>
+          <div class="kiosk-pedestal"></div>
+        </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 8: PHYSICAL PROTOTYPE -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s8" id="slide-8">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in">07 — Physical Device Concept</div>
-    <div class="gold-line"></div>
-    <h2 class="h1 animate-in">The <em>E-Store Kiosk</em><br>Hardware Concept</h2>
-    <div class="prototype-layout animate-in">
-      <div class="kiosk-large">
-        <div class="kiosk-l-body">
-          <div class="kiosk-l-accent-l"></div>
-          <div class="kiosk-l-accent-r"></div>
-          <div class="kiosk-l-screen">
-            <div class="ls-logo">⚓ Smart Ferry<br>E-Store</div>
-            <div class="ls-divider"></div>
-            <div class="ls-route">Batam → Singapore<br>10:30 AM Departure</div>
-            <div class="ls-price">SGD 48</div>
-            <div class="ls-btn">Book Now</div>
-          </div>
-          <div class="kiosk-l-reader"></div>
-          <div style="position:absolute; bottom:110px; left:50%; transform:translateX(-50%); font-size:8px; letter-spacing:2px; color:rgba(201,168,76,0.4); white-space:nowrap; text-transform:uppercase;">TAP CARD · QR · CASH</div>
-          <div class="kiosk-l-dispenser"></div>
-          <div style="position:absolute; bottom:60px; left:50%; transform:translateX(-50%); font-size:8px; letter-spacing:1px; color:rgba(201,168,76,0.35); white-space:nowrap; text-transform:uppercase;">← RECEIPT / TICKET SLOT →</div>
-          <div class="kiosk-l-brand">
-            <div class="kiosk-l-brand-text">⚓ OFFICIAL FERRY E-STORE</div>
-          </div>
-          <div class="kiosk-l-base"></div>
-          <div class="kiosk-l-glow"></div>
-        </div>
-      </div>
-      <div class="proto-features">
-        <div style="margin-bottom:32px;">
-          <p style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:300; font-style:italic; color:var(--white); line-height:1.6; border-left: 2px solid var(--gold); padding-left:20px;">
-            A purpose-built physical unit designed to embody the brand's premium positioning while delivering a seamless, intuitive booking experience in any high-traffic environment.
-          </p>
-        </div>
-        <div class="proto-feat">
-          <div class="proto-feat-icon">🖥️</div>
-          <div>
-            <h5>55" Ultra-HD Touchscreen Display</h5>
-            <p>Vibrant, high-brightness display visible in outdoor-adjacent environments with 10-point multi-touch precision.</p>
+        <!-- Callout labels -->
+        <div style="position:absolute;top:60px;right:-20px;">
+          <div style="background:white;border:1px solid #E2DDD0;border-radius:10px;padding:8px 14px;font-size:11px;font-weight:600;color:#0D1B2E;box-shadow:0 2px 16px rgba(10,22,40,0.08);white-space:nowrap;display:flex;align-items:center;gap:7px;">
+            <span style="width:7px;height:7px;border-radius:50%;background:#C5963A;flex-shrink:0;"></span>55" Ultra-HD Touch
           </div>
         </div>
-        <div class="proto-feat">
-          <div class="proto-feat-icon">💳</div>
-          <div>
-            <h5>Multi-Mode Payment Terminal</h5>
-            <p>NFC/contactless card, QR code wallets (PayNow, GrabPay, NETS), and cash acceptance with auto-change.</p>
+        <div style="position:absolute;bottom:160px;right:-30px;">
+          <div style="background:white;border:1px solid #E2DDD0;border-radius:10px;padding:8px 14px;font-size:11px;font-weight:600;color:#0D1B2E;box-shadow:0 2px 16px rgba(10,22,40,0.08);white-space:nowrap;display:flex;align-items:center;gap:7px;">
+            <span style="width:7px;height:7px;border-radius:50%;background:#C5963A;flex-shrink:0;"></span>Multi-mode Payment
           </div>
         </div>
-        <div class="proto-feat">
-          <div class="proto-feat-icon">🖨️</div>
-          <div>
-            <h5>Thermal Ticket & Receipt Printer</h5>
-            <p>Instant QR-coded boarding pass printing, plus optional email/SMS delivery for paperless experience.</p>
+        <div style="position:absolute;bottom:100px;left:-20px;">
+          <div style="background:white;border:1px solid #E2DDD0;border-radius:10px;padding:8px 14px;font-size:11px;font-weight:600;color:#0D1B2E;box-shadow:0 2px 16px rgba(10,22,40,0.08);white-space:nowrap;display:flex;align-items:center;gap:7px;">
+            <span style="width:7px;height:7px;border-radius:50%;background:#C5963A;flex-shrink:0;"></span>Ticket Slot
           </div>
         </div>
-        <div class="proto-feat">
-          <div class="proto-feat-icon">💡</div>
-          <div>
-            <h5>Ambient Lighting Accents</h5>
-            <p>Programmable LED accent strips in brand gold, creating visual magnetism and differentiated presence in any space.</p>
-          </div>
-        </div>
-        <div class="proto-feat">
-          <div class="proto-feat-icon">🔒</div>
-          <div>
-            <h5>Secure Industrial Enclosure</h5>
-            <p>Anti-vandal tempered glass, weatherproof chassis rating, tamper-resistant lock system for unattended deployment.</p>
-          </div>
-        </div>
-        <div class="proto-feat">
-          <div class="proto-feat-icon">📡</div>
-          <div>
-            <h5>Real-Time Connectivity</h5>
-            <p>4G/LTE + WiFi redundancy with remote management dashboard for operators to monitor all units live.</p>
+        <div style="position:absolute;top:40px;left:-20px;">
+          <div style="background:white;border:1px solid #E2DDD0;border-radius:10px;padding:8px 14px;font-size:11px;font-weight:600;color:#0D1B2E;box-shadow:0 2px 16px rgba(10,22,40,0.08);white-space:nowrap;display:flex;align-items:center;gap:7px;">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--green-accent, #1B7A42);flex-shrink:0;"></span>Live · Online
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 9: UI PROTOTYPE -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s9" id="slide-9">
-  <div class="container" style="padding: 0 8%;">
-    <div class="section-eyebrow animate-in" style="text-align:center">08 — Screen & UI Concept</div>
-    <div class="gold-line" style="margin: 0 auto 24px;"></div>
-    <h2 class="h1 animate-in" style="text-align:center">The <em>Screen Experience</em><br>— Six Key Moments</h2>
-    <div class="ui-screens animate-in">
-
-      <!-- Screen 1: Welcome -->
-      <div>
-        <div class="ui-phone">
-          <div class="ui-phone-bar"><span>SMART FERRY</span><span>⚓</span></div>
-          <div class="ui-phone-content">
-            <div class="ui-welcome-logo">⚓ Smart Ferry<br>E-Store</div>
-            <div class="ui-welcome-hero">🌊</div>
-            <div style="text-align:center; font-size:11px; color:var(--white-dim);">Your gateway to Batam,<br>Singapore & Malaysia</div>
-            <div class="ui-welcome-cta">Touch to Begin</div>
-            <div style="text-align:center; font-size:9px; color:var(--gold-dim); letter-spacing:1px;">EN · 中文 · BM · ID</div>
+<!-- SCREEN UI -->
+<section class="bg-white" id="screens">
+  <div class="container">
+    <div class="section-label">08 — Screen & UI Concept</div>
+    <h2 class="section-title">Six Key <em>Screen Moments</em></h2>
+    <p class="section-desc">Every screen moment is crafted to guide, delight, and convert — from first touch to confirmed boarding pass.</p>
+    <div class="screens-carousel">
+      <div class="screen-card">
+        <div class="screen-top">
+          <div class="sc-header"><span>Smart Ferry</span><span>⚓</span></div>
+          <div class="sc-body" style="text-align:center;justify-content:center;">
+            <div style="font-size:22px;margin-bottom:4px;">⚓</div>
+            <div class="sc-line gold" style="width:60%;margin:0 auto 4px;"></div>
+            <div class="sc-line" style="width:40%;margin:0 auto;"></div>
+            <div style="margin-top:8px;font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">EN · 中文 · BM · ID</div>
           </div>
         </div>
-        <div class="ui-label">Welcome Screen</div>
+        <div class="screen-label">Welcome</div>
+        <div class="screen-sublabel">Multilingual entry, brand greeting</div>
       </div>
 
-      <!-- Screen 2: Destination -->
-      <div>
-        <div class="ui-phone">
-          <div class="ui-phone-bar"><span>← BACK</span><span>SELECT ROUTE</span></div>
-          <div class="ui-phone-content">
-            <div class="ui-dest-title">WHERE ARE YOU GOING?</div>
-            <div class="ui-dest-routes">
-              <div class="ui-route-card active">
-                <div><div class="ui-route-name">🇸🇬 Batam → Singapore</div><div class="ui-route-time">~45 min · 6 departures/day</div></div>
-                <div class="ui-route-price">SGD 32+</div>
-              </div>
-              <div class="ui-route-card">
-                <div><div class="ui-route-name">🇲🇾 Singapore → Johor</div><div class="ui-route-time">~1hr · 4 departures/day</div></div>
-                <div class="ui-route-price">SGD 55+</div>
-              </div>
-              <div class="ui-route-card">
-                <div><div class="ui-route-name">🇮🇩 Singapore → Batam</div><div class="ui-route-time">~45 min · 8 departures/day</div></div>
-                <div class="ui-route-price">SGD 29+</div>
-              </div>
+      <div class="screen-card">
+        <div class="screen-top">
+          <div class="sc-header"><span>← Back</span><span>Routes</span></div>
+          <div class="sc-body">
+            <div class="sc-box">
+              <div style="font-size:7px;color:rgba(255,255,255,0.5);">🇮🇩 → 🇸🇬 Batam–SG</div>
+              <div class="sc-price" style="font-size:10px;">SGD 29+</div>
             </div>
-            <div style="padding:10px; background:rgba(201,168,76,0.06); border-radius:8px; border:1px solid rgba(201,168,76,0.2); font-size:10px; color:var(--gold); text-align:center;">🎁 KIOSK EXCLUSIVE: 15% OFF TODAY</div>
+            <div class="sc-box">
+              <div style="font-size:7px;color:rgba(255,255,255,0.5);">🇸🇬 → 🇲🇾 SG–Johor</div>
+              <div class="sc-price" style="font-size:10px;">SGD 55+</div>
+            </div>
+            <div class="sc-line gold" style="width:80%;"></div>
           </div>
         </div>
-        <div class="ui-label">Route Selection</div>
+        <div class="screen-label">Route Selection</div>
+        <div class="screen-sublabel">Choose destination & class</div>
       </div>
 
-      <!-- Screen 3: Schedule -->
-      <div>
-        <div class="ui-phone">
-          <div class="ui-phone-bar"><span>← ROUTES</span><span>SCHEDULE</span></div>
-          <div class="ui-phone-content">
-            <div style="font-size:10px; color:var(--white-dim); text-align:center;">Batam → Singapore · Today</div>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <div style="padding:10px; border-radius:8px; border:1px solid var(--gold); background:rgba(201,168,76,0.1); display:flex; justify-content:space-between; align-items:center;">
-                <div><div style="font-size:13px; color:white; font-weight:500;">10:30 AM</div><div style="font-size:9px; color:var(--gold-dim);">32 seats left</div></div>
-                <div style="font-size:13px; color:var(--gold-light);">SGD 48</div>
-              </div>
-              <div style="padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
-                <div><div style="font-size:13px; color:white; font-weight:500;">1:00 PM</div><div style="font-size:9px; color:var(--white-dim);">18 seats left</div></div>
-                <div style="font-size:13px; color:var(--white-dim);">SGD 52</div>
-              </div>
-              <div style="padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
-                <div><div style="font-size:13px; color:white; font-weight:500;">4:30 PM</div><div style="font-size:9px; color:var(--white-dim);">Ample seats</div></div>
-                <div style="font-size:13px; color:var(--white-dim);">SGD 44</div>
-              </div>
+      <div class="screen-card">
+        <div class="screen-top">
+          <div class="sc-header"><span>← Route</span><span>Schedule</span></div>
+          <div class="sc-body">
+            <div class="sc-box" style="border:1px solid rgba(197,150,58,0.4);">
+              <div style="font-size:7px;color:rgba(255,255,255,0.5);">10:30 AM · 32 seats</div>
+              <div class="sc-price" style="font-size:10px;">SGD 48</div>
             </div>
-            <div style="padding:8px 12px; border-radius:20px; background:linear-gradient(135deg, var(--gold), #8a6010); text-align:center; font-size:10px; font-weight:700; letter-spacing:2px; color:#000;">CONFIRM SELECTION</div>
+            <div class="sc-box">
+              <div style="font-size:7px;color:rgba(255,255,255,0.5);">1:00 PM · 18 seats</div>
+              <div class="sc-price" style="font-size:10px;">SGD 52</div>
+            </div>
+            <div class="sc-box">
+              <div style="font-size:7px;color:rgba(255,255,255,0.5);">4:30 PM · Ample seats</div>
+              <div class="sc-price" style="font-size:10px;">SGD 44</div>
+            </div>
           </div>
         </div>
-        <div class="ui-label">Schedule Selection</div>
+        <div class="screen-label">Schedule</div>
+        <div class="screen-sublabel">Real-time seat availability</div>
       </div>
 
-      <!-- Screen 4: Gamification -->
-      <div>
-        <div class="ui-phone">
-          <div class="ui-phone-bar"><span>REWARD MOMENT</span><span>🎮</span></div>
-          <div class="ui-phone-content" style="align-items:center;">
-            <div style="font-size:10px; letter-spacing:2px; color:var(--gold); text-align:center; text-transform:uppercase;">SPIN & SAIL</div>
-            <div class="ui-game-wheel">🎡</div>
-            <div class="ui-game-promo">
-              <div class="ui-game-promo-title">🎉 YOU WON!</div>
-              <div class="ui-game-promo-sub" style="font-size:13px; color:var(--gold-light); font-weight:600; margin: 4px 0;">15% OFF Your Ticket</div>
-              <div class="ui-game-promo-sub">Applied automatically at checkout</div>
+      <div class="screen-card">
+        <div class="screen-top">
+          <div class="sc-header"><span>🎮 Reward</span><span></span></div>
+          <div class="sc-body" style="text-align:center;justify-content:center;align-items:center;">
+            <div style="font-size:24px;">🎡</div>
+            <div style="font-size:8px;color:rgba(255,255,255,0.4);margin:4px 0;">SPIN & SAIL</div>
+            <div style="background:rgba(197,150,58,0.2);border-radius:6px;padding:5px 8px;border:1px solid rgba(197,150,58,0.4);">
+              <div style="font-size:8px;color:var(--gold-light);">🎉 15% OFF Applied!</div>
             </div>
-            <div style="font-size:9px; color:var(--white-dim); text-align:center; line-height:1.4;">Every purchase earns<br><span style="color:var(--gold);">Sail Points</span> for future rewards</div>
+            <div style="font-size:7px;color:rgba(255,255,255,0.3);margin-top:6px;">+50 Sail Points Earned</div>
           </div>
         </div>
-        <div class="ui-label">Gamification Layer</div>
+        <div class="screen-label">Gamification</div>
+        <div class="screen-sublabel">Spin wheel reward moment</div>
       </div>
 
-      <!-- Screen 5: Payment -->
-      <div>
-        <div class="ui-phone">
-          <div class="ui-phone-bar"><span>← BACK</span><span>CHECKOUT</span></div>
-          <div class="ui-phone-content">
-            <div class="ui-pay-total">
-              <div class="ui-pay-label">TOTAL AMOUNT</div>
-              <div class="ui-pay-amount">SGD 40.80</div>
-              <div style="font-size:9px; color:var(--gold); margin-top:4px;">✓ 15% kiosk discount applied</div>
+      <div class="screen-card">
+        <div class="screen-top">
+          <div class="sc-header"><span>← Back</span><span>Pay</span></div>
+          <div class="sc-body">
+            <div class="sc-line" style="width:60%;"></div>
+            <div style="display:flex;gap:4px;margin:6px 0;">
+              <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:4px;height:28px;display:flex;align-items:center;justify-content:center;font-size:10px;">💳</div>
+              <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:4px;height:28px;display:flex;align-items:center;justify-content:center;font-size:10px;">📱</div>
+              <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:4px;height:28px;display:flex;align-items:center;justify-content:center;font-size:10px;">💵</div>
             </div>
-            <div style="font-size:9px; letter-spacing:2px; color:var(--white-dim); text-transform:uppercase;">Select Payment</div>
-            <div class="ui-pay-methods">
-              <div class="ui-pay-method active">💳<br>Card</div>
-              <div class="ui-pay-method">📱<br>QR</div>
-              <div class="ui-pay-method">💵<br>Cash</div>
-            </div>
-            <div style="padding:10px; border-radius:8px; background:rgba(201,168,76,0.04); border:1px dashed rgba(201,168,76,0.25); text-align:center; font-size:9px; color:var(--white-dim);">Tap / Insert / Wave Card Below<br><span style="color:var(--gold);">↓ Card Reader ↓</span></div>
+            <div class="sc-line blue" style="width:100%;"></div>
+            <div style="font-size:8px;color:rgba(255,255,255,0.3);text-align:center;margin-top:4px;">SGD 40.80 · 15% off applied</div>
           </div>
         </div>
-        <div class="ui-label">Payment Screen</div>
+        <div class="screen-label">Payment</div>
+        <div class="screen-sublabel">Card, QR, or cash checkout</div>
       </div>
 
-      <!-- Screen 6: E-Ticket -->
-      <div>
-        <div class="ui-phone">
-          <div class="ui-phone-bar"><span>BOOKING CONFIRMED</span><span>✅</span></div>
-          <div class="ui-phone-content" style="align-items:center; text-align:center;">
-            <div style="font-size:11px; color:var(--gold); letter-spacing:2px; text-transform:uppercase;">⚓ Booking Confirmed</div>
-            <div class="ui-ticket">
-              <div class="ui-ticket-route">Batam → Singapore<br>10:30 AM · Gate B3</div>
-              <div class="ui-ticket-qr">⬛</div>
-              <div class="ui-ticket-id">BT-SG-2024-7842</div>
-            </div>
-            <div style="font-size:9px; color:var(--white-dim); line-height:1.6;">Sent to your email & SMS<br>Print below ↓</div>
-            <div style="padding:8px 20px; border-radius:20px; border:1px solid rgba(201,168,76,0.3); font-size:9px; color:var(--gold); letter-spacing:2px; text-transform:uppercase; width:100%; text-align:center;">Print Boarding Pass</div>
-            <div style="font-size:9px; color:var(--gold-dim);">🌟 +50 Sail Points Earned!</div>
+      <div class="screen-card">
+        <div class="screen-top">
+          <div class="sc-header"><span>✅ Confirmed</span><span></span></div>
+          <div class="sc-body" style="text-align:center;justify-content:center;align-items:center;">
+            <div style="width:40px;height:40px;background:rgba(255,255,255,0.08);border-radius:5px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:20px;">⬛</div>
+            <div style="font-size:7px;color:rgba(255,255,255,0.4);">BT-SG-2024-7842</div>
+            <div style="font-size:7px;color:rgba(255,255,255,0.3);margin-top:4px;">10:30 AM · Gate B3</div>
+            <div style="font-size:8px;color:var(--gold-light);margin-top:6px;">🌟 +50 Sail Points</div>
           </div>
         </div>
-        <div class="ui-label">E-Ticket Confirmation</div>
+        <div class="screen-label">E-Ticket</div>
+        <div class="screen-sublabel">QR boarding pass confirmed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION IMPLEMENTATION -->
+<section class="locations-section" id="locations">
+  <div class="container">
+    <div class="locations-intro">
+      <div>
+        <div class="section-label">New — Implementation Visuals</div>
+        <h2 class="section-title">The E-Store <em>In the Wild</em></h2>
+      </div>
+      <div>
+        <p style="font-size:17px;color:#4A5568;line-height:1.7;">From ferry terminals to premium hotels, the Smart Ferry E-Store is purpose-built to thrive wherever high-intent travelers gather. Each placement is a conversion opportunity, a brand statement, and a new revenue channel.</p>
+      </div>
+    </div>
+
+    <div class="locations-grid">
+
+      <!-- FERRY TERMINAL -->
+      <div class="location-card">
+        <div class="location-visual lv-terminal">
+          <div class="location-scene">
+            <div class="terminal-bg">
+              <!-- Sky gradient background -->
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a1a2e 0%,#152640 60%,#1B3D62 100%);"></div>
+              <!-- building facade -->
+              <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:flex-end;gap:0;">
+                <div style="width:100%;height:100px;background:rgba(255,255,255,0.04);border-top:1px solid rgba(255,255,255,0.07);border-radius:6px 6px 0 0;position:relative;">
+                  <!-- windows rows -->
+                  <div style="display:flex;gap:8px;padding:12px 16px;">
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.3);border-radius:2px;"></div>
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.15);border-radius:2px;"></div>
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.4);border-radius:2px;"></div>
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.1);border-radius:2px;"></div>
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.3);border-radius:2px;"></div>
+                  </div>
+                  <div style="display:flex;gap:8px;padding:0 16px;">
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.1);border-radius:2px;"></div>
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.35);border-radius:2px;"></div>
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.2);border-radius:2px;"></div>
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.4);border-radius:2px;"></div>
+                    <div style="width:18px;height:14px;background:rgba(255,220,80,0.15);border-radius:2px;"></div>
+                  </div>
+                  <!-- sign board -->
+                  <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:5px 12px;">
+                    <div style="font-size:7px;color:rgba(255,255,255,0.5);letter-spacing:2px;text-align:center;">FERRY TERMINAL</div>
+                    <div style="display:flex;gap:4px;margin-top:3px;">
+                      <div style="flex:1;height:2px;background:rgba(197,150,58,0.6);border-radius:1px;"></div>
+                      <div style="flex:1;height:2px;background:rgba(197,150,58,0.3);border-radius:1px;"></div>
+                      <div style="flex:1;height:2px;background:rgba(197,150,58,0.6);border-radius:1px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- water -->
+              <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:rgba(27,95,168,0.3);border-top:1px solid rgba(50,150,255,0.2);">
+                <div style="height:2px;background:rgba(255,255,255,0.06);margin-top:8px;"></div>
+              </div>
+              <!-- kiosk -->
+              <div style="position:absolute;bottom:26px;right:30px;">
+                <div style="width:30px;">
+                  <div style="height:36px;background:#0B2140;border-radius:4px 4px 0 0;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⚓</div>
+                  <div style="height:20px;background:#0A1628;border-radius:0 0 3px 3px;border:1.5px solid rgba(255,255,255,0.08);border-top:none;"></div>
+                </div>
+                <div style="position:absolute;top:-20px;left:-12px;width:56px;height:24px;background:radial-gradient(ellipse,rgba(197,150,58,0.6) 0%,transparent 70%);pointer-events:none;"></div>
+              </div>
+              <!-- people silhouettes -->
+              <div style="position:absolute;bottom:26px;left:20px;display:flex;gap:8px;align-items:flex-end;">
+                <svg width="12" height="28" viewBox="0 0 12 28"><ellipse cx="6" cy="4" rx="3.5" ry="3.5" fill="rgba(255,255,255,0.25)"/><rect x="3" y="8" width="6" height="12" rx="2" fill="rgba(255,255,255,0.2)"/><rect x="3" y="20" width="2.5" height="8" rx="1" fill="rgba(255,255,255,0.18)"/><rect x="6.5" y="20" width="2.5" height="8" rx="1" fill="rgba(255,255,255,0.18)"/></svg>
+                <svg width="12" height="28" viewBox="0 0 12 28"><ellipse cx="6" cy="4" rx="3.5" ry="3.5" fill="rgba(255,255,255,0.2)"/><rect x="3" y="8" width="6" height="12" rx="2" fill="rgba(255,255,255,0.15)"/><rect x="3" y="20" width="2.5" height="8" rx="1" fill="rgba(255,255,255,0.13)"/><rect x="6.5" y="20" width="2.5" height="8" rx="1" fill="rgba(255,255,255,0.13)"/></svg>
+                <svg width="12" height="28" viewBox="0 0 12 28"><ellipse cx="6" cy="4" rx="3.5" ry="3.5" fill="rgba(255,255,255,0.18)"/><rect x="3" y="8" width="6" height="12" rx="2" fill="rgba(255,255,255,0.14)"/><rect x="3" y="20" width="2.5" height="8" rx="1" fill="rgba(255,255,255,0.12)"/><rect x="6.5" y="20" width="2.5" height="8" rx="1" fill="rgba(255,255,255,0.12)"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="location-info">
+          <div class="loc-tier tier-1">⭐ Priority Tier 1</div>
+          <h4>Ferry Terminals</h4>
+          <p>Primary placement at HarbourFront, Tanah Merah & Batam Centre — capturing last-minute bookers and route-switchers at the point of travel.</p>
+          <div class="loc-tags">
+            <span class="loc-tag">Highest Volume</span>
+            <span class="loc-tag">Last-Minute Buyers</span>
+            <span class="loc-tag">24/7 Operations</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREMIUM MALL -->
+      <div class="location-card">
+        <div class="location-visual lv-mall">
+          <div class="location-scene">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1A0F40 0%,#2D1B69 50%,#1A0F40 100%);"></div>
+            <!-- Mall floors/atrium -->
+            <div style="position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;width:50px;background:rgba(255,255,255,0.03);border-left:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);"></div>
+            <!-- floor levels -->
+            <div style="position:absolute;top:20px;left:10px;right:10px;">
+              <div style="height:24px;background:rgba(255,255,255,0.04);border-radius:3px;border:1px solid rgba(255,255,255,0.07);margin-bottom:10px;display:flex;align-items:center;gap:4px;padding:0 6px;">
+                <div style="flex:2;height:10px;border-radius:2px;background:rgba(180,130,255,0.3);"></div>
+                <div style="flex:1;height:10px;border-radius:2px;background:rgba(255,255,255,0.08);"></div>
+              </div>
+              <div style="height:24px;background:rgba(255,255,255,0.04);border-radius:3px;border:1px solid rgba(255,255,255,0.07);margin-bottom:10px;display:flex;align-items:center;gap:4px;padding:0 6px;">
+                <div style="flex:1;height:10px;border-radius:2px;background:rgba(255,255,255,0.08);"></div>
+                <div style="flex:2;height:10px;border-radius:2px;background:rgba(180,130,255,0.2);"></div>
+              </div>
+              <div style="height:24px;background:rgba(255,255,255,0.04);border-radius:3px;border:1px solid rgba(255,255,255,0.07);margin-bottom:10px;display:flex;align-items:center;gap:4px;padding:0 6px;">
+                <div style="flex:1;height:10px;border-radius:2px;background:rgba(180,130,255,0.35);"></div>
+                <div style="flex:1;height:10px;border-radius:2px;background:rgba(255,255,255,0.08);"></div>
+                <div style="flex:1;height:10px;border-radius:2px;background:rgba(180,130,255,0.2);"></div>
+              </div>
+            </div>
+            <!-- ground floor with kiosk -->
+            <div style="position:absolute;bottom:0;left:0;right:0;height:55px;background:rgba(255,255,255,0.05);border-top:1px solid rgba(255,255,255,0.08);">
+              <div style="position:absolute;bottom:6px;right:18px;">
+                <div style="width:28px;">
+                  <div style="height:32px;background:#0B2140;border-radius:4px 4px 0 0;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:10px;">⚓</div>
+                  <div style="height:18px;background:#0A1628;border-radius:0 0 3px 3px;border:1.5px solid rgba(255,255,255,0.08);border-top:none;"></div>
+                </div>
+                <div style="position:absolute;top:-18px;left:-10px;width:50px;height:22px;background:radial-gradient(ellipse,rgba(197,150,58,0.7) 0%,transparent 70%);"></div>
+              </div>
+              <!-- shoppers -->
+              <div style="position:absolute;bottom:6px;left:16px;display:flex;gap:6px;align-items:flex-end;">
+                <svg width="10" height="24" viewBox="0 0 10 24"><ellipse cx="5" cy="3" rx="3" ry="3" fill="rgba(255,255,255,0.3)"/><rect x="2.5" y="6.5" width="5" height="10" rx="2" fill="rgba(255,255,255,0.22)"/><rect x="2.5" y="17" width="2" height="7" rx="1" fill="rgba(255,255,255,0.18)"/><rect x="5.5" y="17" width="2" height="7" rx="1" fill="rgba(255,255,255,0.18)"/></svg>
+                <svg width="10" height="24" viewBox="0 0 10 24"><ellipse cx="5" cy="3" rx="3" ry="3" fill="rgba(255,255,255,0.25)"/><rect x="2.5" y="6.5" width="5" height="10" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="2.5" y="17" width="2" height="7" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="5.5" y="17" width="2" height="7" rx="1" fill="rgba(255,255,255,0.15)"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="location-info">
+          <div class="loc-tier tier-1">⭐ Priority Tier 1</div>
+          <h4>Premium Shopping Malls</h4>
+          <p>VivoCity, ION Orchard, Suntec City — high footfall lifestyle destinations where spontaneous travel decisions are most likely to occur.</p>
+          <div class="loc-tags">
+            <span class="loc-tag">Impulse Capital</span>
+            <span class="loc-tag">High Footfall</span>
+            <span class="loc-tag">Leisure Travelers</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AIRPORT -->
+      <div class="location-card">
+        <div class="location-visual lv-airport">
+          <div class="location-scene">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1e0e00 0%,#4A2500 40%,#2A1600 100%);"></div>
+            <!-- roof structure -->
+            <div style="position:absolute;top:0;left:0;right:0;height:50px;overflow:hidden;">
+              <div style="width:100%;height:50px;background:rgba(139,94,0,0.25);clip-path:polygon(0 50px,50% 5px,100% 50px);border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+            </div>
+            <!-- support beams -->
+            <div style="position:absolute;top:48px;left:0;right:0;display:flex;justify-content:space-around;">
+              <div style="width:1px;height:70px;background:rgba(255,255,255,0.08);"></div>
+              <div style="width:1px;height:70px;background:rgba(255,255,255,0.08);"></div>
+              <div style="width:1px;height:70px;background:rgba(255,255,255,0.08);"></div>
+              <div style="width:1px;height:70px;background:rgba(255,255,255,0.08);"></div>
+              <div style="width:1px;height:70px;background:rgba(255,255,255,0.08);"></div>
+            </div>
+            <!-- departure board -->
+            <div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:6px 14px;white-space:nowrap;">
+              <div style="font-size:7px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-align:center;margin-bottom:3px;">DEPARTURES</div>
+              <div style="display:flex;gap:10px;font-size:7px;font-family:monospace;">
+                <span style="color:rgba(255,220,80,0.7);">BT-SG 10:30</span>
+                <span style="color:rgba(255,255,255,0.4);">SG-JB 11:00</span>
+              </div>
+            </div>
+            <!-- gates -->
+            <div style="position:absolute;top:88px;left:8px;right:8px;display:flex;gap:6px;">
+              <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:5px;text-align:center;">
+                <div style="font-size:7px;color:rgba(255,255,255,0.3);font-family:monospace;">GATE</div>
+                <div style="font-size:16px;color:rgba(255,255,255,0.5);font-weight:700;font-family:monospace;">B3</div>
+              </div>
+              <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:5px;text-align:center;">
+                <div style="font-size:7px;color:rgba(255,255,255,0.3);font-family:monospace;">GATE</div>
+                <div style="font-size:16px;color:rgba(255,255,255,0.5);font-weight:700;font-family:monospace;">B4</div>
+              </div>
+              <div style="flex:1;background:rgba(255,220,80,0.05);border:1px solid rgba(255,220,80,0.15);border-radius:3px;padding:5px;text-align:center;">
+                <div style="font-size:7px;color:rgba(255,220,80,0.6);font-family:monospace;">GATE</div>
+                <div style="font-size:16px;color:rgba(255,220,80,0.7);font-weight:700;font-family:monospace;">B5</div>
+              </div>
+            </div>
+            <!-- conveyor belt -->
+            <div style="position:absolute;bottom:36px;left:0;right:0;height:12px;background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);">
+              <div style="display:flex;gap:14px;padding:3px 12px;">
+                <div style="width:20px;height:6px;background:rgba(255,255,255,0.06);border-radius:2px;"></div>
+                <div style="width:30px;height:6px;background:rgba(255,255,255,0.06);border-radius:2px;"></div>
+              </div>
+            </div>
+            <!-- plane icon -->
+            <div style="position:absolute;top:10px;right:10px;font-size:18px;opacity:0.4;transform:rotate(-30deg);">✈️</div>
+            <!-- kiosk -->
+            <div style="position:absolute;bottom:48px;right:20px;">
+              <div style="width:26px;">
+                <div style="height:30px;background:#0B2140;border-radius:3px 3px 0 0;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:9px;">⚓</div>
+                <div style="height:16px;background:#0A1628;border-radius:0 0 3px 3px;border:1.5px solid rgba(255,255,255,0.08);border-top:none;"></div>
+              </div>
+              <div style="position:absolute;top:-16px;left:-8px;width:44px;height:20px;background:radial-gradient(ellipse,rgba(197,150,58,0.7) 0%,transparent 70%);"></div>
+            </div>
+            <!-- travelers -->
+            <div style="position:absolute;bottom:48px;left:14px;display:flex;gap:5px;align-items:flex-end;">
+              <svg width="10" height="22" viewBox="0 0 10 22"><ellipse cx="5" cy="3" rx="2.8" ry="2.8" fill="rgba(255,255,255,0.28)"/><rect x="2.5" y="6" width="5" height="9" rx="1.5" fill="rgba(255,255,255,0.2)"/><rect x="2.5" y="15" width="2" height="7" rx="1" fill="rgba(255,255,255,0.16)"/><rect x="5.5" y="15" width="2" height="7" rx="1" fill="rgba(255,255,255,0.16)"/></svg>
+              <svg width="10" height="22" viewBox="0 0 10 22"><ellipse cx="5" cy="3" rx="2.8" ry="2.8" fill="rgba(255,255,255,0.22)"/><rect x="2.5" y="6" width="5" height="9" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="2.5" y="15" width="2" height="7" rx="1" fill="rgba(255,255,255,0.13)"/><rect x="5.5" y="15" width="2" height="7" rx="1" fill="rgba(255,255,255,0.13)"/></svg>
+              <svg width="10" height="22" viewBox="0 0 10 22"><ellipse cx="5" cy="3" rx="2.8" ry="2.8" fill="rgba(255,255,255,0.18)"/><rect x="2.5" y="6" width="5" height="9" rx="1.5" fill="rgba(255,255,255,0.14)"/><rect x="2.5" y="15" width="2" height="7" rx="1" fill="rgba(255,255,255,0.11)"/><rect x="5.5" y="15" width="2" height="7" rx="1" fill="rgba(255,255,255,0.11)"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="location-info">
+          <div class="loc-tier tier-2">★★ Priority Tier 2</div>
+          <h4>Airport & Transit Hubs</h4>
+          <p>Changi Airport terminals and land transport interchanges intercept inbound travelers at the most relevant decision point of their journey.</p>
+          <div class="loc-tags">
+            <span class="loc-tag">High Intent</span>
+            <span class="loc-tag">Inbound Travelers</span>
+            <span class="loc-tag">Cross-border</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LUXURY HOTEL -->
+      <div class="location-card">
+        <div class="location-visual lv-hotel">
+          <div class="location-scene">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#071A0F 0%,#1A3A2A 50%,#0D2218 100%);"></div>
+            <!-- hotel tower -->
+            <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:120px;">
+              <!-- tower floors -->
+              <div style="display:flex;flex-direction:column;gap:3px;padding-bottom:0;">
+                <div style="display:flex;gap:5px;justify-content:center;">
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.15);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.35);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.1);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.4);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.2);border:1px solid rgba(255,255,255,0.07);"></div>
+                </div>
+                <div style="display:flex;gap:5px;justify-content:center;">
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.3);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.1);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.35);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.15);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.4);border:1px solid rgba(255,255,255,0.07);"></div>
+                </div>
+                <div style="display:flex;gap:5px;justify-content:center;">
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.1);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.35);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.2);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.4);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.15);border:1px solid rgba(255,255,255,0.07);"></div>
+                </div>
+                <div style="display:flex;gap:5px;justify-content:center;">
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.3);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.4);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.15);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.35);border:1px solid rgba(255,255,255,0.07);"></div>
+                  <div style="width:11px;height:9px;border-radius:1px;background:rgba(255,240,150,0.2);border:1px solid rgba(255,255,255,0.07);"></div>
+                </div>
+                <!-- lobby -->
+                <div style="height:32px;background:rgba(255,255,255,0.06);border-radius:4px 4px 0 0;border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;gap:6px;position:relative;">
+                  <div style="position:absolute;top:3px;left:50%;transform:translateX(-50%);width:36px;height:3px;background:rgba(197,150,58,0.5);border-radius:2px;"></div>
+                  <div style="width:14px;height:20px;background:rgba(255,240,150,0.2);border-radius:2px;border:1px solid rgba(255,255,255,0.1);margin-top:5px;"></div>
+                  <div style="width:14px;height:20px;background:rgba(255,240,150,0.2);border-radius:2px;border:1px solid rgba(255,255,255,0.1);margin-top:5px;"></div>
+                </div>
+              </div>
+            </div>
+            <!-- trees -->
+            <div style="position:absolute;bottom:0;left:6px;">
+              <div style="width:20px;height:40px;display:flex;flex-direction:column;align-items:center;">
+                <div style="width:18px;height:18px;background:rgba(13,123,107,0.5);border-radius:50%;margin-bottom:2px;"></div>
+                <div style="width:14px;height:12px;background:rgba(13,123,107,0.4);border-radius:50%;"></div>
+                <div style="width:3px;height:12px;background:rgba(255,255,255,0.1);"></div>
+              </div>
+            </div>
+            <div style="position:absolute;bottom:0;right:6px;">
+              <div style="width:20px;height:35px;display:flex;flex-direction:column;align-items:center;">
+                <div style="width:16px;height:16px;background:rgba(13,123,107,0.45);border-radius:50%;margin-bottom:2px;"></div>
+                <div style="width:12px;height:10px;background:rgba(13,123,107,0.35);border-radius:50%;"></div>
+                <div style="width:3px;height:10px;background:rgba(255,255,255,0.1);"></div>
+              </div>
+            </div>
+            <!-- concierge kiosk -->
+            <div style="position:absolute;bottom:32px;right:34px;">
+              <div style="width:22px;">
+                <div style="height:26px;background:#0B2140;border-radius:3px 3px 0 0;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:8px;">⚓</div>
+                <div style="height:14px;background:#0A1628;border-radius:0 0 3px 3px;border:1.5px solid rgba(255,255,255,0.08);border-top:none;"></div>
+              </div>
+              <div style="position:absolute;top:-14px;left:-7px;width:38px;height:18px;background:radial-gradient(ellipse,rgba(197,150,58,0.7) 0%,transparent 70%);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="location-info">
+          <div class="loc-tier tier-2">★★ Priority Tier 2</div>
+          <h4>Hotels & Serviced Residences</h4>
+          <p>Lobby placement at 4–5 star hotels targets the highest-value leisure and business travelers who may extend their journey across borders.</p>
+          <div class="loc-tags">
+            <span class="loc-tag">High Value Guests</span>
+            <span class="loc-tag">Concierge Adjacent</span>
+            <span class="loc-tag">Premium Upsell</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOURIST ATTRACTION -->
+      <div class="location-card">
+        <div class="location-visual lv-tourist">
+          <div class="location-scene">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1A0020 0%,#4A0030 40%,#2A0018 100%);"></div>
+            <!-- night sky stars -->
+            <div style="position:absolute;inset:0;">
+              <div style="position:absolute;top:15px;left:20px;width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,0.7);"></div>
+              <div style="position:absolute;top:25px;left:60px;width:1px;height:1px;border-radius:50%;background:rgba(255,255,255,0.5);"></div>
+              <div style="position:absolute;top:10px;right:30px;width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,0.6);"></div>
+              <div style="position:absolute;top:35px;right:70px;width:1px;height:1px;border-radius:50%;background:rgba(255,255,255,0.4);"></div>
+              <div style="position:absolute;top:20px;left:110px;width:1.5px;height:1.5px;border-radius:50%;background:rgba(255,255,255,0.5);"></div>
+              <div style="position:absolute;top:8px;left:150px;width:1px;height:1px;border-radius:50%;background:rgba(255,255,255,0.6);"></div>
+            </div>
+            <!-- heritage arch -->
+            <div style="position:absolute;bottom:50px;left:50%;transform:translateX(-50%);width:90px;height:70px;border-radius:45px 45px 0 0;border:2.5px solid rgba(255,255,255,0.12);border-bottom:none;"></div>
+            <div style="position:absolute;bottom:50px;left:50%;transform:translateX(-50%);width:60px;height:48px;border-radius:30px 30px 0 0;border:2px solid rgba(255,200,100,0.15);border-bottom:none;"></div>
+            <!-- palm trees -->
+            <div style="position:absolute;bottom:0;left:4px;">
+              <svg width="50" height="90" viewBox="0 0 50 90"><line x1="25" y1="90" x2="28" y2="40" stroke="rgba(255,255,255,0.12)" stroke-width="2.5"/><ellipse cx="18" cy="38" rx="16" ry="7" fill="rgba(13,123,107,0.45)" transform="rotate(-20,18,38)"/><ellipse cx="35" cy="35" rx="15" ry="6" fill="rgba(13,123,107,0.35)" transform="rotate(15,35,35)"/><ellipse cx="28" cy="30" rx="12" ry="5" fill="rgba(13,123,107,0.5)" transform="rotate(-5,28,30)"/></svg>
+            </div>
+            <div style="position:absolute;bottom:0;right:4px;">
+              <svg width="45" height="80" viewBox="0 0 45 80"><line x1="22" y1="80" x2="19" y2="36" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><ellipse cx="14" cy="34" rx="14" ry="6" fill="rgba(13,123,107,0.35)" transform="rotate(-25,14,34)"/><ellipse cx="28" cy="30" rx="13" ry="5" fill="rgba(13,123,107,0.45)" transform="rotate(10,28,30)"/></svg>
+            </div>
+            <!-- ground -->
+            <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.05);">
+              <!-- kiosk -->
+              <div style="position:absolute;bottom:6px;right:20px;">
+                <div style="width:22px;">
+                  <div style="height:24px;background:#0B2140;border-radius:3px 3px 0 0;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:8px;">⚓</div>
+                  <div style="height:14px;background:#0A1628;border-radius:0 0 3px 3px;border:1.5px solid rgba(255,255,255,0.08);border-top:none;"></div>
+                </div>
+                <div style="position:absolute;top:-14px;left:-6px;width:36px;height:18px;background:radial-gradient(ellipse,rgba(197,150,58,0.7) 0%,transparent 70%);"></div>
+              </div>
+              <!-- tourists -->
+              <div style="position:absolute;bottom:6px;left:10px;display:flex;gap:4px;align-items:flex-end;">
+                <svg width="9" height="20" viewBox="0 0 9 20"><ellipse cx="4.5" cy="2.5" rx="2.5" ry="2.5" fill="rgba(255,255,255,0.3)"/><rect x="2" y="5.5" width="5" height="8" rx="1.5" fill="rgba(255,255,255,0.22)"/><rect x="2" y="13.5" width="2" height="6.5" rx="1" fill="rgba(255,255,255,0.18)"/><rect x="5" y="13.5" width="2" height="6.5" rx="1" fill="rgba(255,255,255,0.18)"/></svg>
+                <svg width="9" height="20" viewBox="0 0 9 20"><ellipse cx="4.5" cy="2.5" rx="2.5" ry="2.5" fill="rgba(255,255,255,0.22)"/><rect x="2" y="5.5" width="5" height="8" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="2" y="13.5" width="2" height="6.5" rx="1" fill="rgba(255,255,255,0.13)"/><rect x="5" y="13.5" width="2" height="6.5" rx="1" fill="rgba(255,255,255,0.13)"/></svg>
+                <svg width="9" height="20" viewBox="0 0 9 20"><ellipse cx="4.5" cy="2.5" rx="2.5" ry="2.5" fill="rgba(255,255,255,0.18)"/><rect x="2" y="5.5" width="5" height="8" rx="1.5" fill="rgba(255,255,255,0.14)"/><rect x="2" y="13.5" width="2" height="6.5" rx="1" fill="rgba(255,255,255,0.11)"/><rect x="5" y="13.5" width="2" height="6.5" rx="1" fill="rgba(255,255,255,0.11)"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="location-info">
+          <div class="loc-tier tier-2">★★ Priority Tier 2</div>
+          <h4>Tourist Attractions</h4>
+          <p>Sentosa, Batam tourism zones, and cultural attractions attract visitors already in an exploratory mindset — ideal for cross-border travel suggestion.</p>
+          <div class="loc-tags">
+            <span class="loc-tag">Discovery Mode</span>
+            <span class="loc-tag">Exploratory Mindset</span>
+            <span class="loc-tag">Bundle Upsell</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUSINESS DISTRICT -->
+      <div class="location-card">
+        <div class="location-visual lv-biz">
+          <div class="location-scene">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#020C18 0%,#0A2840 50%,#051828 100%);"></div>
+            <!-- city skyline -->
+            <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:flex-end;gap:3px;padding:0 6px;">
+              <div style="width:28px;height:110px;background:rgba(255,255,255,0.05);border-radius:2px 2px 0 0;border:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column;gap:3px;padding:5px 3px;">
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.5);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.4);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(197,150,58,0.5);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.5);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.3);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(197,150,58,0.4);"></div></div>
+              </div>
+              <div style="width:22px;height:80px;background:rgba(255,255,255,0.04);border-radius:2px 2px 0 0;border:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;gap:3px;padding:4px 2px;">
+                <div style="height:5px;border-radius:1px;background:rgba(100,180,255,0.4);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(197,150,58,0.4);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(100,180,255,0.3);"></div>
+              </div>
+              <div style="width:36px;height:145px;background:rgba(255,255,255,0.06);border-radius:2px 2px 0 0;border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:3px;padding:6px 3px;">
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.5);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(197,150,58,0.6);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(197,150,58,0.4);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.4);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.5);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.3);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(197,150,58,0.5);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div></div>
+                <div style="display:flex;gap:2px;"><div style="flex:1;height:5px;border-radius:1px;background:rgba(100,180,255,0.4);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div><div style="flex:1;height:5px;border-radius:1px;background:rgba(197,150,58,0.4);"></div></div>
+              </div>
+              <div style="width:24px;height:95px;background:rgba(255,255,255,0.04);border-radius:2px 2px 0 0;border:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column;gap:3px;padding:4px 3px;">
+                <div style="height:5px;border-radius:1px;background:rgba(197,150,58,0.4);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(100,180,255,0.5);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(197,150,58,0.3);"></div>
+              </div>
+              <div style="width:20px;height:65px;background:rgba(255,255,255,0.04);border-radius:2px 2px 0 0;border:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;gap:3px;padding:4px 2px;">
+                <div style="height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(100,180,255,0.35);"></div>
+                <div style="height:5px;border-radius:1px;background:rgba(255,255,255,0.08);"></div>
+              </div>
+            </div>
+            <!-- ground + kiosk -->
+            <div style="position:absolute;bottom:0;left:0;right:0;height:26px;background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.06);">
+              <div style="position:absolute;bottom:4px;right:12px;">
+                <div style="width:20px;">
+                  <div style="height:22px;background:#0B2140;border-radius:3px 3px 0 0;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:7px;">⚓</div>
+                  <div style="height:12px;background:#0A1628;border-radius:0 0 3px 3px;border:1.5px solid rgba(255,255,255,0.08);border-top:none;"></div>
+                </div>
+                <div style="position:absolute;top:-12px;left:-5px;width:32px;height:16px;background:radial-gradient(ellipse,rgba(197,150,58,0.7) 0%,transparent 70%);"></div>
+              </div>
+            </div>
+            <!-- reflection -->
+            <div style="position:absolute;bottom:0;left:0;right:0;height:20px;background:linear-gradient(180deg,transparent,rgba(27,95,168,0.08));"></div>
+          </div>
+        </div>
+        <div class="location-info">
+          <div class="loc-tier tier-3">★★★ Priority Tier 3</div>
+          <h4>Business Districts</h4>
+          <p>Raffles Place, Marina Bay, and JB business zones target corporate travelers who cross frequently and value speed, convenience, and executive perks.</p>
+          <div class="loc-tags">
+            <span class="loc-tag">Corporate Frequent</span>
+            <span class="loc-tag">Loyalty Focus</span>
+            <span class="loc-tag">Executive Class</span>
+          </div>
+        </div>
       </div>
 
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 10: GAMIFICATION -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s10" id="slide-10">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in" style="text-align:center">09 — Gamification & Engagement</div>
-    <div class="gold-line" style="margin:0 auto 24px;"></div>
-    <h2 class="h1 animate-in" style="text-align:center">Making Every Booking<br><em>Memorable & Rewarding</em></h2>
-    <p class="lead animate-in" style="text-align:center; margin: 0 auto 0;">
-      Gamification transforms a transactional moment into a delightful experience — increasing conversion, dwell time, and repeat purchasing.
-    </p>
-    <div class="game-grid animate-in">
-      <div class="game-card">
-        <span class="game-card-icon">🎡</span>
+<!-- JOURNEY FLOW -->
+<section class="journey-section" id="journey">
+  <div class="container">
+    <div class="section-label">06 — Customer Experience Flow</div>
+    <h2 class="section-title">Stranger to <em>Passenger</em></h2>
+    <p class="section-desc">Eight moments, under 90 seconds. The E-Store turns curiosity into confirmed bookings without friction or download.</p>
+    <div class="journey-flow">
+      <div class="journey-step"><div class="js-num">1</div><div class="js-icon">👁️</div><div class="js-label">See & Notice</div><div class="js-desc">Kiosk catches attention</div></div>
+      <div class="journey-step"><div class="js-num">2</div><div class="js-icon">✨</div><div class="js-label">Attracted</div><div class="js-desc">Promo screen draws closer</div></div>
+      <div class="journey-step"><div class="js-num">3</div><div class="js-icon">🗺️</div><div class="js-label">Discover</div><div class="js-desc">Browse routes & schedules</div></div>
+      <div class="journey-step"><div class="js-num">4</div><div class="js-icon">🕐</div><div class="js-label">Choose</div><div class="js-desc">Real-time seat availability</div></div>
+      <div class="journey-step"><div class="js-num">5</div><div class="js-icon">🎮</div><div class="js-label">Play & Win</div><div class="js-desc">Spin for reward</div></div>
+      <div class="journey-step"><div class="js-num">6</div><div class="js-icon">💳</div><div class="js-label">Pay</div><div class="js-desc">Card, QR, or cash</div></div>
+      <div class="journey-step"><div class="js-num">7</div><div class="js-icon">📱</div><div class="js-label">E-Ticket</div><div class="js-desc">QR to phone + print</div></div>
+      <div class="journey-step"><div class="js-num">8</div><div class="js-icon">⛴️</div><div class="js-label">Board & Sail</div><div class="js-desc">Scan at gate, no queue</div></div>
+    </div>
+    <div style="text-align:center;margin-top:48px;">
+      <div class="journey-time">Total Experience Time: <span>Under 90 Seconds</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMIFICATION -->
+<section class="bg-white" id="gamification">
+  <div class="container">
+    <div class="section-label">09 — Gamification & Engagement</div>
+    <h2 class="section-title">Every Booking <em>Memorable & Rewarding</em></h2>
+    <p class="section-desc">Gamification transforms a transactional moment into a delightful experience — increasing conversion, dwell time, and repeat purchasing.</p>
+    <div class="gamif-grid">
+      <div class="gamif-card" data-num="01">
+        <div class="gamif-badge badge-instant">Instant Reward</div>
         <h4>Spin & Sail Reward</h4>
         <p>Every booking triggers a spin wheel moment that reveals a prize — from percentage discounts to free lounge access. Creates excitement and urgency.</p>
-        <span class="game-card-tag">Instant Reward</span>
       </div>
-      <div class="game-card">
-        <span class="game-card-icon">⚡</span>
+      <div class="gamif-card" data-num="02">
+        <div class="gamif-badge badge-urgency">Urgency Driver</div>
         <h4>Lucky Flash Voucher</h4>
-        <p>Time-limited surprise discounts appear on screen at certain hours, creating a "catch it before it's gone" impulse that drives immediate purchase decisions.</p>
-        <span class="game-card-tag">Urgency Driver</span>
+        <p>Time-limited surprise discounts appear at certain hours, creating a "catch it before it's gone" impulse that drives immediate purchase decisions.</p>
       </div>
-      <div class="game-card">
-        <span class="game-card-icon">🗺️</span>
+      <div class="gamif-card" data-num="03">
+        <div class="gamif-badge badge-loyalty">Loyalty Builder</div>
         <h4>Travel Mission Board</h4>
         <p>Passengers collect stamps across different routes — complete missions like "Visit all 3 ports" to unlock exclusive travel rewards and status upgrades.</p>
-        <span class="game-card-tag">Loyalty Builder</span>
       </div>
-      <div class="game-card">
-        <span class="game-card-icon">⭐</span>
+      <div class="gamif-card" data-num="04">
+        <div class="gamif-badge badge-repeat">Repeat Purchase</div>
         <h4>Sail Points System</h4>
         <p>Every purchase earns redeemable Sail Points. Accumulated points unlock discounts, free tickets, lounge access, or partner perks across the region.</p>
-        <span class="game-card-tag">Repeat Purchase</span>
       </div>
-      <div class="game-card">
-        <span class="game-card-icon">🏆</span>
+      <div class="gamif-card" data-num="05">
+        <div class="gamif-badge badge-premium">Premium Upsell</div>
         <h4>Executive Tier Unlocks</h4>
         <p>Frequent kiosk users progress through Gold, Platinum, and Diamond tiers — unlocking premium lounge access, priority boarding, and concierge perks.</p>
-        <span class="game-card-tag">Premium Upsell</span>
       </div>
-      <div class="game-card">
-        <span class="game-card-icon">🎁</span>
+      <div class="gamif-card" data-num="06">
+        <div class="gamif-badge badge-ecosystem">Ecosystem Play</div>
         <h4>Partner Reward Bundles</h4>
-        <p>Gamification integrates with hotel, F&B, and attraction partners. A ferry booking can trigger a partner offer — creating a seamless regional loyalty ecosystem.</p>
-        <span class="game-card-tag">Ecosystem Play</span>
+        <p>Gamification integrates with hotel, F&B, and attraction partners. A ferry booking can trigger a partner offer, creating a seamless regional loyalty ecosystem.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 11: BUSINESS BENEFITS -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s11" id="slide-11">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in">10 — Business Value</div>
-    <div class="gold-line"></div>
-    <h2 class="h1 animate-in">Why This <em>Wins</em><br>for the Operator</h2>
-    <div class="benefits-layout animate-in">
-      <div class="benefit-list">
-        <div class="benefit-item">
-          <div class="benefit-icon">📈</div>
-          <div>
-            <h5>New Offline-to-Digital Sales Channel</h5>
-            <p>Capture foot traffic that no digital channel can reach — turning mall visitors and hotel guests into paying passengers.</p>
-          </div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-icon">🎯</div>
-          <div>
-            <h5>Higher Walk-In Conversion</h5>
-            <p>Premium design, instant booking, and exclusive offers create significantly higher conversion rates from walk-in audiences versus traditional counters.</p>
-          </div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-icon">💎</div>
-          <div>
-            <h5>Brand Differentiation</h5>
-            <p>A beautiful, modern E-Store signals operator quality and seriousness — positioning your brand above competitors in the minds of travelers.</p>
-          </div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-icon">🔄</div>
-          <div>
-            <h5>Reduced Counter Dependency</h5>
-            <p>Automate routine ticketing transactions, freeing staff for complex service delivery and reducing peak-hour pressure at manned counters.</p>
-          </div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-icon">💰</div>
-          <div>
-            <h5>Expanded Upsell Revenue</h5>
-            <p>Lounge passes, transport add-ons, travel bundles, and insurance products can be offered at checkout — increasing average order value per passenger.</p>
-          </div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-icon">📊</div>
-          <div>
-            <h5>Rich Passenger Data</h5>
-            <p>Every transaction builds a dataset — booking patterns, preferences, locations, and behaviors — enabling smarter marketing and operational decisions.</p>
-          </div>
-        </div>
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="container">
+    <div class="section-label">13 — Implementation Roadmap</div>
+    <h2 class="section-title">Concept to <em>Pilot in 6 Months</em></h2>
+    <p class="section-desc" style="margin-bottom:80px;">A structured path from discovery to full network expansion, with clear milestones and accountable deliverables at every phase.</p>
+    <div class="roadmap-timeline">
+      <div class="roadmap-phase">
+        <div class="rp-circle">🔍</div>
+        <div class="rp-months">Month 1–2</div>
+        <div class="rp-title">Discovery & Design</div>
+        <div class="rp-desc">Stakeholder alignment, site surveys, UX/UI design, hardware specs, brand system, vendor engagement.</div>
       </div>
-      <div class="benefit-highlight">
-        <div class="bh-quote">
-          "One well-placed E-Store in a premium mall can generate the equivalent of <span>an additional ticket counter</span> — operating 24/7, without staff."
-        </div>
-        <div class="bh-metrics">
-          <div class="bh-metric">
-            <div class="bh-metric-num">30%</div>
-            <div class="bh-metric-label">Projected counter<br>load reduction</div>
-          </div>
-          <div class="bh-metric">
-            <div class="bh-metric-num">2.5×</div>
-            <div class="bh-metric-label">Higher upsell rate<br>vs digital checkout</div>
-          </div>
-          <div class="bh-metric">
-            <div class="bh-metric-num">24/7</div>
-            <div class="bh-metric-label">Availability without<br>additional staffing</div>
-          </div>
-          <div class="bh-metric">
-            <div class="bh-metric-num">18mo</div>
-            <div class="bh-metric-label">Estimated pilot<br>ROI payback period</div>
-          </div>
-        </div>
+      <div class="roadmap-phase">
+        <div class="rp-circle">🔧</div>
+        <div class="rp-months">Month 2–4</div>
+        <div class="rp-title">Prototype Development</div>
+        <div class="rp-desc">Physical manufacturing, software development, payment integration, gamification build, internal testing.</div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="rp-circle">🚀</div>
+        <div class="rp-months">Month 4–5</div>
+        <div class="rp-title">Pilot Deployment</div>
+        <div class="rp-desc">Install 3–5 units at Tier 1 locations. Staff training, soft launch, real-time monitoring dashboard activated.</div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="rp-circle">📊</div>
+        <div class="rp-months">Month 5–6</div>
+        <div class="rp-title">Optimization Sprint</div>
+        <div class="rp-desc">Data analysis, UX iteration, conversion optimization, gamification tuning based on real behavior.</div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="rp-circle">🌐</div>
+        <div class="rp-months">Month 7+</div>
+        <div class="rp-title">Network Expansion</div>
+        <div class="rp-desc">Scale to 15–30 units across SG, Batam, and Malaysia. Partner integrations, regional loyalty fully operational.</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 12: PLACEMENT STRATEGY -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s12" id="slide-12">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in">11 — Placement Strategy</div>
-    <div class="gold-line"></div>
-    <h2 class="h1 animate-in">Where the<br><em>E-Store Belongs</em></h2>
-    <div class="placement-grid animate-in">
-      <div class="place-card">
-        <div class="place-card-icon">⛴️</div>
-        <h4>Ferry Terminals</h4>
-        <p>Primary placement at HarbourFront, Tanah Merah, Batam Centre — capturing last-minute bookers and route-switchers at the point of travel.</p>
-        <div class="place-priority">⭐ Priority Tier 1 — Highest Volume</div>
-      </div>
-      <div class="place-card">
-        <div class="place-card-icon">🛍️</div>
-        <h4>Premium Shopping Malls</h4>
-        <p>VivoCity, ION Orchard, Suntec City — high footfall lifestyle destinations where spontaneous travel decisions are most likely to occur.</p>
-        <div class="place-priority">⭐ Priority Tier 1 — Impulse Capital</div>
-      </div>
-      <div class="place-card">
-        <div class="place-card-icon">🏨</div>
-        <h4>Hotels & Serviced Residences</h4>
-        <p>Lobby placement at 4–5 star hotels targets the highest-value leisure and business travelers who may extend their journey across borders.</p>
-        <div class="place-priority">⭐⭐ Priority Tier 2 — High Value</div>
-      </div>
-      <div class="place-card">
-        <div class="place-card-icon">🎡</div>
-        <h4>Tourist Attractions</h4>
-        <p>Sentosa, Batam tourism zones, and cultural attractions attract visitors already in an exploratory mindset — ideal for cross-border travel suggestion.</p>
-        <div class="place-priority">⭐⭐ Priority Tier 2 — Discovery</div>
-      </div>
-      <div class="place-card">
-        <div class="place-card-icon">✈️</div>
-        <h4>Airport & Transit Hubs</h4>
-        <p>Changi Airport terminals and land transport interchanges intercept inbound travelers at the most relevant decision point of their journey.</p>
-        <div class="place-priority">⭐⭐ Priority Tier 2 — High Intent</div>
-      </div>
-      <div class="place-card">
-        <div class="place-card-icon">🏢</div>
-        <h4>Business Districts</h4>
-        <p>Raffles Place, Marina Bay, and JB business zones target corporate travelers who cross frequently and value speed, convenience, and executive perks.</p>
-        <div class="place-priority">⭐⭐⭐ Priority Tier 3 — Loyalty</div>
-      </div>
-    </div>
+<!-- QUOTE -->
+<section class="quote-section bg-white">
+  <div class="container">
+    <p class="pull-quote">"One well-placed E-Store in a premium mall can generate the equivalent of an additional ticket counter — operating <em>24/7, without staff.</em>"</p>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 13: BUSINESS MODEL -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s13" id="slide-13">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in">12 — Commercial Opportunity</div>
-    <div class="gold-line"></div>
-    <h2 class="h1 animate-in">A Multi-Layer<br><em>Revenue Engine</em></h2>
-    <div class="revenue-streams animate-in">
-      <div class="rev-card">
-        <div class="rev-card-num">01</div>
-        <h4>Direct Ticket Sales</h4>
-        <p>Core revenue from kiosk-originated bookings across all routes. Premium pricing tiers and executive class options available at point of sale.</p>
-        <span class="rev-card-tag">Core Revenue</span>
-      </div>
-      <div class="rev-card">
-        <div class="rev-card-num">02</div>
-        <h4>Upsell & Add-Ons</h4>
-        <p>Lounge access, premium seating, travel insurance, port transfer packages, and hotel bundles offered at checkout with one-tap addition.</p>
-        <span class="rev-card-tag">+35% Avg Basket</span>
-      </div>
-      <div class="rev-card">
-        <div class="rev-card-num">03</div>
-        <h4>Brand & Sponsor Slots</h4>
-        <p>Advertising display real estate on kiosk screens can be monetized via tourism boards, hotels, credit card partners, and lifestyle brands.</p>
-        <span class="rev-card-tag">Media Revenue</span>
-      </div>
-      <div class="rev-card">
-        <div class="rev-card-num">04</div>
-        <h4>Partner Promotion Fees</h4>
-        <p>Hotels, F&B brands, and attractions pay to feature exclusive offers in the gamification and reward layer — creating a paid promotional ecosystem.</p>
-        <span class="rev-card-tag">Partnership Model</span>
-      </div>
-      <div class="rev-card">
-        <div class="rev-card-num">05</div>
-        <h4>Tourism Package Sales</h4>
-        <p>Bundle ferry + hotel + attraction packages at point of purchase — converting a ticket buyer into a full regional tourism spending customer.</p>
-        <span class="rev-card-tag">High Margin</span>
-      </div>
-      <div class="rev-card">
-        <div class="rev-card-num">06</div>
-        <h4>Loyalty Ecosystem Value</h4>
-        <p>Sail Points currency creates locked-in repeat behavior. Loyalty data enables precision CRM, targeted promotions, and higher lifetime value per passenger.</p>
-        <span class="rev-card-tag">Long-Term LTV</span>
-      </div>
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container" style="position:relative;z-index:1;">
+    <h2 class="section-title">The Future of Ferry<br><em>Begins Here</em></h2>
+    <p class="section-desc">Your invitation to lead the next era of passenger experience. The Smart Ferry E-Store is not just a kiosk — it is a statement of intent.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-gold">Request a Pilot Discussion →</a>
+      <a href="#" class="btn-ghost">Download Full Proposal</a>
+    </div>
+    <div class="cta-pilot-nums">
+      <div class="cpn"><div class="cpn-num">3–5</div><div class="cpn-label">Pilot Units Recommended</div></div>
+      <div class="cpn"><div class="cpn-num">6mo</div><div class="cpn-label">Time to First Live Deployment</div></div>
+      <div class="cpn"><div class="cpn-num">18mo</div><div class="cpn-label">Projected ROI Payback</div></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 14: PILOT PLAN -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s14" id="slide-14">
-  <div class="container" style="padding: 0 10%;">
-    <div class="section-eyebrow animate-in" style="text-align:center">13 — Implementation Roadmap</div>
-    <div class="gold-line" style="margin:0 auto 24px;"></div>
-    <h2 class="h1 animate-in" style="text-align:center">From Concept to<br><em>Pilot in 6 Months</em></h2>
-    <div class="timeline animate-in">
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <div class="timeline-phase">Phase 01 · Month 1–2</div>
-          <h4>Discovery & Design</h4>
-          <p>Stakeholder alignment, site surveys, UX/UI design, hardware specification, brand system development, and vendor engagement. Pilot locations confirmed.</p>
-        </div>
-        <div class="timeline-dot">🔍</div>
-        <div class="timeline-spacer"></div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-spacer"></div>
-        <div class="timeline-dot">🔧</div>
-        <div class="timeline-content">
-          <div class="timeline-phase">Phase 02 · Month 2–4</div>
-          <h4>Prototype Development</h4>
-          <p>Physical kiosk manufacturing, software development, payment integration, gamification build, and internal testing with simulated booking scenarios.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <div class="timeline-phase">Phase 03 · Month 4–5</div>
-          <h4>Pilot Deployment</h4>
-          <p>Install 3–5 units at Tier 1 locations. Staff training completed. Soft launch with controlled audience. Real-time monitoring dashboard activated.</p>
-        </div>
-        <div class="timeline-dot">🚀</div>
-        <div class="timeline-spacer"></div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-spacer"></div>
-        <div class="timeline-dot">📊</div>
-        <div class="timeline-content">
-          <div class="timeline-phase">Phase 04 · Month 5–6</div>
-          <h4>Optimization Sprint</h4>
-          <p>Data analysis from pilot units. UX iteration, conversion optimization, gamification tuning, and promotional strategy refinement based on real behavior.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <div class="timeline-phase">Phase 05 · Month 7+</div>
-          <h4>Network Expansion</h4>
-          <p>Scale to 15–30 units across Singapore, Batam, and Malaysia. Partner integrations activated. Regional loyalty ecosystem fully operational.</p>
-        </div>
-        <div class="timeline-dot">🌐</div>
-        <div class="timeline-spacer"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 15: CLOSING -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide s15" id="slide-15">
-  <div class="container" style="padding: 80px 40px 60px; display:flex; flex-direction:column; align-items:center;">
-    <div class="closing-ornament">⚓</div>
-    <h2 class="closing-title animate-in">
-      The Future of<br>Ferry <em>Begins Here</em>
-    </h2>
-    <div class="cover-divider" style="margin: 24px auto;"></div>
-    <div class="closing-sub animate-in">Your invitation to lead the next era of passenger experience</div>
-    <p style="font-size:14px; color:var(--white-dim); max-width:560px; line-height:1.9; text-align:center; margin-bottom:48px;" class="animate-in">
-      The Smart Ferry E-Store is not just a kiosk. It is a statement of intent — that your brand is ready to go where your passengers are, meet them in their moment, and convert curiosity into a journey they will remember.
-    </p>
-    <div class="closing-taglines animate-in">
-      <div class="closing-tagline-item">
-        <div class="cti-val">3–5</div>
-        <div class="cti-label">Pilot Units<br>Recommended</div>
-      </div>
-      <div style="width:1px; background:linear-gradient(to bottom, transparent, var(--gold-dim), transparent);"></div>
-      <div class="closing-tagline-item">
-        <div class="cti-val">6mo</div>
-        <div class="cti-label">Time to First<br>Live Deployment</div>
-      </div>
-      <div style="width:1px; background:linear-gradient(to bottom, transparent, var(--gold-dim), transparent);"></div>
-      <div class="closing-tagline-item">
-        <div class="cti-val">18mo</div>
-        <div class="cti-label">Projected<br>ROI Payback</div>
-      </div>
-    </div>
-    <div class="closing-cta-group animate-in">
-      <button class="cta-primary">Request a Pilot Discussion</button>
-      <button class="cta-secondary">Download Full Proposal</button>
-    </div>
-    <div class="closing-divider"></div>
-    <div class="closing-contact animate-in" style="text-align:center;">
-      <div style="font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold-light); margin-bottom:8px; font-style:italic;">Smart Ferry E-Store Initiative</div>
-      <div style="font-size:12px; letter-spacing:3px; color:var(--white-dim); text-transform:uppercase;">Batam · Singapore · Malaysia · 2026</div>
-    </div>
-  </div>
-</div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">⚓ Smart Ferry E-Store</div>
+  <div class="footer-label">Batam · Singapore · Malaysia · 2026 · Confidential Business Proposal</div>
+</footer>
 
 <script>
-  // Navigation dots
-  const slides = document.querySelectorAll('.slide');
-  const navDots = document.getElementById('navDots');
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => {
-      slides[i].scrollIntoView({ behavior: 'smooth' });
-    });
-    navDots.appendChild(dot);
-  });
-
-  // Update active dot on scroll
+  // Scroll-based fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const idx = Array.from(slides).indexOf(entry.target);
-        document.querySelectorAll('.nav-dot').forEach((d, i) => {
-          d.classList.toggle('active', i === idx);
-        });
-      }
-    });
-  }, { threshold: 0.5 });
-
-  slides.forEach(s => observer.observe(s));
-
-  // Animate in on scroll
-  const animObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 80);
-        animObserver.unobserve(entry.target);
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
       }
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.animate-in').forEach(el => animObserver.observe(el));
+  document.querySelectorAll('.challenge-card, .solution-card, .gamif-card, .location-card, .screen-card, .roadmap-phase, .journey-step, .opp-feature').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+
+  // Smooth journey step hover
+  document.querySelectorAll('.journey-step').forEach(step => {
+    step.addEventListener('mouseenter', () => {
+      step.querySelector('.js-num').style.background = '#FBF2E0';
+      step.querySelector('.js-num').style.borderColor = '#C5963A';
+    });
+    step.addEventListener('mouseleave', () => {
+      step.querySelector('.js-num').style.background = '#FFFFFF';
+      step.querySelector('.js-num').style.borderColor = '#E2DDD0';
+    });
+  });
 </script>
 </body>
 </html>
