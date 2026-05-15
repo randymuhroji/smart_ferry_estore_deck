@@ -30,7 +30,7 @@
       background: #F8F5EF;
       color: #1A1A1A;
       line-height: 1.6;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     img,
@@ -67,109 +67,137 @@
       --pad: clamp(20px, 5vw, 60px);
     }
 
-    /* ── SECTION SHELL ── */
-    .sec {
-      padding: 80px var(--pad);
-    }
-
-    .deck-wrap {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .deck-slides {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      height: 100%;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-    }
-
-    .deck-slides::-webkit-scrollbar {
-      display: none;
-    }
-
-    .deck-slide {
-      width: 100%;
-      min-width: 100%;
-      height: 100%;
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-      overflow-y: auto;
-      position: relative;
-      background: var(--cream);
-    }
-
-    .deck-slide>.hero {
-      min-height: 100vh;
-    }
-
-    .deck-slide .sec {
-      min-height: 100%;
-      padding: 80px var(--pad);
-    }
-
-    .deck-slide .sec-inner {
-      height: 100%;
-    }
-
-    .deck-controls {
+    /* ── NAV ── */
+    .nav {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: 60px;
+      background: rgba(12, 27, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(184, 137, 42, 0.2);
       display: flex;
       align-items: center;
-      gap: 10px;
-      z-index: 1200;
+      padding: 0 var(--pad);
     }
 
-    .deck-control {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--navy);
-      font-size: 24px;
-      cursor: pointer;
-      display: inline-flex;
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+      justify-content: space-between;
+      gap: 20px;
     }
 
-    .deck-control:hover {
-      background: #fff;
-    }
-
-    .deck-progress {
-      min-width: 72px;
-      padding: 0 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--navy);
-      font-size: 13px;
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
       font-weight: 600;
-      text-align: center;
-      letter-spacing: 0.03em;
-      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
+      color: var(--white);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo span {
+      color: var(--gold-lt);
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-lt);
+    }
+
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 100px;
+      background: var(--gold);
+      color: var(--navy);
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold-lt);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
     }
 
     @media (max-width: 768px) {
-      .deck-controls {
-        bottom: 16px;
-        right: 16px;
-        gap: 8px;
+      .nav-links-wrap {
+        display: none;
       }
 
-      .deck-control {
-        width: 38px;
-        height: 38px;
-        font-size: 20px;
+      .nav-links-wrap.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(12, 27, 46, 0.98);
+        padding: 20px var(--pad);
+        border-bottom: 1px solid rgba(184, 137, 42, 0.2);
       }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .nav-links a {
+        font-size: 14px;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+    }
+
+    /* ── SECTION SHELL ── */
+    .sec {
+      padding: 80px var(--pad);
     }
 
     .sec-inner {
@@ -2118,913 +2146,887 @@
 
 <body>
 
-  <div class="deck-wrap">
-    <div class="deck-controls">
-      <button id="deckPrev" class="deck-control" type="button" aria-label="Previous slide">‹</button>
-      <span id="deckProgress" class="deck-progress">01 / 01</span>
-      <button id="deckNext" class="deck-control" type="button" aria-label="Next slide">›</button>
-    </div>
-    <main class="deck-slides">
-
-      <!-- ── HERO ── -->
-      <section class="hero deck-slide" id="top">
-        <div class="hero-dots"></div>
-        <div class="hero-glow"></div>
-        <div class="hero-content">
-          <div class="hero-eyebrow">Confidential Business Proposal · 2026</div>
-          <h1 class="hero-title">Smart Ferry <em>E-Store</em><br>&amp; Gamified Ticketing</h1>
-          <p class="hero-sub">A premium self-service kiosk experience that redefines how ferry tickets are discovered,
-            purchased, and enjoyed — turning passing strangers into loyal passengers.</p>
-          <div class="hero-vessel">⚓ MV Putri Anggraini — Batam · Johor · Singapore Corridor</div>
-          <div class="hero-stats">
-            <div class="hs"><span class="hs-val">12M+</span><span class="hs-lbl">Annual cross-border passengers,
-                corridor</span></div>
-            <div class="hs"><span class="hs-val">40%</span><span class="hs-lbl">Travelers deciding destination
-                spontaneously</span></div>
-            <div class="hs"><span class="hs-val">3×</span><span class="hs-lbl">Higher conversion vs app-only
-                touchpoints</span></div>
-            <div class="hs"><span class="hs-val">SGD 80</span><span class="hs-lbl">Avg. basket value per kiosk
-                transaction</span></div>
-          </div>
-          <div class="btn-row" style="justify-content:center; margin-bottom: 28px;">
-            <a href="#routes" class="btn btn-gold">Explore the Proposal</a>
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">MV Putri Anggraini <span>E-Store</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links-wrap" id="navWrap">
+        <ul class="nav-links">
+          <li><a href="#routes">Routes</a></li>
+          <li><a href="#solution">Solution</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#placement">Placement</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+          <li>
             <a href="https://wa.me/6281999197186?text=Hi%2C%20saya%20tertarik%20berdiskusi%20tentang%20pilot%20Smart%20Ferry%20E-Store%20untuk%20MV%20Putri%20Anggraini."
-              class="btn btn-outline" target="_blank" rel="noopener">💬 Request Pilot</a>
-          </div>
-          <div class="hero-routes">
-            <span class="route-chip active">⚓ Batam ↔ Johor <span
-                style="font-size:9px;color:rgba(255,255,255,0.3);margin-left:4px">Active Route</span></span>
-            <span class="route-chip coming">🚢 Batam → Singapore<span class="soon">Soon</span></span>
-            <span class="route-chip coming">🌊 Singapore → Johor<span class="soon">Soon</span></span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 01 EXECUTIVE SUMMARY ── -->
-      <section class="sec deck-slide sec-alt" id="summary">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">01 — Executive Summary</div>
-            <h2 class="sh-title">The Opportunity Hiding in <em>Plain Sight</em></h2>
-          </div>
-          <div class="exec-layout">
-            <div class="exec-body">
-              <p>MV Putri Anggraini currently operates the <strong>Batam–Johor</strong> corridor — one of the busiest
-                sea
-                crossings in Southeast Asia. With the upcoming launch of <strong>Batam–Singapore</strong> and
-                <strong>Singapore–Johor</strong> routes, the vessel is positioned to become the premier tri-corridor
-                ferry
-                operator in the region.
-              </p>
-              <p>Yet today, most tickets are sold at counters or via apps. The physical walk-in audience — untapped,
-                impulsive, high-intent — remains completely uncaptured. The Smart Ferry E-Store changes that.</p>
-              <div class="exec-highlight">
-                The E-Store is a premium interactive kiosk concept designed to convert foot traffic into booked
-                passengers —
-                placed in terminals, malls, hotels, and tourist zones across all three ports.
-              </div>
-            </div>
-            <div class="exec-kpis">
-              <div class="kpi">
-                <div class="kpi-val">12M+</div>
-                <div class="kpi-lbl">Annual cross-border passengers across the Batam–SG–JB corridor</div>
-              </div>
-              <div class="kpi">
-                <div class="kpi-val">40%</div>
-                <div class="kpi-lbl">Short-trip travelers making decisions within 48 hours</div>
-              </div>
-              <div class="kpi">
-                <div class="kpi-val">3×</div>
-                <div class="kpi-lbl">Higher conversion rate vs digital-only booking channels</div>
-              </div>
-              <div class="kpi">
-                <div class="kpi-val">SGD 80</div>
-                <div class="kpi-lbl">Average basket value per kiosk transaction</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 02 ROUTES ── -->
-      <section class="sec deck-slide" id="routes">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">02 — Route Network</div>
-            <h2 class="sh-title">MV Putri Anggraini's <em>Expanding Corridor</em></h2>
-            <p class="sh-desc">One active route today. Two strategic new routes launching soon — creating a complete
-              tri-port network connecting Batam, Singapore, and Johor.</p>
-          </div>
-          <div class="routes-grid">
-            <!-- Active -->
-            <div class="route-card">
-              <div class="route-header">
-                <div class="route-status active"><span class="dot"></span> Active Route</div>
-                <div class="route-ports">Batam <span class="route-arrow">↔</span> Johor</div>
-              </div>
-              <div class="route-body">
-                <p class="route-detail">The existing flagship route connecting Batam Centre to Stulang Laut, Johor.
-                  Serves
-                  both leisure travelers and Johor-based workers commuting via Batam.</p>
-                <div class="route-meta">
-                  <span class="route-tag">~90 min crossing</span>
-                  <span class="route-tag">Multiple departures daily</span>
-                  <span class="route-tag">IDR / MYR accepted</span>
-                </div>
-              </div>
-            </div>
-            <!-- Coming: Batam-SG -->
-            <div class="route-coming-soon">
-              <div>
-                <div class="rcs-label">🚀 Launching Soon</div>
-                <div class="rcs-ports">Batam <span class="route-arrow">→</span> Singapore</div>
-                <p class="rcs-desc">The highest-demand new route — connecting Batam directly to HarbourFront, Singapore.
-                  Targets leisure travelers, business visitors, and Singapore residents planning Batam getaways.</p>
-              </div>
-              <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
-                <span class="route-tag"
-                  style="background:var(--gold-pale); border-color:rgba(184,137,42,0.3); color:var(--gold);">~45 min
-                  crossing</span>
-                <span class="route-tag"
-                  style="background:var(--gold-pale); border-color:rgba(184,137,42,0.3); color:var(--gold);">6M+ pax/yr
-                  corridor</span>
-              </div>
-            </div>
-            <!-- Coming: SG-Johor -->
-            <div class="route-coming-soon">
-              <div>
-                <div class="rcs-label">🚀 Launching Soon</div>
-                <div class="rcs-ports">Singapore <span class="route-arrow">→</span> Johor</div>
-                <p class="rcs-desc">A new sea route complementing the existing land crossings between Singapore and
-                  Johor
-                  Bahru — capturing travelers seeking a premium, traffic-free alternative border experience.</p>
-              </div>
-              <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
-                <span class="route-tag"
-                  style="background:var(--gold-pale); border-color:rgba(184,137,42,0.3); color:var(--gold);">Premium
-                  alternative</span>
-                <span class="route-tag"
-                  style="background:var(--gold-pale); border-color:rgba(184,137,42,0.3); color:var(--gold);">Corporate
-                  travelers</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 03 MARKET OPPORTUNITY ── -->
-      <section class="sec deck-slide sec-alt" id="market">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">03 — Market Opportunity</div>
-            <h2 class="sh-title">A Corridor of <em>Immense Scale</em></h2>
-            <p class="sh-desc">Southeast Asia's most active cross-border sea corridor is primed for a self-service
-              ticketing
-              revolution.</p>
-          </div>
-          <div class="market-cards">
-            <div class="mc"><span class="mc-num">01</span>
-              <h4>The Batam–Singapore Gateway</h4>
-              <p>One of Southeast Asia's busiest international ferry corridors, with over 12 million passenger crossings
-                annually. Ferry remains the primary mode of cross-border travel between these two economic powerhouses.
-              </p>
-            </div>
-            <div class="mc"><span class="mc-num">02</span>
-              <h4>Malaysia–Singapore Tourism Surge</h4>
-              <p>Post-pandemic travel recovery has driven a 35% YoY increase in Malaysia–Singapore visitor traffic, with
-                leisure travelers increasingly choosing sea crossings for scenic and cost-efficient border transit.</p>
-            </div>
-            <div class="mc"><span class="mc-num">03</span>
-              <h4>The Physical Touchpoint Gap</h4>
-              <p>Despite massive passenger volumes, no premium physical self-service ticketing experience exists beyond
-                traditional counters. Walk-in audiences at malls, hotels, and attractions remain unaddressed by
-                operators.
-              </p>
-            </div>
-            <div class="mc"><span class="mc-num">04</span>
-              <h4>Tourism Behavior Shift</h4>
-              <p>Today's travelers are spontaneous planners. 40% of short-trip decisions are made within 48 hours. A
-                compelling physical kiosk placed at the right moment converts curiosity into bookings immediately.</p>
-            </div>
-          </div>
-          <div class="corridor-row">
-            <div class="corridor-box">
-              <div class="cb-city">Singapore</div><span class="cb-code">SG · HarbourFront</span>
-              <div class="cb-pax">6M+ pax/yr</div>
-            </div>
-            <div class="corridor-box">
-              <div class="cb-city">Batam</div><span class="cb-code">ID · Batam Centre</span>
-              <div class="cb-pax">8M+ pax/yr</div>
-            </div>
-            <div class="corridor-box">
-              <div class="cb-city">Johor</div><span class="cb-code">MY · Stulang Laut</span>
-              <div class="cb-pax">3M+ pax/yr</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 04 CHALLENGES ── -->
-      <section class="sec deck-slide sec-dark">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">04 — Current Challenges</div>
-            <h2 class="sh-title">Where Today's Channels <em>Fall Short</em></h2>
-            <p class="sh-desc">Every existing sales channel leaves value on the table. The E-Store closes every gap.</p>
-          </div>
-          <div class="ch-grid">
-            <div class="ch-card"><span class="ch-icon">📱</span>
-              <h4>App &amp; Web Dependency</h4>
-              <p>Digital channels only serve travelers who already intend to buy. The spontaneous, walk-in audience is
-                missed entirely — a massive untapped pool.</p>
-            </div>
-            <div class="ch-card"><span class="ch-icon">⏱️</span>
-              <h4>Counter Congestion</h4>
-              <p>Traditional counters create long queues, staffing costs, and a friction-heavy experience that drives
-                frustration rather than loyalty.</p>
-            </div>
-            <div class="ch-card"><span class="ch-icon">💡</span>
-              <h4>Zero Impulse Capture</h4>
-              <p>Passing foot traffic in malls, hotels, and tourist zones is never engaged. No physical presence exists
-                to
-                attract, inform, or convert the undecided traveler.</p>
-            </div>
-            <div class="ch-card"><span class="ch-icon">🎨</span>
-              <h4>Lack of Premium Experience</h4>
-              <p>Existing purchase channels offer no brand differentiation. The booking experience is purely
-                transactional —
-                a missed opportunity to build loyalty.</p>
-            </div>
-            <div class="ch-card"><span class="ch-icon">🌍</span>
-              <h4>Tourist Unfriendliness</h4>
-              <p>First-time international visitors struggle with language barriers and unfamiliar apps. A multilingual
-                physical kiosk solves this immediately.</p>
-            </div>
-            <div class="ch-card"><span class="ch-icon">📊</span>
-              <h4>Limited Upsell Potential</h4>
-              <p>No channel currently bundles lounge access, transport add-ons, or tourism packages at the point of
-                purchase. Revenue-per-passenger remains well below its potential.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 05 SOLUTION ── -->
-      <section class="sec deck-slide sec-alt" id="solution">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">05 — The Proposed Solution</div>
-            <h2 class="sh-title">Introducing the <em>Smart Ferry E-Store</em></h2>
-            <p class="sh-desc">A premium self-service interactive kiosk that places the full booking experience — with
-              discovery, gamification, and upsell — wherever passengers already are.</p>
-          </div>
-          <div class="sol-grid">
-            <div class="sol-card"><span class="sol-icon">🖥️</span>
-              <div>
-                <h4>Interactive Touchscreen</h4>
-                <p>Large, vivid display with intuitive route discovery, schedule browsing, and instant ticketing in
-                  under 60
-                  seconds.</p>
-              </div>
-            </div>
-            <div class="sol-card"><span class="sol-icon">🎮</span>
-              <div>
-                <h4>Gamified Engagement</h4>
-                <p>Spin-to-win promotions, loyalty point accumulation, and exclusive kiosk-only perks that create desire
-                  and
-                  urgency to buy.</p>
-              </div>
-            </div>
-            <div class="sol-card"><span class="sol-icon">💳</span>
-              <div>
-                <h4>Seamless Payment</h4>
-                <p>Contactless cards, QR wallets (PayNow, GrabPay, NETS), and cash acceptance — zero friction checkout
-                  with
-                  instant e-ticket QR delivery.</p>
-              </div>
-            </div>
-            <div class="sol-card"><span class="sol-icon">✨</span>
-              <div>
-                <h4>Premium Brand Presence</h4>
-                <p>Elegant industrial design with ambient gold lighting, branded environment, and an executive-class
-                  customer experience at every interaction.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 06 ADVANTAGES ── -->
-      <section class="sec deck-slide">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">06 — Competitive Advantage</div>
-            <h2 class="sh-title">Why Customers Will Choose <em>the Kiosk</em></h2>
-            <p class="sh-desc">Six distinct advantages that no digital channel can replicate.</p>
-          </div>
-          <div class="adv-grid">
-            <div class="adv-card"><span class="adv-icon">🎁</span>
-              <h5>Exclusive Kiosk-Only Promotions</h5>
-              <p>Discounts, bonus miles, and bundle deals only accessible at the physical E-Store — creating genuine
-                incentive to buy here versus online.</p>
-            </div>
-            <div class="adv-card"><span class="adv-icon">⚡</span>
-              <h5>Zero App Download Required</h5>
-              <p>Walk up, tap, pay, go. No registration, no password, no waiting. The fastest path from curiosity to
-                confirmed ticket.</p>
-            </div>
-            <div class="adv-card"><span class="adv-icon">🌍</span>
-              <h5>Tourist-First Design</h5>
-              <p>Multilingual interface — English, 中文, BM, ID — with clear visual guidance for first-time international
-                travelers.</p>
-            </div>
-            <div class="adv-card"><span class="adv-icon">🏛️</span>
-              <h5>Official Brand Trust</h5>
-              <p>A premium physical presence signals legitimacy. Travelers trust a beautifully branded physical unit
-                over
-                third-party aggregators.</p>
-            </div>
-            <div class="adv-card"><span class="adv-icon">🎯</span>
-              <h5>Impulse-Driven Placement</h5>
-              <p>Located where spontaneous travel decisions happen — malls, hotel lobbies, attraction entrances —
-                capturing
-                intent no digital channel can reach.</p>
-            </div>
-            <div class="adv-card"><span class="adv-icon">🌟</span>
-              <h5>Memorable Experience</h5>
-              <p>A beautiful, engaging kiosk creates a story worth sharing. Customers become brand advocates simply from
-                having a premium booking moment.</p>
-            </div>
-          </div>
-          <div style="margin-top:28px">
-            <div class="badge-cloud">
-              <span class="bc-item">No App Needed</span>
-              <span class="bc-item">Kiosk Exclusives</span>
-              <span class="bc-item">Instant E-Ticket</span>
-              <span class="bc-item">Multilingual</span>
-              <span class="bc-item">Brand Trust</span>
-              <span class="bc-item">Impulse Buy</span>
-              <span class="bc-item">Gamification</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 07 CUSTOMER FLOW ── -->
-      <section class="sec deck-slide sec-alt" id="experience">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">07 — Customer Experience Flow</div>
-            <h2 class="sh-title">From Stranger <em>to Passenger</em></h2>
-            <p class="sh-desc">Eight frictionless steps from first glance to boarding gate — completed in under 90
-              seconds.
-            </p>
-          </div>
-          <div class="flow-grid">
-            <div class="flow-item">
-              <div class="flow-num">1</div>
-              <div class="flow-icon">👁️</div>
-              <div class="flow-title">See &amp; Notice</div>
-              <div class="flow-desc">Striking kiosk design catches attention in busy environment</div>
-            </div>
-            <div class="flow-item">
-              <div class="flow-num">2</div>
-              <div class="flow-icon">✨</div>
-              <div class="flow-title">Attracted</div>
-              <div class="flow-desc">Animated promo screen draws curious visitors closer</div>
-            </div>
-            <div class="flow-item">
-              <div class="flow-num">3</div>
-              <div class="flow-icon">🗺️</div>
-              <div class="flow-title">Discover Routes</div>
-              <div class="flow-desc">Browse destinations, schedules, and pricing effortlessly</div>
-            </div>
-            <div class="flow-item">
-              <div class="flow-num">4</div>
-              <div class="flow-icon">🕐</div>
-              <div class="flow-title">Choose Schedule</div>
-              <div class="flow-desc">Real-time seat availability shown with clear visuals</div>
-            </div>
-            <div class="flow-item">
-              <div class="flow-num">5</div>
-              <div class="flow-icon">🎮</div>
-              <div class="flow-title">Play &amp; Win</div>
-              <div class="flow-desc">Gamified reward — spin for discount or bonus perk</div>
-            </div>
-            <div class="flow-item">
-              <div class="flow-num">6</div>
-              <div class="flow-icon">💳</div>
-              <div class="flow-title">Pay</div>
-              <div class="flow-desc">Card, QR wallet, or cash — frictionless checkout</div>
-            </div>
-            <div class="flow-item">
-              <div class="flow-num">7</div>
-              <div class="flow-icon">📱</div>
-              <div class="flow-title">Get E-Ticket</div>
-              <div class="flow-desc">Instant QR code sent to phone and/or printed</div>
-            </div>
-            <div class="flow-item">
-              <div class="flow-num">8</div>
-              <div class="flow-icon">⛴️</div>
-              <div class="flow-title">Board &amp; Sail</div>
-              <div class="flow-desc">Scan QR at gate — no counter, no queue, no friction</div>
-            </div>
-          </div>
-          <div style="text-align:center; margin-top:20px">
-            <span class="flow-time">⚡ Total Experience Time: Under 90 Seconds</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 08 HARDWARE ── -->
-      <section class="sec deck-slide">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">08 — Physical Device Concept</div>
-            <h2 class="sh-title">The <em>E-Store Kiosk</em> Hardware</h2>
-            <p class="sh-desc">A purpose-built physical unit designed to embody premium positioning while delivering
-              seamless booking in any high-traffic environment.</p>
-          </div>
-          <div class="hw-layout">
-            <div class="kiosk-mockup">
-              <div class="km-screen">
-                <div class="km-brand">⚓ Smart Ferry E-Store</div>
-                <div class="km-route">Batam → Singapore</div>
-                <div class="km-time">10:30 AM Departure</div>
-                <div class="km-price">SGD 48</div>
-                <div class="km-btn">Book Now</div>
-                <div class="km-pay">TAP CARD · QR · CASH</div>
-              </div>
-              <div class="km-slot">← RECEIPT / TICKET SLOT →</div>
-              <div class="km-label">⚓ Official Ferry E-Store</div>
-            </div>
-            <div class="hw-list">
-              <div class="hw-item"><span class="hw-icon">🖥️</span>
-                <div>
-                  <h5>55" Ultra-HD Touchscreen Display</h5>
-                  <p>High-brightness display visible in outdoor-adjacent environments with 10-point multi-touch
-                    precision.
-                  </p>
-                </div>
-              </div>
-              <div class="hw-item"><span class="hw-icon">💳</span>
-                <div>
-                  <h5>Multi-Mode Payment Terminal</h5>
-                  <p>NFC/contactless card, QR wallets (PayNow, GrabPay, NETS), and cash acceptance with auto-change.</p>
-                </div>
-              </div>
-              <div class="hw-item"><span class="hw-icon">🖨️</span>
-                <div>
-                  <h5>Thermal Ticket &amp; Receipt Printer</h5>
-                  <p>Instant QR-coded boarding pass printing, plus optional email/SMS delivery for a paperless
-                    experience.
-                  </p>
-                </div>
-              </div>
-              <div class="hw-item"><span class="hw-icon">💡</span>
-                <div>
-                  <h5>Ambient Lighting Accents</h5>
-                  <p>Programmable LED accent strips in brand gold, creating visual magnetism and differentiated presence
-                    in
-                    any space.</p>
-                </div>
-              </div>
-              <div class="hw-item"><span class="hw-icon">🔒</span>
-                <div>
-                  <h5>Secure Industrial Enclosure</h5>
-                  <p>Anti-vandal tempered glass, weatherproof chassis, tamper-resistant lock system for unattended
-                    deployment.</p>
-                </div>
-              </div>
-              <div class="hw-item"><span class="hw-icon">📡</span>
-                <div>
-                  <h5>Real-Time Connectivity</h5>
-                  <p>4G/LTE + WiFi redundancy with remote management dashboard to monitor all units live.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 09 SCREEN CONCEPTS ── -->
-      <section class="sec deck-slide sec-alt">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">09 — Screen &amp; UI Concept</div>
-            <h2 class="sh-title">The Screen Experience — <em>Six Key Moments</em></h2>
-            <p class="sh-desc">Every screen state advances the passenger from curiosity to confirmed booking with zero
-              friction.</p>
-          </div>
-          <div class="screens-grid">
-            <!-- Welcome -->
-            <div class="sc">
-              <div class="sc-top">
-                <span class="sc-label">Welcome Screen</span>
-                <div style="text-align:center; padding:8px 0">
-                  <div style="color:var(--gold-lt);font-size:24px;margin-bottom:8px">⚓</div>
-                  <div style="color:#fff;font-size:13px;font-weight:600;margin-bottom:4px">MV Putri Anggraini</div>
-                  <div style="color:rgba(255,255,255,0.35);font-size:11px;margin-bottom:14px">Your gateway to Batam,
-                    Singapore &amp; Johor</div>
-                  <div
-                    style="background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;padding:8px 20px;border-radius:100px;display:inline-block;margin-bottom:10px">
-                    Touch to Begin</div>
-                  <div style="color:rgba(255,255,255,0.25);font-size:10px">EN · 中文 · BM · ID</div>
-                </div>
-              </div>
-              <div class="sc-foot">Multilingual welcome</div>
-            </div>
-            <!-- Route -->
-            <div class="sc">
-              <div class="sc-top">
-                <span class="sc-label">Route Selection</span>
-                <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:10px;letter-spacing:0.08em">WHERE
-                  ARE
-                  YOU GOING?</div>
-                <div
-                  style="border-bottom:1px solid rgba(255,255,255,0.07);padding:9px 0;display:flex;justify-content:space-between;align-items:center">
-                  <span style="font-size:12px;color:#fff">⚓ Batam → Johor</span><span
-                    style="color:var(--gold-lt);font-size:12px;font-weight:600">IDR 280K</span>
-                </div>
-                <div
-                  style="border-bottom:1px solid rgba(255,255,255,0.07);padding:9px 0;display:flex;justify-content:space-between;align-items:center;opacity:0.7">
-                  <span style="font-size:12px;color:#fff">🚢 Batam → Singapore</span><span
-                    style="color:var(--gold-lt);font-size:12px;font-weight:600">SGD 32+</span>
-                </div>
-                <div style="padding:9px 0;display:flex;justify-content:space-between;align-items:center;opacity:0.7">
-                  <span style="font-size:12px;color:#fff">🌊 Singapore → Johor</span><span
-                    style="color:var(--gold-lt);font-size:12px;font-weight:600">SGD 55+</span>
-                </div>
-                <div
-                  style="margin-top:10px;background:rgba(184,137,42,0.12);padding:6px 10px;border-radius:6px;font-size:10px;color:var(--gold-lt)">
-                  🎁 KIOSK EXCLUSIVE: 15% OFF TODAY</div>
-              </div>
-              <div class="sc-foot">Route &amp; pricing</div>
-            </div>
-            <!-- Schedule -->
-            <div class="sc">
-              <div class="sc-top">
-                <span class="sc-label">Schedule Selection</span>
-                <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:10px">Batam → Johor · Today</div>
-                <div
-                  style="border-bottom:1px solid rgba(255,255,255,0.07);padding:8px 0;display:flex;justify-content:space-between;align-items:center">
-                  <span style="color:var(--gold-lt);font-weight:600;font-size:12px">08:00 AM</span><span
-                    style="font-size:10px;color:rgba(255,255,255,0.35)">28 left</span><span
-                    style="color:#fff;font-size:12px">IDR 280K</span>
-                </div>
-                <div
-                  style="border-bottom:1px solid rgba(255,255,255,0.07);padding:8px 0;display:flex;justify-content:space-between;align-items:center">
-                  <span style="color:#fff;font-size:12px">12:00 PM</span><span
-                    style="font-size:10px;color:rgba(255,255,255,0.35)">42 left</span><span
-                    style="color:#fff;font-size:12px">IDR 260K</span>
-                </div>
-                <div style="padding:8px 0;display:flex;justify-content:space-between;align-items:center"><span
-                    style="color:#fff;font-size:12px">04:30 PM</span><span
-                    style="font-size:10px;color:rgba(255,255,255,0.35)">Ample</span><span
-                    style="color:#fff;font-size:12px">IDR 240K</span></div>
-                <div
-                  style="margin-top:10px;background:var(--gold);color:var(--navy);text-align:center;font-size:11px;font-weight:700;padding:7px;border-radius:6px">
-                  CONFIRM SELECTION</div>
-              </div>
-              <div class="sc-foot">Real-time availability</div>
-            </div>
-            <!-- Gamification -->
-            <div class="sc">
-              <div class="sc-top">
-                <span class="sc-label">Gamification Layer</span>
-                <div style="text-align:center;padding:8px 0">
-                  <div style="font-size:11px;color:var(--gold-lt);letter-spacing:0.1em;margin-bottom:8px">🎮 REWARD
-                    MOMENT
-                  </div>
-                  <div style="font-size:24px;margin-bottom:6px">🎡</div>
-                  <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">🎉 YOU WON!</div>
-                  <div style="color:var(--gold-lt);font-size:18px;font-weight:700;margin-bottom:8px">15% OFF</div>
-                  <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:4px">Applied automatically at
-                    checkout</div>
-                  <div style="font-size:10px;color:rgba(255,255,255,0.25)">Every purchase earns Sail Points</div>
-                </div>
-              </div>
-              <div class="sc-foot">Spin &amp; Sail reward</div>
-            </div>
-            <!-- Payment -->
-            <div class="sc">
-              <div class="sc-top">
-                <span class="sc-label">Payment Screen</span>
-                <div style="text-align:center;padding:4px 0 10px">
-                  <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:4px">TOTAL AMOUNT</div>
-                  <div
-                    style="font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold-lt);font-weight:700">
-                    IDR 238K</div>
-                  <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:14px">✓ 15% kiosk discount
-                    applied
-                  </div>
-                  <div style="display:flex;gap:8px;justify-content:center">
-                    <div
-                      style="flex:1;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px;text-align:center;font-size:11px;color:#fff">
-                      💳<br>Card</div>
-                    <div
-                      style="flex:1;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px;text-align:center;font-size:11px;color:#fff">
-                      📱<br>QR</div>
-                    <div
-                      style="flex:1;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px;text-align:center;font-size:11px;color:#fff">
-                      💵<br>Cash</div>
-                  </div>
-                </div>
-              </div>
-              <div class="sc-foot">Multi-mode payment</div>
-            </div>
-            <!-- Confirmation -->
-            <div class="sc">
-              <div class="sc-top">
-                <span class="sc-label">E-Ticket Confirmation</span>
-                <div style="text-align:center;padding:4px 0">
-                  <div style="font-size:11px;color:#22c55e;margin-bottom:6px;letter-spacing:0.06em">✅ BOOKING CONFIRMED
-                  </div>
-                  <div style="font-size:12px;color:#fff;margin-bottom:2px">Batam → Johor</div>
-                  <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:10px">08:00 AM · Pier 3</div>
-                  <div style="background:rgba(255,255,255,0.06);border-radius:6px;padding:10px;margin-bottom:10px">
-                    <div
-                      style="background:rgba(255,255,255,0.9);width:48px;height:48px;margin:0 auto 6px;border-radius:4px">
-                    </div>
-                    <div style="font-size:9px;color:rgba(255,255,255,0.25)">BTM-JHR-2026-5501</div>
-                  </div>
-                  <div style="font-size:10px;color:var(--gold-lt)">🌟 +50 Sail Points Earned!</div>
-                </div>
-              </div>
-              <div class="sc-foot">QR boarding pass</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 10 GAMIFICATION ── -->
-      <section class="sec deck-slide sec-dark">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">10 — Gamification &amp; Engagement</div>
-            <h2 class="sh-title">Making Every Booking <em>Memorable &amp; Rewarding</em></h2>
-            <p class="sh-desc">Gamification transforms a transactional moment into a delightful experience — increasing
-              conversion, dwell time, and repeat purchasing.</p>
-          </div>
-          <div class="gami-grid">
-            <div class="gami-card"><span class="gami-icon">🎡</span>
-              <h4>Spin &amp; Sail Reward</h4>
-              <p>Every booking triggers a spin wheel moment revealing a prize — from discounts to free lounge access.
-                Creates excitement and urgency.</p><span class="badge badge-gold">Instant Reward</span>
-            </div>
-            <div class="gami-card"><span class="gami-icon">⚡</span>
-              <h4>Lucky Flash Voucher</h4>
-              <p>Time-limited surprise discounts appear at certain hours, creating a "catch it before it's gone" impulse
-                that drives immediate purchase decisions.</p><span class="badge badge-gold">Urgency Driver</span>
-            </div>
-            <div class="gami-card"><span class="gami-icon">🗺️</span>
-              <h4>Travel Mission Board</h4>
-              <p>Passengers collect stamps across routes — complete missions like "Visit all 3 ports" to unlock
-                exclusive
-                travel rewards and status upgrades.</p><span class="badge badge-gold">Loyalty Builder</span>
-            </div>
-            <div class="gami-card"><span class="gami-icon">⭐</span>
-              <h4>Sail Points System</h4>
-              <p>Every purchase earns redeemable Sail Points. Accumulated points unlock discounts, free tickets, lounge
-                access, or partner perks.</p><span class="badge badge-gold">Repeat Purchase</span>
-            </div>
-            <div class="gami-card"><span class="gami-icon">🏆</span>
-              <h4>Executive Tier Unlocks</h4>
-              <p>Frequent kiosk users progress through Gold, Platinum, and Diamond tiers — unlocking premium lounge
-                access,
-                priority boarding, and concierge perks.</p><span class="badge badge-gold">Premium Upsell</span>
-            </div>
-            <div class="gami-card"><span class="gami-icon">🎁</span>
-              <h4>Partner Reward Bundles</h4>
-              <p>Gamification integrates with hotel, F&amp;B, and attraction partners — a ferry booking can trigger a
-                partner offer, creating a seamless regional ecosystem.</p><span class="badge badge-gold">Ecosystem
-                Play</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 11 BUSINESS VALUE ── -->
-      <section class="sec deck-slide sec-alt">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">11 — Business Value</div>
-            <h2 class="sh-title">Why This <em>Wins</em> for the Operator</h2>
-            <p class="sh-desc">Six measurable business outcomes that justify deployment from day one.</p>
-          </div>
-          <div class="val-grid">
-            <div class="val-card"><span class="val-icon">📈</span>
-              <h5>New Offline-to-Digital Sales Channel</h5>
-              <p>Capture foot traffic that no digital channel can reach — turning mall visitors and hotel guests into
-                paying
-                passengers.</p>
-            </div>
-            <div class="val-card"><span class="val-icon">🎯</span>
-              <h5>Higher Walk-In Conversion</h5>
-              <p>Premium design, instant booking, and exclusive offers create significantly higher conversion rates from
-                walk-in audiences.</p>
-            </div>
-            <div class="val-card"><span class="val-icon">💎</span>
-              <h5>Brand Differentiation</h5>
-              <p>A beautiful, modern E-Store signals operator quality — positioning MV Putri Anggraini above competitors
-                in
-                travelers' minds.</p>
-            </div>
-            <div class="val-card"><span class="val-icon">🔄</span>
-              <h5>Reduced Counter Dependency</h5>
-              <p>Automate routine ticketing transactions, freeing staff for complex service delivery and reducing
-                peak-hour
-                pressure.</p>
-            </div>
-            <div class="val-card"><span class="val-icon">💰</span>
-              <h5>Expanded Upsell Revenue</h5>
-              <p>Lounge passes, transport add-ons, travel bundles, and insurance products can be offered at checkout —
-                increasing average order value.</p>
-            </div>
-            <div class="val-card"><span class="val-icon">📊</span>
-              <h5>Rich Passenger Data</h5>
-              <p>Every transaction builds a dataset — booking patterns, preferences, and behaviors — enabling smarter
-                marketing and operational decisions.</p>
-            </div>
-          </div>
-          <div class="quote-wrap">
-            <blockquote>One well-placed E-Store in a premium mall can generate the equivalent of an additional ticket
-              counter — operating 24/7, without staff.</blockquote>
-            <div class="q-stats">
-              <div class="qs"><span class="qs-val">30%</span><span class="qs-lbl">Projected counter load
-                  reduction</span>
-              </div>
-              <div class="qs"><span class="qs-val">2.5×</span><span class="qs-lbl">Higher upsell rate vs digital
-                  checkout</span></div>
-              <div class="qs"><span class="qs-val">24/7</span><span class="qs-lbl">Availability without additional
-                  staffing</span></div>
-              <div class="qs"><span class="qs-val">18mo</span><span class="qs-lbl">Estimated pilot ROI payback
-                  period</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 12 PLACEMENT STRATEGY ── -->
-      <section class="sec deck-slide" id="placement">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">12 — Placement Strategy</div>
-            <h2 class="sh-title">The E-Store <em>In the Wild</em></h2>
-            <p class="sh-desc">From ferry terminals to premium hotels, the Smart Ferry E-Store is purpose-built to
-              thrive
-              wherever high-intent travelers gather across all three ports.</p>
-          </div>
-          <div class="pl-carousel-wrapper">
-            <button class="slider-btn prev" type="button" aria-label="Slide previous">‹</button>
-            <div class="pl-grid" id="placementGrid"></div>
-            <button class="slider-btn next" type="button" aria-label="Slide next">›</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 13 REVENUE ── -->
-      <section class="sec deck-slide sec-alt">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">13 — Commercial Opportunity</div>
-            <h2 class="sh-title">A Multi-Layer <em>Revenue Engine</em></h2>
-            <p class="sh-desc">Six distinct revenue streams stack from every single kiosk transaction.</p>
-          </div>
-          <div class="rev-grid">
-            <div class="rev-card"><span class="rev-num">01</span>
-              <h4>Direct Ticket Sales</h4>
-              <p>Core revenue from kiosk-originated bookings across all three routes — Batam–Johor, Batam–Singapore, and
-                Singapore–Johor.</p><span class="badge badge-gold">Core Revenue</span>
-            </div>
-            <div class="rev-card"><span class="rev-num">02</span>
-              <h4>Upsell &amp; Add-Ons</h4>
-              <p>Lounge access, premium seating, travel insurance, port transfer packages, and hotel bundles offered at
-                checkout with one-tap addition.</p><span class="badge badge-gold">+35% Avg Basket</span>
-            </div>
-            <div class="rev-card"><span class="rev-num">03</span>
-              <h4>Brand &amp; Sponsor Slots</h4>
-              <p>Advertising display real estate on kiosk screens monetized via tourism boards, hotels, credit card
-                partners, and lifestyle brands.</p><span class="badge badge-gold">Media Revenue</span>
-            </div>
-            <div class="rev-card"><span class="rev-num">04</span>
-              <h4>Partner Promotion Fees</h4>
-              <p>Hotels, F&amp;B brands, and attractions pay to feature exclusive offers in the gamification layer —
-                creating a paid promotional ecosystem.</p><span class="badge badge-gold">Partnership Model</span>
-            </div>
-            <div class="rev-card"><span class="rev-num">05</span>
-              <h4>Tourism Package Sales</h4>
-              <p>Bundle ferry + hotel + attraction packages at the point of purchase — converting a ticket buyer into a
-                full
-                regional tourism spending customer.</p><span class="badge badge-gold">High Margin</span>
-            </div>
-            <div class="rev-card"><span class="rev-num">06</span>
-              <h4>Loyalty Ecosystem Value</h4>
-              <p>Sail Points creates locked-in repeat behavior. Loyalty data enables precision CRM, targeted promotions,
-                and
-                higher lifetime value per passenger.</p><span class="badge badge-gold">Long-Term LTV</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── 14 ROADMAP ── -->
-      <section class="sec deck-slide sec-dark" id="roadmap">
-        <div class="sec-inner">
-          <div class="sh">
-            <div class="sh-tag">14 — Implementation Roadmap</div>
-            <h2 class="sh-title">From Concept to <em>Pilot in 6 Months</em></h2>
-            <p class="sh-desc">A structured five-phase rollout designed to minimize risk and maximize learnings from day
-              one.</p>
-          </div>
-          <div class="roadmap">
-            <div class="phase">
-              <div class="phase-dot">🔍</div>
-              <div class="phase-body">
-                <div class="phase-label">Phase 01 · Month 1–2</div>
-                <div class="phase-title">Discovery &amp; Design</div>
-                <p class="phase-desc">Stakeholder alignment, site surveys across Batam Centre, Stulang Laut, and
-                  HarbourFront. UX/UI design, hardware specification, brand system development, and vendor engagement.
-                  Pilot
-                  locations confirmed.</p>
-              </div>
-            </div>
-            <div class="phase">
-              <div class="phase-dot">🔧</div>
-              <div class="phase-body">
-                <div class="phase-label">Phase 02 · Month 2–4</div>
-                <div class="phase-title">Prototype Development</div>
-                <p class="phase-desc">Physical kiosk manufacturing, software development, payment integration across
-                  SGD/IDR/MYR, gamification build, and internal testing with simulated booking scenarios for all three
-                  routes.</p>
-              </div>
-            </div>
-            <div class="phase">
-              <div class="phase-dot">🚀</div>
-              <div class="phase-body">
-                <div class="phase-label">Phase 03 · Month 4–5</div>
-                <div class="phase-title">Pilot Deployment</div>
-                <p class="phase-desc">Install 3–5 units at Tier 1 locations — Batam Centre terminal, VivoCity Singapore,
-                  and
-                  Stulang Laut terminal. Staff training completed. Soft launch with real-time monitoring dashboard
-                  activated.</p>
-              </div>
-            </div>
-            <div class="phase">
-              <div class="phase-dot">📊</div>
-              <div class="phase-body">
-                <div class="phase-label">Phase 04 · Month 5–6</div>
-                <div class="phase-title">Optimization Sprint</div>
-                <p class="phase-desc">Data analysis from pilot units. UX iteration, conversion optimization,
-                  gamification
-                  tuning, and promotional strategy refinement based on real passenger behavior across all routes.</p>
-              </div>
-            </div>
-            <div class="phase">
-              <div class="phase-dot">🌐</div>
-              <div class="phase-body">
-                <div class="phase-label">Phase 05 · Month 7+</div>
-                <div class="phase-title">Network Expansion</div>
-                <p class="phase-desc">Scale to 15–30 units across Singapore, Batam, and Johor. New route kiosk content
-                  activated as Batam–SG and SG–Johor routes launch. Regional loyalty ecosystem fully operational.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── CTA ── -->
-      <section class="cta-sec">
-        <div class="cta-inner">
-          <span class="cta-eyebrow">⚓ Ready to Launch</span>
-          <h2 class="cta-title">The Future of Ferry <em>Begins Here</em></h2>
-          <p class="cta-desc">The Smart Ferry E-Store is not just a kiosk. It is a statement of intent — that MV Putri
-            Anggraini is ready to go where passengers are, meet them in their moment, and convert curiosity into a
-            journey
-            they will remember.</p>
-          <div class="cta-mini">
-            <div class="cm"><span class="cm-val">3–5</span><span class="cm-lbl">Pilot Units<br>Recommended</span></div>
-            <div class="cm"><span class="cm-val">6mo</span><span class="cm-lbl">Time to First<br>Live Deployment</span>
-            </div>
-            <div class="cm"><span class="cm-val">18mo</span><span class="cm-lbl">Projected<br>ROI Payback</span></div>
-          </div>
-          <div class="btn-row" style="justify-content:center">
-            <a href="https://wa.me/6281999197186?text=Hi%2C%20saya%20tertarik%20berdiskusi%20tentang%20pilot%20Smart%20Ferry%20E-Store%20untuk%20MV%20Putri%20Anggraini."
-              class="btn btn-gold" target="_blank" rel="noopener">💬 Request a Pilot Discussion</a>
-            <button class="btn btn-outline">Download Full Proposal</button>
-          </div>
-        </div>
-      </section>
-      <div class="footer">
-        <p>MV Putri Anggraini · Smart Ferry E-Store Initiative · <span>Batam · Singapore · Johor</span> · 2026 ·
-          Confidential Business Proposal</p>
+              class="nav-cta" target="_blank" rel="noopener">Request Pilot</a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-      <!-- MODAL -->
-    </main>
+  <!-- ── HERO ── -->
+  <section class="hero" id="top">
+    <div class="hero-dots"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Confidential Business Proposal · 2026</div>
+      <h1 class="hero-title">Smart Ferry <em>E-Store</em><br>&amp; Gamified Ticketing</h1>
+      <p class="hero-sub">A premium self-service kiosk experience that redefines how ferry tickets are discovered,
+        purchased, and enjoyed — turning passing strangers into loyal passengers.</p>
+      <div class="hero-vessel">⚓ MV Putri Anggraini — Batam · Johor · Singapore Corridor</div>
+      <div class="hero-stats">
+        <div class="hs"><span class="hs-val">12M+</span><span class="hs-lbl">Annual cross-border passengers,
+            corridor</span></div>
+        <div class="hs"><span class="hs-val">40%</span><span class="hs-lbl">Travelers deciding destination
+            spontaneously</span></div>
+        <div class="hs"><span class="hs-val">3×</span><span class="hs-lbl">Higher conversion vs app-only
+            touchpoints</span></div>
+        <div class="hs"><span class="hs-val">SGD 80</span><span class="hs-lbl">Avg. basket value per kiosk
+            transaction</span></div>
+      </div>
+      <div class="btn-row" style="justify-content:center; margin-bottom: 28px;">
+        <a href="#routes" class="btn btn-gold">Explore the Proposal</a>
+        <a href="https://wa.me/6281999197186?text=Hi%2C%20saya%20tertarik%20berdiskusi%20tentang%20pilot%20Smart%20Ferry%20E-Store%20untuk%20MV%20Putri%20Anggraini."
+          class="btn btn-outline" target="_blank" rel="noopener">💬 Request Pilot</a>
+      </div>
+      <div class="hero-routes">
+        <span class="route-chip active">⚓ Batam ↔ Johor <span
+            style="font-size:9px;color:rgba(255,255,255,0.3);margin-left:4px">Active Route</span></span>
+        <span class="route-chip coming">🚢 Batam → Singapore<span class="soon">Soon</span></span>
+        <span class="route-chip coming">🌊 Singapore → Johor<span class="soon">Soon</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 01 EXECUTIVE SUMMARY ── -->
+  <section class="sec sec-alt" id="summary">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">01 — Executive Summary</div>
+        <h2 class="sh-title">The Opportunity Hiding in <em>Plain Sight</em></h2>
+      </div>
+      <div class="exec-layout">
+        <div class="exec-body">
+          <p>MV Putri Anggraini currently operates the <strong>Batam–Johor</strong> corridor — one of the busiest sea
+            crossings in Southeast Asia. With the upcoming launch of <strong>Batam–Singapore</strong> and
+            <strong>Singapore–Johor</strong> routes, the vessel is positioned to become the premier tri-corridor ferry
+            operator in the region.
+          </p>
+          <p>Yet today, most tickets are sold at counters or via apps. The physical walk-in audience — untapped,
+            impulsive, high-intent — remains completely uncaptured. The Smart Ferry E-Store changes that.</p>
+          <div class="exec-highlight">
+            The E-Store is a premium interactive kiosk concept designed to convert foot traffic into booked passengers —
+            placed in terminals, malls, hotels, and tourist zones across all three ports.
+          </div>
+        </div>
+        <div class="exec-kpis">
+          <div class="kpi">
+            <div class="kpi-val">12M+</div>
+            <div class="kpi-lbl">Annual cross-border passengers across the Batam–SG–JB corridor</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-val">40%</div>
+            <div class="kpi-lbl">Short-trip travelers making decisions within 48 hours</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-val">3×</div>
+            <div class="kpi-lbl">Higher conversion rate vs digital-only booking channels</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-val">SGD 80</div>
+            <div class="kpi-lbl">Average basket value per kiosk transaction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 02 ROUTES ── -->
+  <section class="sec" id="routes">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">02 — Route Network</div>
+        <h2 class="sh-title">MV Putri Anggraini's <em>Expanding Corridor</em></h2>
+        <p class="sh-desc">One active route today. Two strategic new routes launching soon — creating a complete
+          tri-port network connecting Batam, Singapore, and Johor.</p>
+      </div>
+      <div class="routes-grid">
+        <!-- Active -->
+        <div class="route-card">
+          <div class="route-header">
+            <div class="route-status active"><span class="dot"></span> Active Route</div>
+            <div class="route-ports">Batam <span class="route-arrow">↔</span> Johor</div>
+          </div>
+          <div class="route-body">
+            <p class="route-detail">The existing flagship route connecting Batam Centre to Stulang Laut, Johor. Serves
+              both leisure travelers and Johor-based workers commuting via Batam.</p>
+            <div class="route-meta">
+              <span class="route-tag">~90 min crossing</span>
+              <span class="route-tag">Multiple departures daily</span>
+              <span class="route-tag">IDR / MYR accepted</span>
+            </div>
+          </div>
+        </div>
+        <!-- Coming: Batam-SG -->
+        <div class="route-coming-soon">
+          <div>
+            <div class="rcs-label">🚀 Launching Soon</div>
+            <div class="rcs-ports">Batam <span class="route-arrow">→</span> Singapore</div>
+            <p class="rcs-desc">The highest-demand new route — connecting Batam directly to HarbourFront, Singapore.
+              Targets leisure travelers, business visitors, and Singapore residents planning Batam getaways.</p>
+          </div>
+          <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="route-tag"
+              style="background:var(--gold-pale); border-color:rgba(184,137,42,0.3); color:var(--gold);">~45 min
+              crossing</span>
+            <span class="route-tag"
+              style="background:var(--gold-pale); border-color:rgba(184,137,42,0.3); color:var(--gold);">6M+ pax/yr
+              corridor</span>
+          </div>
+        </div>
+        <!-- Coming: SG-Johor -->
+        <div class="route-coming-soon">
+          <div>
+            <div class="rcs-label">🚀 Launching Soon</div>
+            <div class="rcs-ports">Singapore <span class="route-arrow">→</span> Johor</div>
+            <p class="rcs-desc">A new sea route complementing the existing land crossings between Singapore and Johor
+              Bahru — capturing travelers seeking a premium, traffic-free alternative border experience.</p>
+          </div>
+          <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="route-tag"
+              style="background:var(--gold-pale); border-color:rgba(184,137,42,0.3); color:var(--gold);">Premium
+              alternative</span>
+            <span class="route-tag"
+              style="background:var(--gold-pale); border-color:rgba(184,137,42,0.3); color:var(--gold);">Corporate
+              travelers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 03 MARKET OPPORTUNITY ── -->
+  <section class="sec sec-alt" id="market">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">03 — Market Opportunity</div>
+        <h2 class="sh-title">A Corridor of <em>Immense Scale</em></h2>
+        <p class="sh-desc">Southeast Asia's most active cross-border sea corridor is primed for a self-service ticketing
+          revolution.</p>
+      </div>
+      <div class="market-cards">
+        <div class="mc"><span class="mc-num">01</span>
+          <h4>The Batam–Singapore Gateway</h4>
+          <p>One of Southeast Asia's busiest international ferry corridors, with over 12 million passenger crossings
+            annually. Ferry remains the primary mode of cross-border travel between these two economic powerhouses.</p>
+        </div>
+        <div class="mc"><span class="mc-num">02</span>
+          <h4>Malaysia–Singapore Tourism Surge</h4>
+          <p>Post-pandemic travel recovery has driven a 35% YoY increase in Malaysia–Singapore visitor traffic, with
+            leisure travelers increasingly choosing sea crossings for scenic and cost-efficient border transit.</p>
+        </div>
+        <div class="mc"><span class="mc-num">03</span>
+          <h4>The Physical Touchpoint Gap</h4>
+          <p>Despite massive passenger volumes, no premium physical self-service ticketing experience exists beyond
+            traditional counters. Walk-in audiences at malls, hotels, and attractions remain unaddressed by operators.
+          </p>
+        </div>
+        <div class="mc"><span class="mc-num">04</span>
+          <h4>Tourism Behavior Shift</h4>
+          <p>Today's travelers are spontaneous planners. 40% of short-trip decisions are made within 48 hours. A
+            compelling physical kiosk placed at the right moment converts curiosity into bookings immediately.</p>
+        </div>
+      </div>
+      <div class="corridor-row">
+        <div class="corridor-box">
+          <div class="cb-city">Singapore</div><span class="cb-code">SG · HarbourFront</span>
+          <div class="cb-pax">6M+ pax/yr</div>
+        </div>
+        <div class="corridor-box">
+          <div class="cb-city">Batam</div><span class="cb-code">ID · Batam Centre</span>
+          <div class="cb-pax">8M+ pax/yr</div>
+        </div>
+        <div class="corridor-box">
+          <div class="cb-city">Johor</div><span class="cb-code">MY · Stulang Laut</span>
+          <div class="cb-pax">3M+ pax/yr</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 04 CHALLENGES ── -->
+  <section class="sec sec-dark">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">04 — Current Challenges</div>
+        <h2 class="sh-title">Where Today's Channels <em>Fall Short</em></h2>
+        <p class="sh-desc">Every existing sales channel leaves value on the table. The E-Store closes every gap.</p>
+      </div>
+      <div class="ch-grid">
+        <div class="ch-card"><span class="ch-icon">📱</span>
+          <h4>App &amp; Web Dependency</h4>
+          <p>Digital channels only serve travelers who already intend to buy. The spontaneous, walk-in audience is
+            missed entirely — a massive untapped pool.</p>
+        </div>
+        <div class="ch-card"><span class="ch-icon">⏱️</span>
+          <h4>Counter Congestion</h4>
+          <p>Traditional counters create long queues, staffing costs, and a friction-heavy experience that drives
+            frustration rather than loyalty.</p>
+        </div>
+        <div class="ch-card"><span class="ch-icon">💡</span>
+          <h4>Zero Impulse Capture</h4>
+          <p>Passing foot traffic in malls, hotels, and tourist zones is never engaged. No physical presence exists to
+            attract, inform, or convert the undecided traveler.</p>
+        </div>
+        <div class="ch-card"><span class="ch-icon">🎨</span>
+          <h4>Lack of Premium Experience</h4>
+          <p>Existing purchase channels offer no brand differentiation. The booking experience is purely transactional —
+            a missed opportunity to build loyalty.</p>
+        </div>
+        <div class="ch-card"><span class="ch-icon">🌍</span>
+          <h4>Tourist Unfriendliness</h4>
+          <p>First-time international visitors struggle with language barriers and unfamiliar apps. A multilingual
+            physical kiosk solves this immediately.</p>
+        </div>
+        <div class="ch-card"><span class="ch-icon">📊</span>
+          <h4>Limited Upsell Potential</h4>
+          <p>No channel currently bundles lounge access, transport add-ons, or tourism packages at the point of
+            purchase. Revenue-per-passenger remains well below its potential.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 05 SOLUTION ── -->
+  <section class="sec sec-alt" id="solution">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">05 — The Proposed Solution</div>
+        <h2 class="sh-title">Introducing the <em>Smart Ferry E-Store</em></h2>
+        <p class="sh-desc">A premium self-service interactive kiosk that places the full booking experience — with
+          discovery, gamification, and upsell — wherever passengers already are.</p>
+      </div>
+      <div class="sol-grid">
+        <div class="sol-card"><span class="sol-icon">🖥️</span>
+          <div>
+            <h4>Interactive Touchscreen</h4>
+            <p>Large, vivid display with intuitive route discovery, schedule browsing, and instant ticketing in under 60
+              seconds.</p>
+          </div>
+        </div>
+        <div class="sol-card"><span class="sol-icon">🎮</span>
+          <div>
+            <h4>Gamified Engagement</h4>
+            <p>Spin-to-win promotions, loyalty point accumulation, and exclusive kiosk-only perks that create desire and
+              urgency to buy.</p>
+          </div>
+        </div>
+        <div class="sol-card"><span class="sol-icon">💳</span>
+          <div>
+            <h4>Seamless Payment</h4>
+            <p>Contactless cards, QR wallets (PayNow, GrabPay, NETS), and cash acceptance — zero friction checkout with
+              instant e-ticket QR delivery.</p>
+          </div>
+        </div>
+        <div class="sol-card"><span class="sol-icon">✨</span>
+          <div>
+            <h4>Premium Brand Presence</h4>
+            <p>Elegant industrial design with ambient gold lighting, branded environment, and an executive-class
+              customer experience at every interaction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 06 ADVANTAGES ── -->
+  <section class="sec">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">06 — Competitive Advantage</div>
+        <h2 class="sh-title">Why Customers Will Choose <em>the Kiosk</em></h2>
+        <p class="sh-desc">Six distinct advantages that no digital channel can replicate.</p>
+      </div>
+      <div class="adv-grid">
+        <div class="adv-card"><span class="adv-icon">🎁</span>
+          <h5>Exclusive Kiosk-Only Promotions</h5>
+          <p>Discounts, bonus miles, and bundle deals only accessible at the physical E-Store — creating genuine
+            incentive to buy here versus online.</p>
+        </div>
+        <div class="adv-card"><span class="adv-icon">⚡</span>
+          <h5>Zero App Download Required</h5>
+          <p>Walk up, tap, pay, go. No registration, no password, no waiting. The fastest path from curiosity to
+            confirmed ticket.</p>
+        </div>
+        <div class="adv-card"><span class="adv-icon">🌍</span>
+          <h5>Tourist-First Design</h5>
+          <p>Multilingual interface — English, 中文, BM, ID — with clear visual guidance for first-time international
+            travelers.</p>
+        </div>
+        <div class="adv-card"><span class="adv-icon">🏛️</span>
+          <h5>Official Brand Trust</h5>
+          <p>A premium physical presence signals legitimacy. Travelers trust a beautifully branded physical unit over
+            third-party aggregators.</p>
+        </div>
+        <div class="adv-card"><span class="adv-icon">🎯</span>
+          <h5>Impulse-Driven Placement</h5>
+          <p>Located where spontaneous travel decisions happen — malls, hotel lobbies, attraction entrances — capturing
+            intent no digital channel can reach.</p>
+        </div>
+        <div class="adv-card"><span class="adv-icon">🌟</span>
+          <h5>Memorable Experience</h5>
+          <p>A beautiful, engaging kiosk creates a story worth sharing. Customers become brand advocates simply from
+            having a premium booking moment.</p>
+        </div>
+      </div>
+      <div style="margin-top:28px">
+        <div class="badge-cloud">
+          <span class="bc-item">No App Needed</span>
+          <span class="bc-item">Kiosk Exclusives</span>
+          <span class="bc-item">Instant E-Ticket</span>
+          <span class="bc-item">Multilingual</span>
+          <span class="bc-item">Brand Trust</span>
+          <span class="bc-item">Impulse Buy</span>
+          <span class="bc-item">Gamification</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 07 CUSTOMER FLOW ── -->
+  <section class="sec sec-alt" id="experience">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">07 — Customer Experience Flow</div>
+        <h2 class="sh-title">From Stranger <em>to Passenger</em></h2>
+        <p class="sh-desc">Eight frictionless steps from first glance to boarding gate — completed in under 90 seconds.
+        </p>
+      </div>
+      <div class="flow-grid">
+        <div class="flow-item">
+          <div class="flow-num">1</div>
+          <div class="flow-icon">👁️</div>
+          <div class="flow-title">See &amp; Notice</div>
+          <div class="flow-desc">Striking kiosk design catches attention in busy environment</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">2</div>
+          <div class="flow-icon">✨</div>
+          <div class="flow-title">Attracted</div>
+          <div class="flow-desc">Animated promo screen draws curious visitors closer</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">3</div>
+          <div class="flow-icon">🗺️</div>
+          <div class="flow-title">Discover Routes</div>
+          <div class="flow-desc">Browse destinations, schedules, and pricing effortlessly</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">4</div>
+          <div class="flow-icon">🕐</div>
+          <div class="flow-title">Choose Schedule</div>
+          <div class="flow-desc">Real-time seat availability shown with clear visuals</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">5</div>
+          <div class="flow-icon">🎮</div>
+          <div class="flow-title">Play &amp; Win</div>
+          <div class="flow-desc">Gamified reward — spin for discount or bonus perk</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">6</div>
+          <div class="flow-icon">💳</div>
+          <div class="flow-title">Pay</div>
+          <div class="flow-desc">Card, QR wallet, or cash — frictionless checkout</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">7</div>
+          <div class="flow-icon">📱</div>
+          <div class="flow-title">Get E-Ticket</div>
+          <div class="flow-desc">Instant QR code sent to phone and/or printed</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">8</div>
+          <div class="flow-icon">⛴️</div>
+          <div class="flow-title">Board &amp; Sail</div>
+          <div class="flow-desc">Scan QR at gate — no counter, no queue, no friction</div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:20px">
+        <span class="flow-time">⚡ Total Experience Time: Under 90 Seconds</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 08 HARDWARE ── -->
+  <section class="sec">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">08 — Physical Device Concept</div>
+        <h2 class="sh-title">The <em>E-Store Kiosk</em> Hardware</h2>
+        <p class="sh-desc">A purpose-built physical unit designed to embody premium positioning while delivering
+          seamless booking in any high-traffic environment.</p>
+      </div>
+      <div class="hw-layout">
+        <div class="kiosk-mockup">
+          <div class="km-screen">
+            <div class="km-brand">⚓ Smart Ferry E-Store</div>
+            <div class="km-route">Batam → Singapore</div>
+            <div class="km-time">10:30 AM Departure</div>
+            <div class="km-price">SGD 48</div>
+            <div class="km-btn">Book Now</div>
+            <div class="km-pay">TAP CARD · QR · CASH</div>
+          </div>
+          <div class="km-slot">← RECEIPT / TICKET SLOT →</div>
+          <div class="km-label">⚓ Official Ferry E-Store</div>
+        </div>
+        <div class="hw-list">
+          <div class="hw-item"><span class="hw-icon">🖥️</span>
+            <div>
+              <h5>55" Ultra-HD Touchscreen Display</h5>
+              <p>High-brightness display visible in outdoor-adjacent environments with 10-point multi-touch precision.
+              </p>
+            </div>
+          </div>
+          <div class="hw-item"><span class="hw-icon">💳</span>
+            <div>
+              <h5>Multi-Mode Payment Terminal</h5>
+              <p>NFC/contactless card, QR wallets (PayNow, GrabPay, NETS), and cash acceptance with auto-change.</p>
+            </div>
+          </div>
+          <div class="hw-item"><span class="hw-icon">🖨️</span>
+            <div>
+              <h5>Thermal Ticket &amp; Receipt Printer</h5>
+              <p>Instant QR-coded boarding pass printing, plus optional email/SMS delivery for a paperless experience.
+              </p>
+            </div>
+          </div>
+          <div class="hw-item"><span class="hw-icon">💡</span>
+            <div>
+              <h5>Ambient Lighting Accents</h5>
+              <p>Programmable LED accent strips in brand gold, creating visual magnetism and differentiated presence in
+                any space.</p>
+            </div>
+          </div>
+          <div class="hw-item"><span class="hw-icon">🔒</span>
+            <div>
+              <h5>Secure Industrial Enclosure</h5>
+              <p>Anti-vandal tempered glass, weatherproof chassis, tamper-resistant lock system for unattended
+                deployment.</p>
+            </div>
+          </div>
+          <div class="hw-item"><span class="hw-icon">📡</span>
+            <div>
+              <h5>Real-Time Connectivity</h5>
+              <p>4G/LTE + WiFi redundancy with remote management dashboard to monitor all units live.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 09 SCREEN CONCEPTS ── -->
+  <section class="sec sec-alt">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">09 — Screen &amp; UI Concept</div>
+        <h2 class="sh-title">The Screen Experience — <em>Six Key Moments</em></h2>
+        <p class="sh-desc">Every screen state advances the passenger from curiosity to confirmed booking with zero
+          friction.</p>
+      </div>
+      <div class="screens-grid">
+        <!-- Welcome -->
+        <div class="sc">
+          <div class="sc-top">
+            <span class="sc-label">Welcome Screen</span>
+            <div style="text-align:center; padding:8px 0">
+              <div style="color:var(--gold-lt);font-size:24px;margin-bottom:8px">⚓</div>
+              <div style="color:#fff;font-size:13px;font-weight:600;margin-bottom:4px">MV Putri Anggraini</div>
+              <div style="color:rgba(255,255,255,0.35);font-size:11px;margin-bottom:14px">Your gateway to Batam,
+                Singapore &amp; Johor</div>
+              <div
+                style="background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;padding:8px 20px;border-radius:100px;display:inline-block;margin-bottom:10px">
+                Touch to Begin</div>
+              <div style="color:rgba(255,255,255,0.25);font-size:10px">EN · 中文 · BM · ID</div>
+            </div>
+          </div>
+          <div class="sc-foot">Multilingual welcome</div>
+        </div>
+        <!-- Route -->
+        <div class="sc">
+          <div class="sc-top">
+            <span class="sc-label">Route Selection</span>
+            <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:10px;letter-spacing:0.08em">WHERE ARE
+              YOU GOING?</div>
+            <div
+              style="border-bottom:1px solid rgba(255,255,255,0.07);padding:9px 0;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:12px;color:#fff">⚓ Batam → Johor</span><span
+                style="color:var(--gold-lt);font-size:12px;font-weight:600">IDR 280K</span>
+            </div>
+            <div
+              style="border-bottom:1px solid rgba(255,255,255,0.07);padding:9px 0;display:flex;justify-content:space-between;align-items:center;opacity:0.7">
+              <span style="font-size:12px;color:#fff">🚢 Batam → Singapore</span><span
+                style="color:var(--gold-lt);font-size:12px;font-weight:600">SGD 32+</span>
+            </div>
+            <div style="padding:9px 0;display:flex;justify-content:space-between;align-items:center;opacity:0.7"><span
+                style="font-size:12px;color:#fff">🌊 Singapore → Johor</span><span
+                style="color:var(--gold-lt);font-size:12px;font-weight:600">SGD 55+</span></div>
+            <div
+              style="margin-top:10px;background:rgba(184,137,42,0.12);padding:6px 10px;border-radius:6px;font-size:10px;color:var(--gold-lt)">
+              🎁 KIOSK EXCLUSIVE: 15% OFF TODAY</div>
+          </div>
+          <div class="sc-foot">Route &amp; pricing</div>
+        </div>
+        <!-- Schedule -->
+        <div class="sc">
+          <div class="sc-top">
+            <span class="sc-label">Schedule Selection</span>
+            <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:10px">Batam → Johor · Today</div>
+            <div
+              style="border-bottom:1px solid rgba(255,255,255,0.07);padding:8px 0;display:flex;justify-content:space-between;align-items:center">
+              <span style="color:var(--gold-lt);font-weight:600;font-size:12px">08:00 AM</span><span
+                style="font-size:10px;color:rgba(255,255,255,0.35)">28 left</span><span
+                style="color:#fff;font-size:12px">IDR 280K</span>
+            </div>
+            <div
+              style="border-bottom:1px solid rgba(255,255,255,0.07);padding:8px 0;display:flex;justify-content:space-between;align-items:center">
+              <span style="color:#fff;font-size:12px">12:00 PM</span><span
+                style="font-size:10px;color:rgba(255,255,255,0.35)">42 left</span><span
+                style="color:#fff;font-size:12px">IDR 260K</span>
+            </div>
+            <div style="padding:8px 0;display:flex;justify-content:space-between;align-items:center"><span
+                style="color:#fff;font-size:12px">04:30 PM</span><span
+                style="font-size:10px;color:rgba(255,255,255,0.35)">Ample</span><span
+                style="color:#fff;font-size:12px">IDR 240K</span></div>
+            <div
+              style="margin-top:10px;background:var(--gold);color:var(--navy);text-align:center;font-size:11px;font-weight:700;padding:7px;border-radius:6px">
+              CONFIRM SELECTION</div>
+          </div>
+          <div class="sc-foot">Real-time availability</div>
+        </div>
+        <!-- Gamification -->
+        <div class="sc">
+          <div class="sc-top">
+            <span class="sc-label">Gamification Layer</span>
+            <div style="text-align:center;padding:8px 0">
+              <div style="font-size:11px;color:var(--gold-lt);letter-spacing:0.1em;margin-bottom:8px">🎮 REWARD MOMENT
+              </div>
+              <div style="font-size:24px;margin-bottom:6px">🎡</div>
+              <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">🎉 YOU WON!</div>
+              <div style="color:var(--gold-lt);font-size:18px;font-weight:700;margin-bottom:8px">15% OFF</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:4px">Applied automatically at
+                checkout</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.25)">Every purchase earns Sail Points</div>
+            </div>
+          </div>
+          <div class="sc-foot">Spin &amp; Sail reward</div>
+        </div>
+        <!-- Payment -->
+        <div class="sc">
+          <div class="sc-top">
+            <span class="sc-label">Payment Screen</span>
+            <div style="text-align:center;padding:4px 0 10px">
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:4px">TOTAL AMOUNT</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold-lt);font-weight:700">
+                IDR 238K</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:14px">✓ 15% kiosk discount applied
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center">
+                <div
+                  style="flex:1;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px;text-align:center;font-size:11px;color:#fff">
+                  💳<br>Card</div>
+                <div
+                  style="flex:1;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px;text-align:center;font-size:11px;color:#fff">
+                  📱<br>QR</div>
+                <div
+                  style="flex:1;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px;text-align:center;font-size:11px;color:#fff">
+                  💵<br>Cash</div>
+              </div>
+            </div>
+          </div>
+          <div class="sc-foot">Multi-mode payment</div>
+        </div>
+        <!-- Confirmation -->
+        <div class="sc">
+          <div class="sc-top">
+            <span class="sc-label">E-Ticket Confirmation</span>
+            <div style="text-align:center;padding:4px 0">
+              <div style="font-size:11px;color:#22c55e;margin-bottom:6px;letter-spacing:0.06em">✅ BOOKING CONFIRMED
+              </div>
+              <div style="font-size:12px;color:#fff;margin-bottom:2px">Batam → Johor</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:10px">08:00 AM · Pier 3</div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:6px;padding:10px;margin-bottom:10px">
+                <div
+                  style="background:rgba(255,255,255,0.9);width:48px;height:48px;margin:0 auto 6px;border-radius:4px">
+                </div>
+                <div style="font-size:9px;color:rgba(255,255,255,0.25)">BTM-JHR-2026-5501</div>
+              </div>
+              <div style="font-size:10px;color:var(--gold-lt)">🌟 +50 Sail Points Earned!</div>
+            </div>
+          </div>
+          <div class="sc-foot">QR boarding pass</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 10 GAMIFICATION ── -->
+  <section class="sec sec-dark">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">10 — Gamification &amp; Engagement</div>
+        <h2 class="sh-title">Making Every Booking <em>Memorable &amp; Rewarding</em></h2>
+        <p class="sh-desc">Gamification transforms a transactional moment into a delightful experience — increasing
+          conversion, dwell time, and repeat purchasing.</p>
+      </div>
+      <div class="gami-grid">
+        <div class="gami-card"><span class="gami-icon">🎡</span>
+          <h4>Spin &amp; Sail Reward</h4>
+          <p>Every booking triggers a spin wheel moment revealing a prize — from discounts to free lounge access.
+            Creates excitement and urgency.</p><span class="badge badge-gold">Instant Reward</span>
+        </div>
+        <div class="gami-card"><span class="gami-icon">⚡</span>
+          <h4>Lucky Flash Voucher</h4>
+          <p>Time-limited surprise discounts appear at certain hours, creating a "catch it before it's gone" impulse
+            that drives immediate purchase decisions.</p><span class="badge badge-gold">Urgency Driver</span>
+        </div>
+        <div class="gami-card"><span class="gami-icon">🗺️</span>
+          <h4>Travel Mission Board</h4>
+          <p>Passengers collect stamps across routes — complete missions like "Visit all 3 ports" to unlock exclusive
+            travel rewards and status upgrades.</p><span class="badge badge-gold">Loyalty Builder</span>
+        </div>
+        <div class="gami-card"><span class="gami-icon">⭐</span>
+          <h4>Sail Points System</h4>
+          <p>Every purchase earns redeemable Sail Points. Accumulated points unlock discounts, free tickets, lounge
+            access, or partner perks.</p><span class="badge badge-gold">Repeat Purchase</span>
+        </div>
+        <div class="gami-card"><span class="gami-icon">🏆</span>
+          <h4>Executive Tier Unlocks</h4>
+          <p>Frequent kiosk users progress through Gold, Platinum, and Diamond tiers — unlocking premium lounge access,
+            priority boarding, and concierge perks.</p><span class="badge badge-gold">Premium Upsell</span>
+        </div>
+        <div class="gami-card"><span class="gami-icon">🎁</span>
+          <h4>Partner Reward Bundles</h4>
+          <p>Gamification integrates with hotel, F&amp;B, and attraction partners — a ferry booking can trigger a
+            partner offer, creating a seamless regional ecosystem.</p><span class="badge badge-gold">Ecosystem
+            Play</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 11 BUSINESS VALUE ── -->
+  <section class="sec sec-alt">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">11 — Business Value</div>
+        <h2 class="sh-title">Why This <em>Wins</em> for the Operator</h2>
+        <p class="sh-desc">Six measurable business outcomes that justify deployment from day one.</p>
+      </div>
+      <div class="val-grid">
+        <div class="val-card"><span class="val-icon">📈</span>
+          <h5>New Offline-to-Digital Sales Channel</h5>
+          <p>Capture foot traffic that no digital channel can reach — turning mall visitors and hotel guests into paying
+            passengers.</p>
+        </div>
+        <div class="val-card"><span class="val-icon">🎯</span>
+          <h5>Higher Walk-In Conversion</h5>
+          <p>Premium design, instant booking, and exclusive offers create significantly higher conversion rates from
+            walk-in audiences.</p>
+        </div>
+        <div class="val-card"><span class="val-icon">💎</span>
+          <h5>Brand Differentiation</h5>
+          <p>A beautiful, modern E-Store signals operator quality — positioning MV Putri Anggraini above competitors in
+            travelers' minds.</p>
+        </div>
+        <div class="val-card"><span class="val-icon">🔄</span>
+          <h5>Reduced Counter Dependency</h5>
+          <p>Automate routine ticketing transactions, freeing staff for complex service delivery and reducing peak-hour
+            pressure.</p>
+        </div>
+        <div class="val-card"><span class="val-icon">💰</span>
+          <h5>Expanded Upsell Revenue</h5>
+          <p>Lounge passes, transport add-ons, travel bundles, and insurance products can be offered at checkout —
+            increasing average order value.</p>
+        </div>
+        <div class="val-card"><span class="val-icon">📊</span>
+          <h5>Rich Passenger Data</h5>
+          <p>Every transaction builds a dataset — booking patterns, preferences, and behaviors — enabling smarter
+            marketing and operational decisions.</p>
+        </div>
+      </div>
+      <div class="quote-wrap">
+        <blockquote>One well-placed E-Store in a premium mall can generate the equivalent of an additional ticket
+          counter — operating 24/7, without staff.</blockquote>
+        <div class="q-stats">
+          <div class="qs"><span class="qs-val">30%</span><span class="qs-lbl">Projected counter load reduction</span>
+          </div>
+          <div class="qs"><span class="qs-val">2.5×</span><span class="qs-lbl">Higher upsell rate vs digital
+              checkout</span></div>
+          <div class="qs"><span class="qs-val">24/7</span><span class="qs-lbl">Availability without additional
+              staffing</span></div>
+          <div class="qs"><span class="qs-val">18mo</span><span class="qs-lbl">Estimated pilot ROI payback period</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 12 PLACEMENT STRATEGY ── -->
+  <section class="sec" id="placement">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">12 — Placement Strategy</div>
+        <h2 class="sh-title">The E-Store <em>In the Wild</em></h2>
+        <p class="sh-desc">From ferry terminals to premium hotels, the Smart Ferry E-Store is purpose-built to thrive
+          wherever high-intent travelers gather across all three ports.</p>
+      </div>
+      <div class="pl-carousel-wrapper">
+        <button class="slider-btn prev" type="button" aria-label="Slide previous">‹</button>
+        <div class="pl-grid" id="placementGrid"></div>
+        <button class="slider-btn next" type="button" aria-label="Slide next">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 13 REVENUE ── -->
+  <section class="sec sec-alt">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">13 — Commercial Opportunity</div>
+        <h2 class="sh-title">A Multi-Layer <em>Revenue Engine</em></h2>
+        <p class="sh-desc">Six distinct revenue streams stack from every single kiosk transaction.</p>
+      </div>
+      <div class="rev-grid">
+        <div class="rev-card"><span class="rev-num">01</span>
+          <h4>Direct Ticket Sales</h4>
+          <p>Core revenue from kiosk-originated bookings across all three routes — Batam–Johor, Batam–Singapore, and
+            Singapore–Johor.</p><span class="badge badge-gold">Core Revenue</span>
+        </div>
+        <div class="rev-card"><span class="rev-num">02</span>
+          <h4>Upsell &amp; Add-Ons</h4>
+          <p>Lounge access, premium seating, travel insurance, port transfer packages, and hotel bundles offered at
+            checkout with one-tap addition.</p><span class="badge badge-gold">+35% Avg Basket</span>
+        </div>
+        <div class="rev-card"><span class="rev-num">03</span>
+          <h4>Brand &amp; Sponsor Slots</h4>
+          <p>Advertising display real estate on kiosk screens monetized via tourism boards, hotels, credit card
+            partners, and lifestyle brands.</p><span class="badge badge-gold">Media Revenue</span>
+        </div>
+        <div class="rev-card"><span class="rev-num">04</span>
+          <h4>Partner Promotion Fees</h4>
+          <p>Hotels, F&amp;B brands, and attractions pay to feature exclusive offers in the gamification layer —
+            creating a paid promotional ecosystem.</p><span class="badge badge-gold">Partnership Model</span>
+        </div>
+        <div class="rev-card"><span class="rev-num">05</span>
+          <h4>Tourism Package Sales</h4>
+          <p>Bundle ferry + hotel + attraction packages at the point of purchase — converting a ticket buyer into a full
+            regional tourism spending customer.</p><span class="badge badge-gold">High Margin</span>
+        </div>
+        <div class="rev-card"><span class="rev-num">06</span>
+          <h4>Loyalty Ecosystem Value</h4>
+          <p>Sail Points creates locked-in repeat behavior. Loyalty data enables precision CRM, targeted promotions, and
+            higher lifetime value per passenger.</p><span class="badge badge-gold">Long-Term LTV</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 14 ROADMAP ── -->
+  <section class="sec sec-dark" id="roadmap">
+    <div class="sec-inner">
+      <div class="sh">
+        <div class="sh-tag">14 — Implementation Roadmap</div>
+        <h2 class="sh-title">From Concept to <em>Pilot in 6 Months</em></h2>
+        <p class="sh-desc">A structured five-phase rollout designed to minimize risk and maximize learnings from day
+          one.</p>
+      </div>
+      <div class="roadmap">
+        <div class="phase">
+          <div class="phase-dot">🔍</div>
+          <div class="phase-body">
+            <div class="phase-label">Phase 01 · Month 1–2</div>
+            <div class="phase-title">Discovery &amp; Design</div>
+            <p class="phase-desc">Stakeholder alignment, site surveys across Batam Centre, Stulang Laut, and
+              HarbourFront. UX/UI design, hardware specification, brand system development, and vendor engagement. Pilot
+              locations confirmed.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot">🔧</div>
+          <div class="phase-body">
+            <div class="phase-label">Phase 02 · Month 2–4</div>
+            <div class="phase-title">Prototype Development</div>
+            <p class="phase-desc">Physical kiosk manufacturing, software development, payment integration across
+              SGD/IDR/MYR, gamification build, and internal testing with simulated booking scenarios for all three
+              routes.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot">🚀</div>
+          <div class="phase-body">
+            <div class="phase-label">Phase 03 · Month 4–5</div>
+            <div class="phase-title">Pilot Deployment</div>
+            <p class="phase-desc">Install 3–5 units at Tier 1 locations — Batam Centre terminal, VivoCity Singapore, and
+              Stulang Laut terminal. Staff training completed. Soft launch with real-time monitoring dashboard
+              activated.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot">📊</div>
+          <div class="phase-body">
+            <div class="phase-label">Phase 04 · Month 5–6</div>
+            <div class="phase-title">Optimization Sprint</div>
+            <p class="phase-desc">Data analysis from pilot units. UX iteration, conversion optimization, gamification
+              tuning, and promotional strategy refinement based on real passenger behavior across all routes.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot">🌐</div>
+          <div class="phase-body">
+            <div class="phase-label">Phase 05 · Month 7+</div>
+            <div class="phase-title">Network Expansion</div>
+            <p class="phase-desc">Scale to 15–30 units across Singapore, Batam, and Johor. New route kiosk content
+              activated as Batam–SG and SG–Johor routes launch. Regional loyalty ecosystem fully operational.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-sec">
+    <div class="cta-inner">
+      <span class="cta-eyebrow">⚓ Ready to Launch</span>
+      <h2 class="cta-title">The Future of Ferry <em>Begins Here</em></h2>
+      <p class="cta-desc">The Smart Ferry E-Store is not just a kiosk. It is a statement of intent — that MV Putri
+        Anggraini is ready to go where passengers are, meet them in their moment, and convert curiosity into a journey
+        they will remember.</p>
+      <div class="cta-mini">
+        <div class="cm"><span class="cm-val">3–5</span><span class="cm-lbl">Pilot Units<br>Recommended</span></div>
+        <div class="cm"><span class="cm-val">6mo</span><span class="cm-lbl">Time to First<br>Live Deployment</span>
+        </div>
+        <div class="cm"><span class="cm-val">18mo</span><span class="cm-lbl">Projected<br>ROI Payback</span></div>
+      </div>
+      <div class="btn-row" style="justify-content:center">
+        <a href="https://wa.me/6281999197186?text=Hi%2C%20saya%20tertarik%20berdiskusi%20tentang%20pilot%20Smart%20Ferry%20E-Store%20untuk%20MV%20Putri%20Anggraini."
+          class="btn btn-gold" target="_blank" rel="noopener">💬 Request a Pilot Discussion</a>
+        <button class="btn btn-outline">Download Full Proposal</button>
+      </div>
+    </div>
+  </section>
+  <div class="footer">
+    <p>MV Putri Anggraini · Smart Ferry E-Store Initiative · <span>Batam · Singapore · Johor</span> · 2026 ·
+      Confidential Business Proposal</p>
   </div>
 
+  <!-- MODAL -->
   <div class="modal-bd" id="modalBd" role="dialog" aria-modal="true">
     <div class="modal" id="modal">
       <button class="modal-close" id="modalClose">✕</button>
@@ -3045,50 +3047,13 @@
   </div>
 
   <script>
-    const slides = document.querySelectorAll('.deck-slide');
-    const deckWrapper = document.querySelector('.deck-slides');
-    const deckPrev = document.getElementById('deckPrev');
-    const deckNext = document.getElementById('deckNext');
-    const deckProgress = document.getElementById('deckProgress');
-    let currentDeckIndex = 0;
-
-    const updateDeckState = () => {
-      if (!deckPrev || !deckNext || !deckProgress || slides.length === 0) return;
-      deckProgress.textContent = `${String(currentDeckIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-      deckPrev.disabled = currentDeckIndex === 0;
-      deckNext.disabled = currentDeckIndex === slides.length - 1;
-    };
-
-    const scrollToDeck = index => {
-      currentDeckIndex = Math.max(0, Math.min(index, slides.length - 1));
-      slides[currentDeckIndex].scrollIntoView({ behavior: 'smooth', inline: 'start' });
-      updateDeckState();
-    };
-
-    if (deckPrev) deckPrev.addEventListener('click', () => scrollToDeck(currentDeckIndex - 1));
-    if (deckNext) deckNext.addEventListener('click', () => scrollToDeck(currentDeckIndex + 1));
-
-    if (deckWrapper) {
-      deckWrapper.addEventListener('scroll', () => {
-        const index = Math.round(deckWrapper.scrollLeft / deckWrapper.clientWidth);
-        if (index !== currentDeckIndex) {
-          currentDeckIndex = Math.min(index, slides.length - 1);
-          updateDeckState();
-        }
-      });
-    }
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        scrollToDeck(currentDeckIndex + 1);
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        scrollToDeck(currentDeckIndex - 1);
-      }
+    // Nav toggle
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navWrap').classList.toggle('open');
     });
-
-    updateDeckState();
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+      document.getElementById('navWrap').classList.remove('open');
+    }));
 
     // ── SVG THUMBNAILS ──
     const svgs = {
